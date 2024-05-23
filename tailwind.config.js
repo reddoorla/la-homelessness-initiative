@@ -35,10 +35,15 @@ export default {
     },
     extend: {},
   },
-  safelist:{
-    pattern: /^bg-/,
-    pattern: /^text-/,
-  },
+  safelist: [
+    {
+      pattern: /^bg-/,
+    },
+    {
+      pattern: /^text-/,
+    },
+  ],
+  // ...
   plugins: [],
 }
 
