@@ -40,6 +40,10 @@
 
 </script>
 
+<svelte:head>
+    <title>Hearts and Minds</title>
+</svelte:head>
+
 <main class="w-screen h-screen fixed">
     <div class="h-16 w-screen flex flex-row items-center justify-between py-3 px-8 absolute z-50">
         <button class="h-full flex flex-row items-center transition">
