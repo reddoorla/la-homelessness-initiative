@@ -47,12 +47,12 @@
 <main class="w-screen h-screen fixed">
     <div class="h-16 w-screen flex flex-row items-center justify-between py-3 px-8 absolute z-50">
         <button class="h-full flex flex-row items-center transition">
-            <button class="w-40 text-light-pink hover:text-pink transition-colors">I WANT TO HELP</button>
+            <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
             <img class="h-6" src={helpArrow} alt="down arrow" />
         </button>
         <img class="h-full" src={logo} alt="hearts & minds" />
         <button class="h-full flex flex-row items-center transition">
-            <button class="w-40 text-light-pink hover:text-pink transition-colors">SOS, I NEED HELP</button>
+            <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">SOS, I NEED HELP</div>
             <img class="h-6" src={lifePreserver} alt="life preserver" />
         </button>
     </div>
