@@ -59,7 +59,11 @@
 
 $:{
     if($activeFrame===2){
-        toNumber.set(38);
+        setTimeout(()=>toNumber.set(38), 500);
+        
+    }
+    else{
+        toNumber.set(0)
     }
 }
 
