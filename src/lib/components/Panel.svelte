@@ -1,21 +1,20 @@
 <script lang='ts'>
-    import { fly } from "svelte/transition";
+
     import { bgColor } from "$lib/stores/colors";
+    import { activeFrame } from '$lib/stores/activeFrame'
     export let horizontal = false;
+    export let frame:number;
 
-    let flyIn;
-    let flyOut;
+    let axis="y";
 
-    if(horizontal){
-        flyIn = {x:'100vw', opacity:0.7}
-        flyOut = {x:-'100vw', opacity:0.7}
-    } else{
-        flyIn = {y:'100vh', opacity:0.7}
-        flyOut = {y:-'100vh', opacity:0.7}
-    }
+    if(horizontal)
+        axis="x";
+    
+
+        console.log(frame)
 
 </script>
 
-<div class="w-screen h-screen relative top-0 left-0 bg-{$bgColor} {$$props.class || '' }" in:fly={flyIn} out:fly={flyOut}>
+<div class="w-screen h-screen absolute transition-all duration-1000 top-0 left-0 bg-{$bgColor} {$$props.class || '' } {frame>$activeFrame ? "translate-"+axis+"-full" : ""} {frame<$activeFrame ? "-translate-"+axis+"-full" : ""}" >
     <slot/>
 </div>

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 h1{
-    color: var(--001855, #001855);
     leading-trim: both;
     text-edge: cap;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -17,7 +16,7 @@ h1{
 }
 
 h2{
-    color: var(--001855, #001855);
+
 leading-trim: both;
 text-edge: cap;
 font-feature-settings: 'clig' off, 'liga' off;
@@ -123,4 +122,20 @@ font-weight: 500;
 line-height: 125%; /* 18.75px */
 letter-spacing: 1.5px;
 text-transform: uppercase;
+}
+
+.bump{
+    transition: transform 300ms ease-out;
+}
+
+.bump:active{
+    transform: translateY(-8px);
+}
+
+.negative-bump{
+    transition: transform 300ms ease-out;
+}
+
+.negative-bump:active{
+    transform: translateY(8px);
 }

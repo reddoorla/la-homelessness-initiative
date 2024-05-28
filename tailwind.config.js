@@ -42,6 +42,10 @@ export default {
     {
       pattern: /^text-/,
     },
+    "translate-x-full",
+    "translate-y-full",
+    "-translate-x-full",
+    "-translate-y-full",
   ],
   // ...
   plugins: [],
