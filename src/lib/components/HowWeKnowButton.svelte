@@ -55,7 +55,7 @@
 
 <div class="w-[400px] absolute bottom-4 left-32 transition-all" bind:this={infoBox}>
     <button class="absolute z-20 transition-all duration-500 left-5 {isHovered ? "boop brightness-125":""}" style="top: {isOpen ? "-32":reservedTextHeight-64}px" on:click={()=>isOpen=!isOpen} on:mouseover={()=>isHovered=true} on:focus={()=>isHovered=true} on:mouseout={()=>isHovered=false} on:blur={()=>isHovered=false}><img src={asterisk} alt="asterisk"/></button>
-    <button class="absolute transition-all bottom-7 left-20 text-light-blue pointer-events-auto {isHovered ? "brightness-125":"" } {isOpen ? "-bottom-24":"bottom-4"}" on:click={()=>isOpen=!isOpen} on:mouseover={()=>isHovered=true} on:focus={()=>isHovered=true} on:mouseout={()=>isHovered=false} on:blur={()=>isHovered=false} >HOW WE KNOW</button>
+    <button class="absolute transition-all bottom-7 left-20 text-light-blue pointer-events-auto duration-500 {isHovered ? "brightness-125":"" } {isOpen ? "-bottom-[100%] opacity-0":"bottom-4"}" on:click={()=>isOpen=!isOpen} on:mouseover={()=>isHovered=true} on:focus={()=>isHovered=true} on:mouseout={()=>isHovered=false} on:blur={()=>isHovered=false} >HOW WE KNOW</button>
 
     <div class="w-full rounded-lg bg-[#1A52E3] p-5 transition-opacity duration-500 {isOpen ? "opacity-100 delay-200":"opacity-0 pointer-events-none" }">
         <p class="text-[#EAD4DF] paragraph-2">
