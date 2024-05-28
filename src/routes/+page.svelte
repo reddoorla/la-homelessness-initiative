@@ -1,5 +1,6 @@
 <script lang='ts'>
     import Panel from "$lib/components/Panel.svelte";
+    import HowWeKnowButton from "$lib/components/HowWeKnowButton.svelte";
 
     import helpArrow from "$lib/assets/icons/helpButtonArrow.svg"
     import lifePreserver from "$lib/assets/icons/lifePreserver.svg"
@@ -15,9 +16,16 @@
 
     import { bgColor, COLOR_KEY } from "$lib/stores/colors";
     import { activeFrame } from "$lib/stores/activeFrame";
-  import { fade } from "svelte/transition";
-  import HowWeKnowButton from "$lib/components/HowWeKnowButton.svelte";
+    import { fade } from "svelte/transition";
 
+    
+
+    import { tweened } from 'svelte/motion'
+    import { quintOut } from 'svelte/easing'
+    import { derived } from 'svelte/store'
+  
+  let toNumber = tweened(0 as number, { duration: 2000, easing: quintOut })
+  let toNumberFormatted = derived(toNumber, ($toNumber) => $toNumber.toFixed())
 
 
 
@@ -48,6 +56,12 @@
 
 
 // frame two
+
+$:{
+    if($activeFrame===2){
+        toNumber.set(38);
+    }
+}
 
 
 
@@ -210,7 +224,7 @@ const resetToFrameOne  = () => {
 
               <h6 class="z-10 text-pink">DID YOU KNOW</h6>
               <h3 class="z-10 text-light-pink max-w-screen-lg">Homelessness in youth and young adults has increased</h3>
-              <h1 class="z-10 text-[#EAD4DF]">38%</h1>
+              <h1 class="z-10 text-[#EAD4DF]">{$toNumberFormatted}%</h1>
             <HowWeKnowButton 
                 text="According to LAHSA’s 2023 Greater Los Angeles Homeless Youth Count, there were over 2,000 youth and young adults experiencing homeless in 2023 on any given night."
                 reportLink="https://www.lahsa.org/documents?id=7689-yc2023-la-coc-data-summary"
