@@ -177,18 +177,18 @@ const resetToFrameOne  = () => {
     
     <Panel frame={2}>
         <div class="w-screen h-screen bg-underpass-blue relative">
-            <svg class="absolute top-0 left-0 h-[40vh]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199 424" fill="none">
+            <svg class="absolute top-0 left-0 h-[40vh] max-h-72" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199 424" fill="none">
                 <path d="M0.879883 369.18L198.03 423.1V257.41C162 159.1 110.37 68.5901 46.0699 -11.1899H0.879883V369.18Z" fill="#2E4C8E"/>
             </svg>
             <svg class="absolute top-0 right-0" xmlns="http://www.w3.org/2000/svg" width="353" height="764" viewBox="0 0 353 764" fill="none">
                 <path d="M268.631 420.37L271.621 763.9L352.481 746.66V-11.1899H0.680664C116.391 112.2 208.061 258.41 268.631 420.37Z" fill="#2E4C8E"/>
               </svg>
 
-              <svg class="absolute bottom-0 right-0  w-screen min-h-[80vh]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1441 580" fill="none">
+              <svg class="absolute bottom-0 right-0  lg:w-screen min-h-[80vh]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1441 580" fill="none">
                 <path d="M1.50051 0.340088L1440.48 420.79V624L0.520508 80.4501L1.50051 0.340088Z" fill="#1C4182"/>
               </svg>
 
-              <img class="top-[35vh] left-[10vw] absolute" src={encampment} alt="encampment"/>
+              <img class= "top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[10vw] w-[80vw] absolute" src={encampment} alt="encampment"/>
         </div>
     </Panel>
     
