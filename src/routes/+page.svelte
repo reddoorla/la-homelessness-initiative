@@ -4,11 +4,19 @@
     import helpArrow from "$lib/assets/icons/helpButtonArrow.svg"
     import lifePreserver from "$lib/assets/icons/lifePreserver.svg"
     import logo from "$lib/assets/logos/heartsAndMind/hearts-minds-logo.svg"
+    
     import encampment from "$lib/assets/panelTwo/encampment.svg"
+    import basePeople from '$lib/assets/panelTwo/basePeople.svg'
+    import newPeopleOne from '$lib/assets/panelTwo/newPeople1.svg'
+    import newPeopleTwo from '$lib/assets/panelTwo/newPeople2.svg'
+    import newPeopleThree from '$lib/assets/panelTwo/newPeople3.svg'
+    import newPeopleFour from '$lib/assets/panelTwo/newPeople4.svg'
+    import newPeopleFive from '$lib/assets/panelTwo/newPeople5.svg'
 
     import { bgColor, COLOR_KEY } from "$lib/stores/colors";
     import { activeFrame } from "$lib/stores/activeFrame";
   import { fade } from "svelte/transition";
+  import HowWeKnowButton from "$lib/components/HowWeKnowButton.svelte";
 
 
 
@@ -41,16 +49,17 @@
 
 // frame two
 
-let isFrameTwo = false;
 
 
-const goToNextFrame = () => activeFrame.update(frame=>frame+1)
+
+const goToNextFrame = () => activeFrame.update(frame=>frame+1);
 
 const resetToFrameOne  = () => {
   showSittingPerson = true;
   showSleepingPerson = false;
   isLampOn = false;
   isFrameOneStarted = false;
+  bgColor.set('masthead-pink');
   
   setTimeout(()=>activeFrame.update(()=> 1),200)
  }
@@ -176,7 +185,7 @@ const resetToFrameOne  = () => {
 
     
     <Panel frame={2}>
-        <div class="w-screen h-screen bg-underpass-blue relative">
+        <div class="w-screen h-screen bg-underpass-blue flex flex-col justify-center items-center gap-9">
             <svg class="absolute top-0 left-0 h-[40vh] max-h-72" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199 424" fill="none">
                 <path d="M0.879883 369.18L198.03 423.1V257.41C162 159.1 110.37 68.5901 46.0699 -11.1899H0.879883V369.18Z" fill="#2E4C8E"/>
             </svg>
@@ -188,8 +197,25 @@ const resetToFrameOne  = () => {
                 <path d="M1.50051 0.340088L1440.48 420.79V624L0.520508 80.4501L1.50051 0.340088Z" fill="#1C4182"/>
               </svg>
 
-              <img class= "top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[10vw] w-[80vw] absolute" src={encampment} alt="encampment"/>
-        </div>
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[12vw] w-[80vw] absolute" src={encampment} alt="encampment"/>
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[10vw] w-[80vw] absolute" src={basePeople} alt="people" />
+              {#if $activeFrame===2}
+              
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleOne} alt="people" transition:fade={{duration:1000,delay:500}}/>
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleTwo} alt="people" transition:fade={{duration:1000,delay:1500}}/>
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleThree} alt="people" transition:fade={{duration:1000,delay:2500}}/>
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFour} alt="people" transition:fade={{duration:1000,delay:3500}} />
+              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFive} alt="people" transition:fade={{duration:1000,delay:4500}} />
+              {/if}
+
+              <h6 class="z-10 text-pink">DID YOU KNOW</h6>
+              <h3 class="z-10 text-light-pink max-w-screen-lg">Homelessness in youth and young adults has increased</h3>
+              <h1 class="z-10 text-[#EAD4DF]">38%</h1>
+            <HowWeKnowButton 
+                text="According to LAHSA’s 2023 Greater Los Angeles Homeless Youth Count, there were over 2,000 youth and young adults experiencing homeless in 2023 on any given night."
+                reportLink="https://www.lahsa.org/documents?id=7689-yc2023-la-coc-data-summary"
+            />
+                </div>
     </Panel>
     
     
