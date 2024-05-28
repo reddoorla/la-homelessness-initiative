@@ -2,7 +2,7 @@
     import asterisk from '$lib/assets/icons/asterisk.svg'
     import buttonArrow from '$lib/assets/icons/defaultButtonArrow.svg'
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
+
 
     export let text="";
     export let reportLink:string;
@@ -61,7 +61,7 @@
         <p class="text-[#EAD4DF] paragraph-2">
             {text}
         </p>
-        <a class="bump flex flex-row pt-5 gap-5" href={reportLink} >
+        <a class="bump flex flex-row pt-5 gap-5" href={reportLink} target="_blank">
             <div class="btn-text text-light-blue hover:brightness-125">READ THE REPORT</div>
             <img src={buttonArrow} alt="button-arrow" />
         </a>
