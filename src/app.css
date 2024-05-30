@@ -124,7 +124,7 @@ text-transform: uppercase;
 }
 
 .bump{
-    transition: transform 300ms ease-out;
+    transition: transform 300ms ease-out, color 400ms ease, filter 400ms ease;
 }
 
 .bump:active{
@@ -132,7 +132,7 @@ text-transform: uppercase;
 }
 
 .negative-bump{
-    transition: transform 300ms ease-out;
+    transition: transform 300ms ease-out,  color 400ms ease, filter 400ms ease;
 }
 
 .negative-bump:active{

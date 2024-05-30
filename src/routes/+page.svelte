@@ -141,6 +141,7 @@ const runFrameFive = () =>{
 
 //frame 6
 
+let activeFeature = 0;
 
 
 
@@ -388,7 +389,7 @@ const resetToFrameOne  = () => {
                 <h6 class="z-10 text-pink">LET'S GET THESE</h6>
                 <h1 class="z-10 text-[#EAD4DF]">MYTHS</h1>
                 <h3 class="z-10 text-light-pink max-w-screen-lg">OUT OF THE WAY</h3>
-                <button class="hover:brightness-125" on:click={()=>isMythOne=true}>
+                <button class="hover:brightness-125 bump" on:click={()=>isMythOne=true}>
                     <img src={mythsArrow} alt="arrow right"/>
                 </button>
             </div>
@@ -398,7 +399,7 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
             <div class="absolute w-full h-full flex flex-col items-center justify-center bg-dark-red">
                 <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6  justify-center items-center w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
                     
                     <img src={rightArrow} alt="next arrow"/>
                 </button>
@@ -408,7 +409,7 @@ const resetToFrameOne  = () => {
             <button class="z-10 absolute w-full h-full flex-col items-center justify-center bg-darkest-red" on:click={()=>isMythOneBusted=true} transition:fade>
                 <h6 class="z-10 text-pink">01/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 hover:gap-7 justify-center items-center w-full" on:click>
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
                     "/>
@@ -431,7 +432,7 @@ const resetToFrameOne  = () => {
             <button class="z-10  absolute w-full h-full flex-col items-center justify-center bg-dark-red" on:click={()=>isMythTwoBusted=true} transition:fade>
                 <h6 class="z-10 text-pink">02/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 hover:gap-7 justify-center items-center w-full" on:click>
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
                     "/>
@@ -458,7 +459,7 @@ const resetToFrameOne  = () => {
             <button class="z-10 absolute w-full h-full flex-col items-center justify-center bg-red" on:click={()=>isMythThreeBusted=true} transition:fade>
                 <h6 class="z-10 text-pink">03/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 hover:gap-7 justify-center items-center w-full" on:click>
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
                     "/>
@@ -501,8 +502,10 @@ const resetToFrameOne  = () => {
                 <p class="text-center">Here are organizations doing good in Los Angeles so you can learn more about the homeless crisis and become an advocate for our neighbors.</p>
             </div>
         
-            <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg p-10 relative flex flex-row overflow-hidden gap-16 justify-start items-start mb-32">
-                
+            <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden">
+
+                <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+
                     <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
                     <div>
                         <h5 class="text-orange mb-7">Young people to the front</h5>
@@ -521,10 +524,57 @@ const resetToFrameOne  = () => {
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                     </div>
+                </div>
+
+                <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+
+                    <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
+                    <div>
+                        <h5 class="text-orange mb-7">Young people to the front</h5>
+                        <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
+                        <a class="bump flex flex-row pt-5 gap-5 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                            <div class="btn-text">GO TO SITE</div>
+                            <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <div class="flex flex-row gap-4 mt-7">
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+
+                    <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
+                    <div>
+                        <h5 class="text-orange mb-7">Young people to the front</h5>
+                        <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
+                        <a class="bump flex flex-row pt-5 gap-5 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                            <div class="btn-text">GO TO SITE</div>
+                            <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <div class="flex flex-row gap-4 mt-7">
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 
                     <div class="absolute bottom-10 left-10 flex flex-row gap-5">
-                        <button class="carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button class="carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                     </div>
                 </div>
         </div>
