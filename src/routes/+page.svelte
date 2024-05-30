@@ -23,10 +23,16 @@
     import scribblesSix from "$lib/assets/panelThree/scribblesSix.svg"
     import scribblesSeven from "$lib/assets/panelThree/scribblesSeven.svg"
     import scribblesEight from "$lib/assets/panelThree/scribblesEight.svg"
+    import fullScribbles from "$lib/assets/panelThree/fullScribbles.png"
+
+    import mythsArrow from "$lib/assets/icons/mythsArrow.svg"
+
+    import yp2fLogo from "$lib/assets/logos/orgs/stickerified/yp2f_logo.svg"
 
 
     import { bgColor, COLOR_KEY } from "$lib/stores/colors";
     import { activeFrame } from "$lib/stores/activeFrame";
+    import { get } from "svelte/store";
     import { fade, fly } from "svelte/transition";
 
     
@@ -34,6 +40,8 @@
     import { tweened } from 'svelte/motion'
     import { quintOut } from 'svelte/easing'
     import { derived } from 'svelte/store'
+  import ContentWidth from "$lib/components/ContentWidth.svelte";
+ 
   
   let toThirtyEight = tweened(0 as number, { duration: 2000, easing: quintOut })
   let toThirtyEightFormatted = derived(toThirtyEight, ($toThirtyEight) => $toThirtyEight.toFixed())
@@ -89,6 +97,52 @@ $:{
 
 // frame three
 let isFrameThreeStarted = false;
+let isFrameThreeFinished = false;
+
+const runFrameThree = () => {
+    isFrameThreeStarted=true;
+    setTimeout(()=>{
+        isFrameThreeFinished=true;
+    }, 3000)
+}
+
+
+
+//frame four
+let isMythOne=false;
+let isMythOneBusted=false;
+let isMythTwo=false;
+let isMythTwoBusted=false;
+let isMythThree=false;
+let isMythThreeBusted = false;
+
+$:{
+    
+
+
+    if(get(activeFrame)===4)
+    bgColor.set('darkest-red');
+
+    if(isMythOneBusted)
+    bgColor.set('dark-red');
+
+    if(isMythTwoBusted)
+    bgColor.set('red');
+    
+}
+
+///frame 5
+
+const runFrameFive = () =>{
+    bgColor.set('day');
+    activeFrame.set(5);
+
+}
+
+//frame 6
+
+
+
 
 
 
@@ -101,10 +155,24 @@ const resetToFrameOne  = () => {
   isLampOn = false;
   isFrameOneStarted = false;
   bgColor.set('masthead-pink');
+
+  isFrameThreeStarted=false;
   
   setTimeout(()=>activeFrame.update(()=> 1),200)
  }
 </script>
+
+<style>
+    .carousel-nav{
+
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: 'search';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 115%; /* 16.1px */
+    }
+</style>
 
 <svelte:head>
     <title>Hearts and Minds</title>
@@ -112,7 +180,7 @@ const resetToFrameOne  = () => {
 
 <main class="w-screen h-screen fixed">
     <div class="h-16 w-screen flex flex-row items-center justify-between py-3 px-8 absolute z-50">
-        <button class="h-full flex flex-row items-center transition bump">
+        <button class="h-full flex flex-row items-center transition bump" on:click={()=>activeFrame.set(6)}>
             <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
             <img class="h-6" src={helpArrow} alt="down arrow" />
         </button>
@@ -266,43 +334,201 @@ const resetToFrameOne  = () => {
                 </div>
     </Panel>
 
-    <Panel frame={3} class="flex flex-col items-center justify-center text-center">
+    <Panel frame={3} class="flex flex-col items-center justify-center text-center will-change-transform">
 
         <img class="absolute w-screen h-screen object-cover" src={scribblesOne} alt="background-scribbles" transition:fade/>
-        {#if isFrameThreeStarted}
-            <img class="absolute w-screen h-screen object-cover " src={scribblesTwo} alt="background-scribbles" transition:fade={{delay:400}}/>
-            <img class="absolute w-screen h-screen object-cover " src={scribblesThree} alt="background-scribbles" transition:fade={{delay:800}}/>
-            <img class="absolute w-screen h-screen object-cover " src={scribblesFour} alt="background-scribbles" transition:fade={{delay:1200}}/>
-            <img class="absolute w-screen h-screen object-cover " src={scribblesFive} alt="background-scribbles" transition:fade={{delay:1600}}/>
-            <img class="absolute w-screen h-screen object-cover " src={scribblesSix} alt="background-scribbles" transition:fade={{delay:2000}}/>
-            <img class="absolute w-screen h-screen object-cover " src={scribblesSeven} alt="background-scribbles" transition:fade={{delay:2400}}/>
-            <img class="absolute w-screen h-screen object-cover " src={scribblesEight} alt="background-scribbles" transition:fade={{delay:2800}}/>
+        {#if isFrameThreeStarted&&!isFrameThreeFinished}
+            <img class="absolute w-screen h-screen object-cover " src={scribblesTwo} alt="background-scribbles" in:fade={{delay:400}} out:fade/>
+            <img class="absolute w-screen h-screen object-cover " src={scribblesThree} alt="background-scribbles" in:fade={{delay:800}} out:fade/>
+            <img class="absolute w-screen h-screen object-cover " src={scribblesFour} alt="background-scribbles" in:fade={{delay:1200}} out:fade/>
+            <img class="absolute w-screen h-screen object-cover " src={scribblesFive} alt="background-scribbles" in:fade={{delay:1600}} out:fade/>
+            <img class="absolute w-screen h-screen object-cover " src={scribblesSix} alt="background-scribbles" in:fade={{delay:2000}} out:fade/>
+            <img class="absolute w-screen h-screen object-cover " src={scribblesSeven} alt="background-scribbles" in:fade={{delay:2400}} out:fade/>
+            <img class="absolute w-screen h-screen object-cover " src={scribblesEight} alt="background-scribbles" in:fade={{delay:2800}} out:fade/>
         
+        {/if}
+        {#if isFrameThreeFinished}
+        <img class="absolute w-screen h-screen object-cover " src={fullScribbles} alt="background-scribbles" transition:fade/>
         {/if}
             <h6 class="z-10 text-pink">WHAT'S ON THE LINE</h6>
             
             <div class="z-10 h-[40vh]">
             {#if !isFrameThreeStarted}
-            <div out:fly={{x:"100%", duration:400}}>
+            <div out:fly={{x:"-100%", duration:400}}>
             <h1 class="z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h1>
             <h3 class="z-10 text-light-pink max-w-[992px]">Of homeless youth experience mental illness or crises while unhoused</h3>
-            <button class="z-10 mt-24 bump hover:brightness-125" on:click={()=>isFrameThreeStarted=true}>
+            <button class="z-10 mt-24 bump hover:brightness-125" on:click={runFrameThree}>
                 <img src={rightArrow} alt="next arrow" />
             </button>
             </div>
             {:else}
-            <h3 in:fly={{delay:400, duration:400, x:"-100%"}} class="z-10 text-light-pink max-w-[992px] mt-16">Without adequate care, young people are at greater <span class="text-[#EAD4DF]">risk of suicide attempts and suicide.</span></h3>
+            <h3 in:fly={{delay:400, duration:400, x:"100%"}} class="z-10 text-light-pink max-w-[992px] mt-16">Without adequate care, young people are at greater <span class="text-[#EAD4DF]">risk of suicide attempts and suicide.</span></h3>
             {/if}
             </div>
             {#if isFrameThreeStarted}
-            <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
                     </g>
                     </svg>
             </button>
+            <HowWeKnowButton 
+                text="Chapin University conducted a national survey of in 2017 and found that 69% of homeless youth report mental health challenges that can lead to significant and long term health issues."
+                reportLink="https://www.chapinhall.org/research/one-in-10-young-adults-experience-homelessness-during-one-year/"
+                color="purple"
+            />
             {/if}
+    </Panel>
+    <Panel frame={4}>
+        {#if !isMythOne&&!isMythTwo&&!isMythThree}
+        <div class="bg-darkest-red w-screen h-screen absolute">
+            
+            <div class="w-full h-full flex flex-col items-center justify-center" out:fly={{x:"-100vw", duration:400, opacity:1}}>
+                <h6 class="z-10 text-pink">LET'S GET THESE</h6>
+                <h1 class="z-10 text-[#EAD4DF]">MYTHS</h1>
+                <h3 class="z-10 text-light-pink max-w-screen-lg">OUT OF THE WAY</h3>
+                <button class="hover:brightness-125" on:click={()=>isMythOne=true}>
+                    <img src={mythsArrow} alt="arrow right"/>
+                </button>
+            </div>
+        </div>
+            {/if}
+            {#if isMythOne}
+            <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
+            <div class="absolute w-full h-full flex flex-col items-center justify-center bg-dark-red">
+                <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
+                    
+                    <img src={rightArrow} alt="next arrow"/>
+                </button>
+                <HowWeKnowButton color="red" reportLink="https://www.aclusocal.org/sites/default/files/aclu_socal_oc_shelters_report.pdf" text="Most unhoused people would move to shelter if there were safe and affordable options. In a report by the ACLU, they found that residents in emergency centers in Orange County were met with untrained, abusive, and neglectful shelter staff." />
+            </div>
+            {#if !isMythOneBusted}
+            <button class="z-10 absolute w-full h-full flex-col items-center justify-center bg-darkest-red" on:click={()=>isMythOneBusted=true} transition:fade>
+                <h6 class="z-10 text-pink">01/03</h6>
+                <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click>
+                    <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
+                    <img src={rightArrow} alt="next arrow" class="w-20
+                    "/>
+                </button>
+            </button>
+            {/if}
+            </div>
+            {/if}
+            {#if isMythTwo}
+            <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400, opacity:1}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
+            <div class="absolute w-full h-full flex flex-col items-center justify-center bg-red">
+                <h3 class="z-10 text-[#EAD4DF]  max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>homeless folks would move inside if housing programs met their needs.</h3>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
+                    
+                    <img src={rightArrow} alt="next arrow"/>
+                </button>
+                <HowWeKnowButton color="red" reportLink="https://nlihc.org/sites/default/files/Housing-First-Research.pdf" text="Homelessness is not a choice. Most individuals are seeking shelter, employment, and support but find it difficult to adhere to “treatment-first” programs. Instead, “housing-first” programs offer flexibility to a larger population and can help them find employment and maintain stable housing" />
+            </div>
+            {#if !isMythTwoBusted}
+            <button class="z-10  absolute w-full h-full flex-col items-center justify-center bg-dark-red" on:click={()=>isMythTwoBusted=true} transition:fade>
+                <h6 class="z-10 text-pink">02/03</h6>
+                <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click>
+                    <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
+                    <img src={rightArrow} alt="next arrow" class="w-20
+                    "/>
+                </button>
+            </button>
+            {/if}
+            </div>
+            {/if}
+            {#if isMythThree}
+            <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100%", duration:400, opacity:1}} in:fly={{x:"100%", duration:400, delay:400, opacity:1}}>
+            <div class="z-10 absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
+                <h3 class="z-10 text-[#EAD4DF]  max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
+                <button class="z-10  absolute bottom-12 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click={runFrameFive}>
+                    
+                    <svg class="transition-colors text-light-pink" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Frame 226">
+                            <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
+                        </g>
+                        </svg>
+                </button>
+                <HowWeKnowButton color="red" reportLink="https://bfi.uchicago.edu/wp-content/uploads/2021/06/BFI_WP_2021-65.pdf" text="Many people experiencing homelessness are employed or actively seeking employment and would move inside if housing responsive to their needs were available. " />
+            </div>
+            {#if !isMythThreeBusted}
+            <button class="z-10 absolute w-full h-full flex-col items-center justify-center bg-red" on:click={()=>isMythThreeBusted=true} transition:fade>
+                <h6 class="z-10 text-pink">03/03</h6>
+                <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>
+                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click>
+                    <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
+                    <img src={rightArrow} alt="next arrow" class="w-20
+                    "/>
+                </button>
+            </button>
+            {/if}
+            </div>
+            {/if}
+            
+       
+    </Panel>
+
+    <Panel frame={5}>
+        <div class="w-full h-full absolute top-0 left-0 flex flex-col items-center justify-center transition-colors duration-[6000ms] delay-1000 ease-out {$activeFrame===5?"bg-day":"bg-night"}">
+            <h4 class="text-blue text-center max-w-screen-xl">With so many young people sleeping without shelter every night, we want to shed light on the issue to</h4>
+            <h2 class="{$activeFrame===5?"text-orange opacity-100":"text-light-pink opacity-10"} transition duration-[8000ms] delay-1000 ease-out">open hearts and minds</h2>
+
+            {#if $activeFrame===5}
+            
+            <button transition:fade={{delay:6000}} on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+                <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Frame 226">
+                        <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
+                    </g>
+                    </svg>
+                    
+                <div class="btn-text transition-colors">
+                    LET'S DO SOMETHING
+                </div>
+            </button>
+            {/if}
+        </div>
+    </Panel>
+
+    <Panel frame={6} class="overflow-y-scroll">
+        <div class="w-full min-h-screen flex flex-col items-center justify-center bg-help-light">
+            <div class="flex flex-col items-center justify-center max-w-screen-md my-32">
+                <h6 class="text-light-orange">make a difference</h6>
+                <h3 class="text-orange my-9">How to help</h3>
+                <p class="text-center">Here are organizations doing good in Los Angeles so you can learn more about the homeless crisis and become an advocate for our neighbors.</p>
+            </div>
+        
+            <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg p-10 relative flex flex-row overflow-hidden gap-16 justify-start items-start mb-32">
+                
+                    <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
+                    <div>
+                        <h5 class="text-orange mb-7">Young people to the front</h5>
+                        <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
+                        <a class="bump flex flex-row pt-5 gap-5 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                            <div class="btn-text">GO TO SITE</div>
+                            <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <div class="flex flex-row gap-4 mt-7">
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                        </div>
+                    </div>
+                
+                    <div class="absolute bottom-10 left-10 flex flex-row gap-5">
+                        <button class="carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button class="carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                    </div>
+                </div>
+        </div>
+
     </Panel>
     
     

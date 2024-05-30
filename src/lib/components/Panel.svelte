@@ -11,10 +11,12 @@
         axis="x";
     
 
-        console.log(frame)
+        console.log(frame) 
 
 </script>
 
 <div class="w-screen h-screen absolute transition-all duration-1000 top-0 left-0 bg-{$bgColor} {$$props.class || '' } {frame>$activeFrame ? "translate-"+axis+"-full" : ""} {frame<$activeFrame ? "-translate-"+axis+"-full" : ""}" >
-    <slot/>
+    
+        <slot/>
+    
 </div>
