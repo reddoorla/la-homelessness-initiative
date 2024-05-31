@@ -28,6 +28,11 @@
     import mythsArrow from "$lib/assets/icons/mythsArrow.svg"
 
     import yp2fLogo from "$lib/assets/logos/orgs/stickerified/yp2f_logo.svg"
+    import spyLogo from "$lib/assets/logos/orgs/stickerified/spy_logo.svg"
+    import mfpLogo from "$lib/assets/logos/orgs/stickerified/mfp_logo.svg"
+    import house from "$lib/assets/icons/house.svg"
+    import present from "$lib/assets/icons/present.svg"
+    import heart from "$lib/assets/icons/heart.svg"
 
 
     import { bgColor, COLOR_KEY } from "$lib/stores/colors";
@@ -41,6 +46,44 @@
     import { quintOut } from 'svelte/easing'
     import { derived } from 'svelte/store'
   import ContentWidth from "$lib/components/ContentWidth.svelte";
+
+  import { slide } from 'svelte/transition';
+
+
+                  
+                    const LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat m dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inc."
+                  
+                    export let labels = ["Is this thing on?", "It could be why don't you check"]
+                    export let contents = [LOREM, LOREM]
+
+                    let orgs = [
+                        {
+                            name: "Young People to the Front",
+                            logo: yp2fLogo,
+                            siteUrl: "https://www.yp2f.org/",
+                            instagram:"https://www.instagram.com/youngpeopletothefront/",
+                            linkedin: "https://www.linkedin.com/company/yp2f",
+                            podcast: "https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117",
+                            bodyCopy:"YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible"
+                        },
+                        {
+                            name: "Safe Place for Youth",
+                            logo: spyLogo,
+                            siteUrl: "https://www.safeplaceforyouth.org/",
+                            instagram:"https://www.instagram.com/safeplaceforyouth/",
+                            facebook: "https://www.facebook.com/SafePlaceForYouth/",
+                            twitter: "https://twitter.com/safeplace4youth",
+                            youtube: "https://www.youtube.com/channel/UCUy5AnugYb4OhLuooZEByDA",
+                            bodyCopy: "S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs."
+
+                        },
+
+
+                    ]
+                  
+                    let activeAccordians: boolean[] = [];
+                  
+                    labels.forEach(() => activeAccordians.push(false));
  
   
   let toThirtyEight = tweened(0 as number, { duration: 2000, easing: quintOut })
@@ -502,7 +545,7 @@ const resetToFrameOne  = () => {
                 <p class="text-center">Here are organizations doing good in Los Angeles so you can learn more about the homeless crisis and become an advocate for our neighbors.</p>
             </div>
         
-            <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden">
+            <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden rounded">
 
                 <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
@@ -510,62 +553,61 @@ const resetToFrameOne  = () => {
                     <div>
                         <h5 class="text-orange mb-7">Young people to the front</h5>
                         <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
-                        <a class="bump flex flex-row pt-5 gap-5 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                        <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
                         <div class="flex flex-row gap-4 mt-7">
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/youngpeopletothefront/"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.linkedin.com/company/yp2f"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117"><i class="fa-regular fa-microphone fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.yp2f.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
-                    <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
+                    <img class="w-64" src={spyLogo} alt="young people to the front logo" />
                     <div>
-                        <h5 class="text-orange mb-7">Young people to the front</h5>
-                        <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
-                        <a class="bump flex flex-row pt-5 gap-5 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                        <h5 class="text-orange mb-7">Safe place for youth</h5>
+                        <p>S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs.</p>
+                        <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-pink hover:brightness-125" href="https://www.safeplaceforyouth.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
                         <div class="flex flex-row gap-4 mt-7">
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/safeplaceforyouth/"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.youtube.com/channel/UCUy5AnugYb4OhLuooZEByDA"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://twitter.com/safeplace4youth"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.facebook.com/SafePlaceForYouth/"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.safeplaceforyouth.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
-                    <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
+                    <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
                     <div>
-                        <h5 class="text-orange mb-7">Young people to the front</h5>
-                        <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
-                        <a class="bump flex flex-row pt-5 gap-5 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                        <h5 class="text-orange mb-7">My Friend's place</h5>
+                        <p>They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency.</p>
+                        <a class="bump flex flex-row pt-5 gap-5  hover:gap-6 my-7 text-pink hover:brightness-125" href="https://www.myfriendsplace.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
                         <div class="flex flex-row gap-4 mt-7">
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
-                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/myfriendsplace"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.youtube.com/channel/UCwP9v838Jx58xYUjZoqehIg"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://twitter.com/MFPLA"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.facebook.com/mfphollywood/"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                            <a class="text-light-orange hover:text-orange transition-colors" href="https://www.myfriendsplace.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                     </div>
                 </div>
@@ -577,6 +619,85 @@ const resetToFrameOne  = () => {
                         <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                     </div>
                 </div>
+
+                <div class="flex flex-col items-center justify-center max-w-screen-md mb-32">
+                    <h3 class="text-orange my-9">Explore</h3>
+                    <p class="text-center mb-32">Look through our complete list of orgs and consider how you can help!</p>
+
+                    <div class="flex flex-row justify-center items-center gap-16">
+                        <button class="bump flex flex-col items-center justify-center hover:brightness-90 gap-2">
+                            <div class="btn-text text-light-orange">support</div>
+                            <img class="" src={house} alt="house" />
+                
+                        </button>
+                        <button class="bump flex flex-col items-center justify-center hover:brightness-90 gap-2">
+                            <div class="btn-text text-light-orange">support</div>
+                            <img class="" src={present} alt="house" />
+                
+                        </button>
+                        <button class="bump flex flex-col items-center justify-center hover:brightness-90 gap-2">
+                            <div class="btn-text text-light-orange">support</div>
+                            <img class="" src={heart} alt="house" />
+                        </button>
+
+                    </div>
+                </div>
+
+
+     
+                 <ContentWidth class="w-full mb-32">
+                  <div class="w-full flex flex-col cursor-pointer">
+                    {#each orgs as org, i}
+                      <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2" on:click={() => activeAccordians[i] = !activeAccordians[i]}>
+                        <div class="h-20 p-8 w-full flex flex-row justify-between items-center text-light-orange">
+                            <h5 class="text-orange">{org.name}</h5>
+                            <div class="flex flex-row gap-8">
+                                <div class="btn-text">{activeAccordians[i] ? "less -" :"about +"}</div>
+                                <a href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
+                                    <div class="btn-text">Go to Site</div>
+                                    <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                                        </svg>
+                                        
+                                </a>
+                            </div>
+                        </div>
+                        {#if activeAccordians[i]}
+                          <div class="flex flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
+                            
+                                <img class="w-64" src={org.logo} alt="young people to the front logo" />
+                                <div>
+                                    
+                                    <p class=" normal-case">{org.bodyCopy}</p>
+            
+                                    <div class="flex flex-row gap-4 mt-7">
+                                        {#if org.instagram}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.instagram}><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                        {/if}
+                                        {#if org.youtube}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.youtube}><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                        {/if}
+                                        {#if org.twitter}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.twitter}><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                        {/if}
+                                        {#if org.facebook}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.facebook}><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                                        {/if}
+                                        {#if org.linkedin}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.linkedin}><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
+                                        {/if}
+                                        {#if org.podcast}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.podcast}><i class="fa-regular fa-microphone fa-lg"></i></a>
+                                        {/if}
+                                        <a class="text-light-orange hover:text-orange transition-colors" href={org.siteUrl}><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {/if}
+                      </button>
+                    {/each}
+                  </div>
+                </ContentWidth> 
         </div>
 
     </Panel>
