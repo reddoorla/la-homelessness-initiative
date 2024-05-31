@@ -201,6 +201,18 @@ const resetToFrameOne  = () => {
   bgColor.set('masthead-pink');
 
   isFrameThreeStarted=false;
+  isFrameThreeFinished=false;
+
+  isMythOne=false;
+  isMythOneBusted=false;
+  isMythTwo=false;
+  isMythTwoBusted=false;
+  isMythThree=false;
+  isMythThreeBusted = false;
+
+  toThirtyEight.set(0)
+  toSixtyNine.set(0)
+
   
   setTimeout(()=>activeFrame.update(()=> 1),200)
  }
