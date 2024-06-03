@@ -236,16 +236,20 @@ const resetToFrameOne  = () => {
 
 <main class="w-screen h-screen fixed">
     <div class="h-16 w-screen flex flex-row items-center justify-between py-3 px-8 absolute z-50">
-        <button class="h-full flex flex-row items-center transition bump" on:click={()=>activeFrame.set(6)}>
-            <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
-            <img class="h-6" src={helpArrow} alt="down arrow" />
+        <button class="h-full " on:click={()=>activeFrame.set(6)}>
+            <span class="flex flex-row items-center bump">
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
+                <img class="h-6" src={helpArrow} alt="down arrow" />
+            </span>
         </button>
         <button class="h-full" on:click={resetToFrameOne}>
             <img class="h-full" src={logo} alt="hearts & minds" />
         </button>
-        <button class="h-full flex flex-row items-center transition bump">
-            <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">SOS, I NEED HELP</div>
-            <img class="h-6" src={lifePreserver} alt="life preserver" />
+        <button class="h-full">
+            <span class="flex flex-row items-center transition bump">
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">SOS, I NEED HELP</div>
+                <img class="h-6" src={lifePreserver} alt="life preserver" />
+            </span>
         </button>
     </div>
         <Panel frame={1}>
@@ -331,7 +335,8 @@ const resetToFrameOne  = () => {
                     Raising awareness for LA’s unhoused youth and their mental health.
                 </h2>
                 {#if isLampOn}
-                <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+                <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+                    <span class="flex flex-col justify-center items-center gap-4">
                     <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
                             <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
@@ -341,6 +346,7 @@ const resetToFrameOne  = () => {
                     <div class="btn-text transition-colors">
                         LET'S GET STARTED
                     </div>
+                    </span>
                 </button>
                 {/if}
             </div>
@@ -371,12 +377,14 @@ const resetToFrameOne  = () => {
               <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleThree} alt="people" transition:fade={{duration:1000,delay:2500}}/>
               <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFour} alt="people" transition:fade={{duration:1000,delay:3500}} />
               <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFive} alt="people" transition:fade={{duration:1000,delay:4500}} />
-              <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+              <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+                <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
                     </g>
                     </svg>
+                    </span>
             </button>
               {/if}
 
@@ -422,12 +430,14 @@ const resetToFrameOne  = () => {
             {/if}
             </div>
             {#if isFrameThreeStarted}
-            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+                <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
                     </g>
                     </svg>
+                    </span>
             </button>
             <HowWeKnowButton 
                 text="Chapin University conducted a national survey of in 2017 and found that 69% of homeless youth report mental health challenges that can lead to significant and long term health issues."
@@ -454,21 +464,26 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
             <div class="absolute w-full h-full flex flex-col items-center justify-center bg-dark-red">
                 <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6  justify-center items-center w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
-                    
-                    <img src={rightArrow} alt="next arrow"/>
+                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
+                    <span class="flex flex-row justify-center items-center gap-6">
+                        <img src={rightArrow} alt="next arrow"/>
+                    </span>
                 </button>
                 <HowWeKnowButton color="red" reportLink="https://www.aclusocal.org/sites/default/files/aclu_socal_oc_shelters_report.pdf" text="Most unhoused people would move to shelter if there were safe and affordable options. In a report by the ACLU, they found that residents in emergency centers in Orange County were met with untrained, abusive, and neglectful shelter staff." />
             </div>
             {#if !isMythOneBusted}
-            <button class="z-10 absolute w-full h-full flex-col items-center justify-center bg-darkest-red" on:click={()=>isMythOneBusted=true} transition:fade>
-                <h6 class="z-10 text-pink">01/03</h6>
-                <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 hover:gap-7 justify-center items-center w-full" on:click>
-                    <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
-                    <img src={rightArrow} alt="next arrow" class="w-20
-                    "/>
-                </button>
+            <button class="z-10 absolute w-full h-full bg-darkest-red" on:click={()=>isMythOneBusted=true} transition:fade>
+                <span class="flex flex-col items-center justify-center">
+                    <h6 class="z-10 text-pink">01/03</h6>
+                    <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
+                    <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click>
+                        <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
+                            <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
+                            <img src={rightArrow} alt="next arrow" class="w-20
+                        "/>
+                    </span>
+                    </button>
+                </span>
             </button>
             {/if}
             </div>
@@ -477,21 +492,26 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400, opacity:1}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
             <div class="absolute w-full h-full flex flex-col items-center justify-center bg-red">
                 <h3 class="z-10 text-[#EAD4DF]  max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>homeless folks would move inside if housing programs met their needs.</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
-                    
+                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
+                    <span class="flex flex-row gap-6 justify-center items-center ">
                     <img src={rightArrow} alt="next arrow"/>
+                    </span>
                 </button>
                 <HowWeKnowButton color="red" reportLink="https://nlihc.org/sites/default/files/Housing-First-Research.pdf" text="Homelessness is not a choice. Most individuals are seeking shelter, employment, and support but find it difficult to adhere to “treatment-first” programs. Instead, “housing-first” programs offer flexibility to a larger population and can help them find employment and maintain stable housing" />
             </div>
             {#if !isMythTwoBusted}
-            <button class="z-10  absolute w-full h-full flex-col items-center justify-center bg-dark-red" on:click={()=>isMythTwoBusted=true} transition:fade>
+            <button class="z-10  absolute w-full h-full bg-dark-red" on:click={()=>isMythTwoBusted=true} transition:fade>
+                <span class="flex flex-col items-center justify-center ">
                 <h6 class="z-10 text-pink">02/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 hover:gap-7 justify-center items-center w-full" on:click>
+                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click>
+                    <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
                     "/>
+                    </span>
                 </button>
+                </span>
             </button>
             {/if}
             </div>
@@ -500,25 +520,30 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100%", duration:400, opacity:1}} in:fly={{x:"100%", duration:400, delay:400, opacity:1}}>
             <div class="z-10 absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
                 <h3 class="z-10 text-[#EAD4DF]  max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
-                <button class="z-10  absolute bottom-12 mt-24 bump hover:brightness-125 flex flex-row gap-6 justify-center items-center w-full" on:click={runFrameFive}>
-                    
+                <button class="z-10  absolute bottom-12 mt-24 bump hover:brightness-125 w-full" on:click={runFrameFive}>
+                    <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <svg class="transition-colors text-light-pink" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
                             <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
                         </g>
                         </svg>
+                        </span>
                 </button>
                 <HowWeKnowButton color="red" reportLink="https://bfi.uchicago.edu/wp-content/uploads/2021/06/BFI_WP_2021-65.pdf" text="Many people experiencing homelessness are employed or actively seeking employment and would move inside if housing responsive to their needs were available. " />
             </div>
             {#if !isMythThreeBusted}
-            <button class="z-10 absolute w-full h-full flex-col items-center justify-center bg-red" on:click={()=>isMythThreeBusted=true} transition:fade>
+            <button class="z-10 absolute w-full h-full bg-red" on:click={()=>isMythThreeBusted=true} transition:fade>
+                <span class=" flex-col items-center justify-center">
                 <h6 class="z-10 text-pink">03/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 flex flex-row gap-6 hover:gap-7 justify-center items-center w-full" on:click>
+                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click>
+                    <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center">
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
                     "/>
+                    </span>
                 </button>
+                </span>
             </button>
             {/if}
             </div>
@@ -637,19 +662,24 @@ const resetToFrameOne  = () => {
                     <p class="text-center mb-32">Look through our complete list of orgs and consider how you can help!</p>
 
                     <div class="flex flex-row justify-center items-center gap-16">
-                        <button class="bump flex flex-col items-center justify-center hover:brightness-90 gap-2">
+                        <button class="hover:brightness-90">
+                            <span class="bump flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">support</div>
                             <img class="" src={house} alt="house" />
+                            </span>
                 
                         </button>
-                        <button class="bump flex flex-col items-center justify-center hover:brightness-90 gap-2">
-                            <div class="btn-text text-light-orange">support</div>
-                            <img class="" src={present} alt="house" />
-                
+                        <button class="bump hover:brightness-90">
+                            <span class="flex flex-col items-center justify-center gap-2">
+                                <div class="btn-text text-light-orange">support</div>
+                                <img class="" src={present} alt="house" />
+                            </span>
                         </button>
-                        <button class="bump flex flex-col items-center justify-center hover:brightness-90 gap-2">
+                        <button class="bump hover:brightness-90">
+                            <span class="flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">support</div>
                             <img class="" src={heart} alt="house" />
+                            </span>
                         </button>
 
                     </div>
