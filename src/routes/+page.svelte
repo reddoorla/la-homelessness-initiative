@@ -27,6 +27,13 @@
 
     import mythsArrow from "$lib/assets/icons/mythsArrow.svg"
 
+    import mythOneShatterLeft from "$lib/assets/panelFour/shatter1_left.svg"
+    import mythOneShatterRight from "$lib/assets/panelFour/shatter1_right.svg"
+    import mythTwoShatterLeft from "$lib/assets/panelFour/shatter2_left.svg"
+    import mythTwoShatterRight from "$lib/assets/panelFour/shatter2_right.svg"
+    import mythThreeShatterLeft from "$lib/assets/panelFour/shatter3_left.svg"
+    import mythThreeShatterRight from "$lib/assets/panelFour/shatter3_right.svg"
+
     import yp2fLogo from "$lib/assets/logos/orgs/stickerified/yp2f_logo.svg"
     import spyLogo from "$lib/assets/logos/orgs/stickerified/spy_logo.svg"
     import mfpLogo from "$lib/assets/logos/orgs/stickerified/mfp_logo.svg"
@@ -43,7 +50,7 @@
     
 
     import { tweened } from 'svelte/motion'
-    import { quintOut } from 'svelte/easing'
+    import { expoIn, expoInOut, quintIn, quintOut } from 'svelte/easing'
     import { derived } from 'svelte/store'
   import ContentWidth from "$lib/components/ContentWidth.svelte";
 
@@ -172,6 +179,15 @@ $:{
     if(isMythTwoBusted)
     bgColor.set('red');
     
+}
+
+const crackOpenEase = (t:number) =>{
+    if(t<0.1)
+        return quintOut(t/0.1)*0.1;
+
+    
+    return 0.1 + quintIn((t - 0.1) / 0.9) * 0.9;
+
 }
 
 ///frame 5
@@ -311,7 +327,7 @@ const resetToFrameOne  = () => {
                     {/if}
     
                 <!--lamp-->
-                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100  xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] opacity-10" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] opacity-10" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5151_6597)">
                     <path class="brightness-0 invert" d="M323.384 283.602C352.478 282.849 376.724 261.978 382.543 234.115L261.638 237.235C268.966 264.775 294.181 284.355 323.276 283.602H323.384Z" fill={$bgColor}/>
                     <path d="M56.8965 347.72L125.647 335.886L141.164 738.453L47.9526 737.485L56.8965 347.72Z" />
@@ -412,7 +428,7 @@ const resetToFrameOne  = () => {
         
         {/if}
         {#if isFrameThreeFinished}
-        <img class="absolute w-screen h-screen object-cover " src={fullScribbles} alt="background-scribbles" transition:fade/>
+        <img class="absolute w-screen h-screen object-cover " src={fullScribbles} alt="background-scribbles" transition:fade={{duration:200}}/>
         {/if}
             <h6 class="z-10 text-pink">WHAT'S ON THE LINE</h6>
             
@@ -459,10 +475,11 @@ const resetToFrameOne  = () => {
                 </button>
             </div>
         </div>
-            {/if}
+            {/if} 
             {#if isMythOne}
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
-            <div class="absolute w-full h-full flex flex-col items-center justify-center bg-dark-red">
+
+            <div class="absolute w-full h-full flex flex-col items-center justify-center">
                 <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
                 <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
                     <span class="flex flex-row justify-center items-center gap-6">
@@ -472,7 +489,10 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://www.aclusocal.org/sites/default/files/aclu_socal_oc_shelters_report.pdf" text="Most unhoused people would move to shelter if there were safe and affordable options. In a report by the ACLU, they found that residents in emergency centers in Orange County were met with untrained, abusive, and neglectful shelter staff." />
             </div>
             {#if !isMythOneBusted}
-            <button class="z-10 absolute w-full h-full bg-darkest-red" on:click={()=>isMythOneBusted=true} transition:fade>
+            <img src={mythOneShatterLeft} alt="shattering background" class=" z-10 absolute  h-screen xl:h-[140vh] top-0 xl:-top-1/5 left-0 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythOneShatterRight} alt="shattering background" class="z-10 absolute  h-screen xl:h-[140vh] top-0 xl:-top-1/5 right-0 object-fill" out:fly={{delay:200, duration:1800, x:"100%", opacity:1, easing: crackOpenEase}}/>
+            <button class="z-10 absolute w-full h-full" on:click={()=>isMythOneBusted=true} transition:fade>
+                
                 <span class="flex flex-col items-center justify-center">
                     <h6 class="z-10 text-pink">01/03</h6>
                     <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
@@ -485,6 +505,7 @@ const resetToFrameOne  = () => {
                     </button>
                 </span>
             </button>
+
             {/if}
             </div>
             {/if}
@@ -500,7 +521,10 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://nlihc.org/sites/default/files/Housing-First-Research.pdf" text="Homelessness is not a choice. Most individuals are seeking shelter, employment, and support but find it difficult to adhere to “treatment-first” programs. Instead, “housing-first” programs offer flexibility to a larger population and can help them find employment and maintain stable housing" />
             </div>
             {#if !isMythTwoBusted}
-            <button class="z-10  absolute w-full h-full bg-dark-red" on:click={()=>isMythTwoBusted=true} transition:fade>
+            <img src={mythTwoShatterLeft} alt="shattering background" class=" z-10 absolute h-screen xl:h-[140vh] top-0 xl:-top-1/5 left-0 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythTwoShatterRight} alt="shattering background" class="z-10 absolute h-screen xl:h-[140vh] top-0 xl:-top-1/5 right-0 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
+           
+            <button class="z-10  absolute w-full h-full" on:click={()=>isMythTwoBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center ">
                 <h6 class="z-10 text-pink">02/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
@@ -532,7 +556,10 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://bfi.uchicago.edu/wp-content/uploads/2021/06/BFI_WP_2021-65.pdf" text="Many people experiencing homelessness are employed or actively seeking employment and would move inside if housing responsive to their needs were available. " />
             </div>
             {#if !isMythThreeBusted}
-            <button class="z-10 absolute w-full h-full bg-red" on:click={()=>isMythThreeBusted=true} transition:fade>
+            <img src={mythThreeShatterLeft} alt="shattering background" class="z-10 absolute h-screen xl:h-[140vh] top-0 xl:-top-1/5 left-0 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythThreeShatterRight} alt="shattering background" class="z-10 absolute h-screen xl:h-[140vh] top-0 xl:-top-1/5 right-0 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
+           
+            <button class="z-10 absolute w-full h-full" on:click={()=>isMythThreeBusted=true} transition:fade>
                 <span class=" flex-col items-center justify-center">
                 <h6 class="z-10 text-pink">03/03</h6>
                 <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>

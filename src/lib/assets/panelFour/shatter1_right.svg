@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 829.04 944">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4e1123;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="shatter">
+    <polygon class="cls-1" points="829.04 0 829.04 944 0 944 201.33 657.35 163.02 566.19 173.59 509.65 159.06 472 192.09 436.72 176.23 272.91 22.99 185.71 58.66 24.54 52.53 0 829.04 0"/>
+  </g>
+</svg>
