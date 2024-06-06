@@ -108,26 +108,25 @@
     let showSleepingPerson = false;
     let isLampOn = false;
     let isFrameOneStarted = false;
+    const FRAME_SPEED = 0.75;
     const runFrameOne = async () => {
         
         if(!isFrameOneStarted){
             isFrameOneStarted=true;
-            setTimeout(()=>bgColor.set('masthead-tan'), 2000);
+            setTimeout(()=>bgColor.set('masthead-tan'), 1500*FRAME_SPEED);
             
             setTimeout(()=>{
                 bgColor.set('masthead-blue');
-                
-                
-            },4000);
+            },3000*FRAME_SPEED);
 
             setTimeout(()=>{
                 showSittingPerson=false;
                 showSleepingPerson=true;
-            },6000)
+            },4500*FRAME_SPEED)
 
             setTimeout(()=>{
                 isLampOn = true;
-            },7000)
+            },7500*FRAME_SPEED)
         }
     };
 
@@ -273,16 +272,16 @@ const resetToFrameOne  = () => {
         </button>
         <button class="h-full">
             <span class="flex flex-row items-center transition bump">
-                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">SOS, I NEED HELP</div>
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
             </span>
         </button>
     </div>
         <Panel frame={1}>
-            <button class="w-full h-full relative {isFrameOneStarted ? 'cursor-default' : ''}" on:click >
+            <div class="w-full h-full relative {isFrameOneStarted ? 'cursor-default' : ''} transition-colors ease-linear" style="background-color:{COLOR_KEY[$bgColor]}; transition-duration:{1000*FRAME_SPEED}ms" >
 
                          <!--bench-->
-                         <svg class="absolute bottom-16 right-32 xl:right-64 md:scale-100 scale-75 transition-opacity ease-linear  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
+                         <svg class="absolute bottom-16 right-32 xl:right-64 md:scale-100 scale-75 transition-opacity ease-linear xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" style="transition-duration:{2000*FRAME_SPEED}ms;" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6604)">
                             <path d="M0 163.93L718.68 150.39V225.42L0 213.45V163.93Z" />
                             <path d="M606.83 0.620209L598.93 98.2102L581.8 97.8402L578.67 128.87L366.86 132.84L362.83 98.4202L334.24 97.8402L330.64 133.69L113.92 137.62L109.26 98.4202L82.31 97.8902L75.37 13.2402L606.83 0.620209Z"/>
@@ -299,10 +298,10 @@ const resetToFrameOne  = () => {
                         <!--sitting person-->
                    
                         {#if showSittingPerson}
-                        <svg out:fade={{easing:(t)=>t}} class="absolute bottom-16 right-20 xl:right-52 md:scale-100 scale-75  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] transition-all ease-linear" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
+                        <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute bottom-16 right-20 xl:right-52 md:scale-100 scale-75  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6609)" >
-                            <path  fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-all ease-linear duration-1000" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" />
-                            <path fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-all ease-linear duration-1000" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" />
+                            <path  fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-colors ease-linear" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" style="transition-duration:{1000*FRAME_SPEED}ms"/>
+                            <path fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-colors ease-linear" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" style="transition-duration:{1000*FRAME_SPEED}ms"/>
                             </g>
                             <defs>
                             <clipPath id="clip0_5151_6609">
@@ -314,7 +313,7 @@ const resetToFrameOne  = () => {
         
                         <!--sleeping person-->
                         {#if showSleepingPerson}
-                        <svg in:fade={{delay:400, easing:(t)=>t}} class="absolute bottom-48 right-[620px] md:scale-100 scale-75 xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="431" height="177" viewBox="0 0 431 177" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <svg in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute bottom-48 right-[620px] md:scale-100 scale-75 xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="431" height="177" viewBox="0 0 431 177" fill="white" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5017_5407)">
                             <path d="M103.269 114.64L107.369 72.7999L47.3795 37.8999L3.49945 67.1299L0.189453 100.51L20.3295 130.75L69.1595 137.35L103.269 114.64Z" fill="#19294B"/>
                             <path d="M95.9492 45.59L167.169 0L245.899 8.49L325.699 20.47L323.979 81.25L285.529 121.44L180.369 144.66L107.369 134.13L126.549 75.45L95.9492 45.59Z" fill="#19294B"/>
@@ -330,14 +329,14 @@ const resetToFrameOne  = () => {
         
                       <!--light cone-->
                       {#if isLampOn}
-                      <svg in:fade  class="absolute bottom-0 left-[2px] md:scale-100 scale-75 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] mix-blend-overlay" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
+                      <svg in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:600*FRAME_SPEED}}  class="absolute bottom-0 left-[2px] md:scale-100 scale-75 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] mix-blend-overlay" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.4" d="M438.05 0.114746L315.785 3.29375L-338.319 638.423L13.3617 743.44H778.313L1154.13 650.435L438.05 0.114746Z"/>
                     </svg>
 
                     {/if}
     
                 <!--lamp-->
-                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] opacity-50" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] transition-opacity ease-linear {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
                     <g clip-path="url(#clip0_5151_6597)">
                     <path class="brightness-0 invert" d="M323.384 283.602C352.478 282.849 376.724 261.978 382.543 234.115L261.638 237.235C268.966 264.775 294.181 284.355 323.276 283.602H323.384Z" fill={$bgColor}/>
                     <path d="M56.8965 347.72L125.647 335.886L141.164 738.453L47.9526 737.485L56.8965 347.72Z" />
@@ -355,7 +354,7 @@ const resetToFrameOne  = () => {
 
        
           
-            </button>
+            </div>
             <div class="w-screen h-screen absolute top-0 left-0 flex justify-center items-center pointer-events-none">
                 <h2 class=" text-[#1B41A0] max-w-[1040px] text-center">
                     Raising awareness for LA’s unhoused youth and their mental health.
