@@ -50,11 +50,12 @@
     
 
     import { tweened } from 'svelte/motion'
-    import { expoIn, expoInOut, quintIn, quintOut } from 'svelte/easing'
+    import { expoIn, expoInOut, linear, quintIn, quintOut } from 'svelte/easing'
     import { derived } from 'svelte/store'
   import ContentWidth from "$lib/components/ContentWidth.svelte";
 
   import { slide } from 'svelte/transition';
+  import { onMount } from "svelte";
 
 
                   
@@ -111,16 +112,22 @@
         
         if(!isFrameOneStarted){
             isFrameOneStarted=true;
-            bgColor.set('masthead-tan');
+            setTimeout(()=>bgColor.set('masthead-tan'), 2000);
+            
             setTimeout(()=>{
                 bgColor.set('masthead-blue');
+                
+                
+            },4000);
+
+            setTimeout(()=>{
                 showSittingPerson=false;
                 showSleepingPerson=true;
-            },1200);
+            },6000)
 
             setTimeout(()=>{
                 isLampOn = true;
-            },2400)
+            },7000)
         }
     };
 
@@ -231,7 +238,10 @@ const resetToFrameOne  = () => {
 
   
   setTimeout(()=>activeFrame.update(()=> 1),200)
+  setTimeout(()=>runFrameOne(),1000)
  }
+
+ onMount(()=>runFrameOne())
 </script>
 
 <style>
@@ -269,10 +279,10 @@ const resetToFrameOne  = () => {
         </button>
     </div>
         <Panel frame={1}>
-            <button class="w-full h-full relative {isFrameOneStarted ? 'cursor-default' : ''}" on:click={runFrameOne} >
+            <button class="w-full h-full relative {isFrameOneStarted ? 'cursor-default' : ''}" on:click >
 
                          <!--bench-->
-                         <svg class="absolute bottom-16 right-32 xl:right-64 md:scale-100 scale-75  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] opacity-10" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
+                         <svg class="absolute bottom-16 right-32 xl:right-64 md:scale-100 scale-75 transition-opacity ease-linear  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6604)">
                             <path d="M0 163.93L718.68 150.39V225.42L0 213.45V163.93Z" />
                             <path d="M606.83 0.620209L598.93 98.2102L581.8 97.8402L578.67 128.87L366.86 132.84L362.83 98.4202L334.24 97.8402L330.64 133.69L113.92 137.62L109.26 98.4202L82.31 97.8902L75.37 13.2402L606.83 0.620209Z"/>
@@ -289,10 +299,10 @@ const resetToFrameOne  = () => {
                         <!--sitting person-->
                    
                         {#if showSittingPerson}
-                        <svg out:fade class="absolute bottom-16 right-20 xl:right-52 md:scale-100 scale-75  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] transition-all duration-1000" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
+                        <svg out:fade={{easing:(t)=>t}} class="absolute bottom-16 right-20 xl:right-52 md:scale-100 scale-75  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] transition-all ease-linear" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6609)" >
-                            <path  fill={COLOR_KEY[$bgColor]||'white'} class="brightness-50 transition-all duration-1000" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" />
-                            <path fill={COLOR_KEY[$bgColor]||'white'} class="brightness-50 transition-all duration-1000" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" />
+                            <path  fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-all ease-linear duration-1000" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" />
+                            <path fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-all ease-linear duration-1000" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" />
                             </g>
                             <defs>
                             <clipPath id="clip0_5151_6609">
@@ -304,7 +314,7 @@ const resetToFrameOne  = () => {
         
                         <!--sleeping person-->
                         {#if showSleepingPerson}
-                        <svg in:fade={{delay:400}} class="absolute bottom-48 right-[620px] md:scale-100 scale-75 xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="431" height="177" viewBox="0 0 431 177" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <svg in:fade={{delay:400, easing:(t)=>t}} class="absolute bottom-48 right-[620px] md:scale-100 scale-75 xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="431" height="177" viewBox="0 0 431 177" fill="white" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5017_5407)">
                             <path d="M103.269 114.64L107.369 72.7999L47.3795 37.8999L3.49945 67.1299L0.189453 100.51L20.3295 130.75L69.1595 137.35L103.269 114.64Z" fill="#19294B"/>
                             <path d="M95.9492 45.59L167.169 0L245.899 8.49L325.699 20.47L323.979 81.25L285.529 121.44L180.369 144.66L107.369 134.13L126.549 75.45L95.9492 45.59Z" fill="#19294B"/>
@@ -320,14 +330,14 @@ const resetToFrameOne  = () => {
         
                       <!--light cone-->
                       {#if isLampOn}
-                      <svg in:fade  class="absolute bottom-0 left-[2px] md:scale-100 scale-75 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%]" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
+                      <svg in:fade  class="absolute bottom-0 left-[2px] md:scale-100 scale-75 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] mix-blend-overlay" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.4" d="M438.05 0.114746L315.785 3.29375L-338.319 638.423L13.3617 743.44H778.313L1154.13 650.435L438.05 0.114746Z"/>
                     </svg>
 
                     {/if}
     
                 <!--lamp-->
-                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] opacity-10" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] opacity-50" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5151_6597)">
                     <path class="brightness-0 invert" d="M323.384 283.602C352.478 282.849 376.724 261.978 382.543 234.115L261.638 237.235C268.966 264.775 294.181 284.355 323.276 283.602H323.384Z" fill={$bgColor}/>
                     <path d="M56.8965 347.72L125.647 335.886L141.164 738.453L47.9526 737.485L56.8965 347.72Z" />
@@ -428,7 +438,7 @@ const resetToFrameOne  = () => {
         
         {/if}
         {#if isFrameThreeFinished}
-        <img class="absolute w-screen h-screen object-cover " src={fullScribbles} alt="background-scribbles" transition:fade={{duration:200}}/>
+        <img class="absolute w-screen h-screen object-cover " src={fullScribbles} alt="background-scribbles" transition:fade={{duration:600}}/>
         {/if}
             <h6 class="z-10 text-pink">WHAT'S ON THE LINE</h6>
             
@@ -601,7 +611,7 @@ const resetToFrameOne  = () => {
         </div>
     </Panel>
 
-    <Panel frame={6} class="overflow-y-scroll">
+    <Panel frame={6} class="overflow-y-scroll overflow-x-hidden">
         <div class="w-full min-h-screen flex flex-col items-center justify-center bg-help-light">
             <div class="flex flex-col items-center justify-center max-w-screen-md my-32">
                 <h6 class="text-light-orange">make a difference</h6>
@@ -611,13 +621,13 @@ const resetToFrameOne  = () => {
         
             <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden rounded">
 
-                <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+                <div class="p-10 relative flex flex-row gap-16 justify-start items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
                     <div>
                         <h5 class="text-orange mb-7">Young people to the front</h5>
                         <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
-                        <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-pink hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
+                        <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
@@ -632,13 +642,13 @@ const resetToFrameOne  = () => {
                     </div>
                 </div>
 
-                <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+                <div class="p-10 relative flex flex-row gap-16 justify-start items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={spyLogo} alt="young people to the front logo" />
                     <div>
                         <h5 class="text-orange mb-7">Safe place for youth</h5>
                         <p>S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs.</p>
-                        <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-pink hover:brightness-125" href="https://www.safeplaceforyouth.org/" target="_blank">
+                        <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.safeplaceforyouth.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
@@ -654,13 +664,13 @@ const resetToFrameOne  = () => {
                     </div>
                 </div>
                 
-                <div class="p-10 relative flex flex-row gap-16 justify-start items-start w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+                <div class="p-10 relative flex flex-row gap-16 justify-start items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
                     <div>
                         <h5 class="text-orange mb-7">My Friend's place</h5>
                         <p>They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency.</p>
-                        <a class="bump flex flex-row pt-5 gap-5  hover:gap-6 my-7 text-pink hover:brightness-125" href="https://www.myfriendsplace.org/" target="_blank">
+                        <a class="bump flex flex-row pt-5 gap-5  hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.myfriendsplace.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
