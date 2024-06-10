@@ -140,15 +140,22 @@ $:{
         setTimeout(()=>toThirtyEight.set(38), 500);
 
         //for frame 3
-        bgColor.set("mental-health-purple")
+        
     }
     else if($activeFrame===3){
         setTimeout(()=>toSixtyNine.set(69), 500);
+        bgColor.set("mental-health-purple")
 
     }else{
         toThirtyEight.set(0)
         toSixtyNine.set(0)
+        isFrameThreeStarted = false;
+    isFrameThreeFinished = false;
     }
+}
+
+const setToFrameTwo = () => {
+    activeFrame.set(2)
 }
 
 // frame three
@@ -162,6 +169,12 @@ const runFrameThree = () => {
     }, 3000)
 }
 
+const setToFrameThree = () =>{
+    bgColor.set("mental-health-purple")
+
+    activeFrame.set(3)
+}
+
 
 
 //frame four
@@ -171,6 +184,17 @@ let isMythTwo=false;
 let isMythTwoBusted=false;
 let isMythThree=false;
 let isMythThreeBusted = false;
+
+const setToFrameFour = () => {
+    isMythOne=false;
+    isMythOneBusted=false;  
+    isMythTwo=false;
+    isMythTwoBusted=false;
+    isMythThree=false;
+    isMythThreeBusted = false;
+
+    activeFrame.set(4)
+}
 
 $:{
     
@@ -198,15 +222,24 @@ const crackOpenEase = (t:number) =>{
 
 ///frame 5
 
+
+
 const runFrameFive = () =>{
     bgColor.set('day');
     activeFrame.set(5);
 
 }
 
+const setFrameFive = runFrameFive;
+
 //frame 6
 
 let activeFeature = 0;
+
+const setToFrameSix = () => {
+    activeFeature = 0 ;
+    activeFrame.set(6)
+}
 
 
 
@@ -276,6 +309,15 @@ const resetToFrameOne  = () => {
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
             </span>
         </button>
+    </div>
+    <div class="w-2 gap-4 flex flex-col absolute right-12 top-1/2 -translate-y-1/2 z-50">
+        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===1?"bg-opacity-100":"bg-opacity-5"}" on:click={resetToFrameOne}></button>
+        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===2?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameTwo}></button>
+        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===3?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameThree}></button>
+        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===4?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameFour}></button>
+        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===5?"bg-opacity-100":"bg-opacity-5"}" on:click={setFrameFive}></button>
+        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===6?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameSix}></button>
+
     </div>
         <Panel frame={1}>
             <div class="w-full h-full relative {isFrameOneStarted ? 'cursor-default' : ''} transition-colors ease-linear" style="background-color:{COLOR_KEY[$bgColor]}; transition-duration:{1000*FRAME_SPEED}ms" >
