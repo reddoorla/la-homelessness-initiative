@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 812.29 944">
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 944" width="100%" height="100%">
   <defs>
     <style>
       .cls-1 {
         fill: #4e1123;
         stroke-width: 0px;
       }
+
+      .transparent{
+        fill:transparent;
+        stroke-width: 0px;
+      }
     </style>
   </defs>
   <g id="shatter">
+    <polygon class="transparent" points="1440 0 1440 944 610.96 944 812.29 657.35 773.98 566.19 784.55 509.65 770.02 472 803.05 436.72 787.19 272.91 633.95 185.71 669.62 24.54 663.49 0 1440 0"/>
     <polygon class="cls-1" points="812.29 657.35 610.96 944 0 944 0 0 663.49 0 669.62 24.54 633.95 185.71 787.19 272.91 803.05 436.72 770.02 472 784.55 509.65 773.98 566.19 812.29 657.35"/>
   </g>
 </svg>
