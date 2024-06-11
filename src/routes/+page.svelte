@@ -92,6 +92,8 @@
                     let activeAccordians: boolean[] = [];
                   
                     labels.forEach(() => activeAccordians.push(false));
+
+                    let isMobileNavActive = false;
  
   
   let toThirtyEight = tweened(0 as number, { duration: 2000, easing: quintOut })
@@ -108,6 +110,8 @@
     let showSleepingPerson = false;
     let isLampOn = false;
     let isFrameOneStarted = false;
+    let lightCone:SVGElement;
+    let bottomOfLightCone=0;
     const FRAME_SPEED = 0.75;
     const runFrameOne = async () => {
         
@@ -126,9 +130,16 @@
 
             setTimeout(()=>{
                 isLampOn = true;
+                
             },7500*FRAME_SPEED)
         }
     };
+
+    $:{
+        isLampOn;
+        if(lightCone)
+        bottomOfLightCone=lightCone.getBoundingClientRect().bottom;
+    }
 
 
 
@@ -273,7 +284,11 @@ const resetToFrameOne  = () => {
   setTimeout(()=>runFrameOne(),1000)
  }
 
- onMount(()=>runFrameOne())
+ onMount(()=>{
+    
+    runFrameOne()
+    window.addEventListener('resize', ()=>{if(isLampOn){isLampOn=false; setTimeout(()=>isLampOn=true, 800)} })
+    })
 </script>
 
 <style>
@@ -293,24 +308,52 @@ const resetToFrameOne  = () => {
 </svelte:head>
 
 <main class="w-screen h-screen fixed">
-    <div class="h-16 w-screen flex flex-row items-center justify-between py-3 px-8 absolute z-50">
-        <button class="h-full " on:click={()=>activeFrame.set(6)}>
+    <div class="h-12 lg:h-16 w-screen flex flex-row items-center justify-between py-3 px-8 absolute z-40">
+        <button class="h-full hidden lg:block" on:click={()=>activeFrame.set(6)}>
             <span class="flex flex-row items-center bump">
                 <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
                 <img class="h-6" src={helpArrow} alt="down arrow" />
             </span>
         </button>
-        <button class="h-full" on:click={resetToFrameOne}>
+        <button class="h-full bump hover:opacity-90" on:click={resetToFrameOne}>
             <img class="h-full" src={logo} alt="hearts & minds" />
         </button>
-        <button class="h-full">
+        <button class="h-full hidden lg:block">
             <span class="flex flex-row items-center transition bump">
                 <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
             </span>
         </button>
+        <button class="lg:hidden text-light-pink hover:text-pink bump" on:click={()=>isMobileNavActive=true}>
+            <i class="fa-solid fa-bars fa-xl" />
+        </button>
     </div>
-    <div class="w-2 gap-4 flex flex-col absolute right-12 top-1/2 -translate-y-1/2 z-50">
+    {#if isMobileNavActive}
+    <div class="w-screen h-screen bg-masthead-pink fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20" transition:fly={{y:"-100%"}}>
+        <button class="" on:click={()=>activeFrame.set(6)}>
+            <span class="flex flex-row items-center bump">
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
+                <img class="h-6" src={helpArrow} alt="down arrow" />
+            </span>
+        </button>
+        <button class="">
+            <span class="flex flex-row items-center transition bump">
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
+                <img class="h-6" src={lifePreserver} alt="life preserver" />
+            </span>
+        </button>
+        <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump text-light-pink hover:text-pink flex flex-row gap-3 hover:gap-4">
+            <div class="btn-text">I have a suggestion</div>
+            <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill={COLOR_KEY["pink"]}/>
+            </svg>
+        </a>
+        <button class="absolute top-4 right-8 text-pink hover:text-light-pink bump" on:click={()=>isMobileNavActive=false}>
+            <i class="fa-solid fa-close fa-xl" />
+        </button>
+    </div>
+    {/if}
+    <div class="w-2 gap-4 flex flex-col absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-40">
         <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===1?"bg-opacity-100":"bg-opacity-5"}" on:click={resetToFrameOne}></button>
         <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===2?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameTwo}></button>
         <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===3?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameThree}></button>
@@ -323,7 +366,7 @@ const resetToFrameOne  = () => {
             <div class="w-full h-full relative {isFrameOneStarted ? 'cursor-default' : ''} transition-colors ease-linear" style="background-color:{COLOR_KEY[$bgColor]}; transition-duration:{1000*FRAME_SPEED}ms" >
 
                          <!--bench-->
-                         <svg class="absolute bottom-16 right-32 xl:right-64 md:scale-100 scale-75 transition-opacity ease-linear xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" style="transition-duration:{2000*FRAME_SPEED}ms;" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
+                         <svg class="absolute bottom-0 sm:bottom-16 -left-32 sm:-left-20 lg:left-auto right-auto lg:right-32 xl:right-64 md:scale-100 sm:scale-75 scale-[50%] transition-opacity ease-linear xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" style="transition-duration:{2000*FRAME_SPEED}ms;" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6604)">
                             <path d="M0 163.93L718.68 150.39V225.42L0 213.45V163.93Z" />
                             <path d="M606.83 0.620209L598.93 98.2102L581.8 97.8402L578.67 128.87L366.86 132.84L362.83 98.4202L334.24 97.8402L330.64 133.69L113.92 137.62L109.26 98.4202L82.31 97.8902L75.37 13.2402L606.83 0.620209Z"/>
@@ -340,7 +383,7 @@ const resetToFrameOne  = () => {
                         <!--sitting person-->
                    
                         {#if showSittingPerson}
-                        <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute bottom-16 right-20 xl:right-52 md:scale-100 scale-75  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
+                        <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute -bottom-6 sm:bottom-12 md:bottom-16 left-[200px] sm:left-[400px] md:left-[480px] right-auto lg:left-auto lg:right-20 xl:right-52 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6609)" >
                             <path  fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-colors ease-linear" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" style="transition-duration:{1000*FRAME_SPEED}ms"/>
                             <path fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-colors ease-linear" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" style="transition-duration:{1000*FRAME_SPEED}ms"/>
@@ -355,7 +398,7 @@ const resetToFrameOne  = () => {
         
                         <!--sleeping person-->
                         {#if showSleepingPerson}
-                        <svg in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute bottom-48 right-[620px] md:scale-100 scale-75 xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="431" height="177" viewBox="0 0 431 177" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <svg in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute bottom-[88px] sm:bottom-40 lg:bottom-48 right-auto -left-12 sm:left-8 lg:left-auto lg:right-[620px] md:scale-100 sm:scale-75 scale-[50%] xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="431" height="177" viewBox="0 0 431 177" fill="white" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5017_5407)">
                             <path d="M103.269 114.64L107.369 72.7999L47.3795 37.8999L3.49945 67.1299L0.189453 100.51L20.3295 130.75L69.1595 137.35L103.269 114.64Z" fill="#19294B"/>
                             <path d="M95.9492 45.59L167.169 0L245.899 8.49L325.699 20.47L323.979 81.25L285.529 121.44L180.369 144.66L107.369 134.13L126.549 75.45L95.9492 45.59Z" fill="#19294B"/>
@@ -371,34 +414,47 @@ const resetToFrameOne  = () => {
         
                       <!--light cone-->
                       {#if isLampOn}
-                      <svg in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:600*FRAME_SPEED}}  class="absolute bottom-0 left-[2px] md:scale-100 scale-75 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] mix-blend-overlay" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
+                      <svg bind:this={lightCone} in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:600*FRAME_SPEED}}  class="absolute top-[110px] sm:top-[260px] md:top-[320px] lg:top-auto lg:bottom-0 -left-[406px] sm:-left-[290px] md:-left-[240px] lg:left-[2px] scale-[50%] sm:scale-100  xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] mix-blend-overlay" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.4" d="M438.05 0.114746L315.785 3.29375L-338.319 638.423L13.3617 743.44H778.313L1154.13 650.435L438.05 0.114746Z"/>
                     </svg>
+                    <div in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:600*FRAME_SPEED}} class="bg-[#C6D8EF] opacity-40 mix-blend-overlay absolute h-1/2 w-screen" style="top:{bottomOfLightCone}px;">
+
+                    </div>
+
 
                     {/if}
     
                 <!--lamp-->
-                <svg class="absolute bottom-16 left-16 scale-75 md:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] transition-opacity ease-linear {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
-                    <g clip-path="url(#clip0_5151_6597)">
-                    <path class="brightness-0 invert" d="M323.384 283.602C352.478 282.849 376.724 261.978 382.543 234.115L261.638 237.235C268.966 264.775 294.181 284.355 323.276 283.602H323.384Z" fill={$bgColor}/>
-                    <path d="M56.8965 347.72L125.647 335.886L141.164 738.453L47.9526 737.485L56.8965 347.72Z" />
-                    <path d="M134.483 285.108L48.8146 282.849L47.9526 327.602L133.621 319.104L134.483 285.108Z" />
-                    <path d="M113.147 -9.77086C113.147 -60.2262 154.203 -101.215 204.741 -101.215C255.28 -101.215 296.336 -59.4732 296.336 -9.77086C296.336 10.7771 285.56 36.9192 285.56 36.9192L340.086 30.5719V-9.77086C340.086 -84.3243 279.31 -145 204.634 -145C129.957 -145 69.3965 -84.3243 69.3965 -9.77086V271.876H125.647L113.147 -9.77086Z" fill={$bgColor}/>
-                    <path d="M373.06 42.621L257.974 53.2715L231.034 217.332L400.108 222.819L373.168 42.621H373.06Z" />
-                    <path d="M20.7974 749.749H160.776L185.022 864H0L20.7974 749.749Z" />
+                <svg class="absolute -top-32 md:-top-16 lg:top-auto lg:bottom-16 -left-48 md:-left-40 lg:left-16 sm:scale-75 scale-[50%] lg:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] transition-opacity ease-linear {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
+                    <g class="lg:-translate-y-[144px]">
+                        
+                        <path d="M323.382 428.602C352.477 427.849 376.723 406.978 382.542 379.115L261.637 382.235C268.964 409.775 294.18 429.355 323.275 428.602H323.382Z" fill={$bgColor}/>
+                        <path d="M56.8971 492.72L125.647 480.886L141.164 883.453L47.9531 882.485L56.8971 492.72Z" fill={$bgColor}/>
+                        <path d="M134.483 430.108L48.8152 427.849L47.9531 472.602L133.621 464.103L134.483 430.108Z" fill={$bgColor}/>
+                        <path d="M113.146 135.229C113.146 84.7736 154.203 43.7854 204.741 43.7854C255.28 43.7854 296.336 85.5267 296.336 135.229C296.336 155.777 285.56 181.919 285.56 181.919L340.086 175.572V135.229C340.086 60.6756 279.31 0 204.634 0C129.957 0 69.3965 60.6756 69.3965 135.229V416.875H125.646L113.146 135.229Z" fill={$bgColor}/>
+                        <path d="M373.061 187.621L257.975 198.272L231.035 362.332L400.108 367.819L373.169 187.621H373.061Z" fill={$bgColor}/>
+                        <path d="M20.7974 894.749H160.776L185.022 1009H0L20.7974 894.749Z" fill={$bgColor}/>
                     </g>
-                    <defs>
-                    <clipPath id="clip0_5151_6597">
-                    <rect width="400" height="1009" fill="white" transform="translate(0 -145)"/>
-                    </clipPath>
-                    </defs>
+                        
+                       
                 </svg>
+                <!--bulb-->
+                {#if isLampOn}
+                <svg in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:600*FRAME_SPEED}} class="absolute -top-32 md:-top-16 lg:top-auto lg:bottom-16 -left-48 md:-left-40 lg:left-16 sm:scale-75 scale-[50%] lg:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%]" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
+                    <g class="lg:-translate-y-[144px]">
+                        <path d="M323.382 428.602C352.477 427.849 376.723 406.978 382.542 379.115L261.637 382.235C268.964 409.775 294.18 429.355 323.275 428.602H323.382Z" fill="white"/>
+                    </g>
+                </svg>
+
+                {/if}
+                        
+                        
 
        
           
             </div>
             <div class="w-screen h-screen absolute top-0 left-0 flex justify-center items-center pointer-events-none">
-                <h2 class=" text-[#1B41A0] max-w-[1040px] text-center">
+                <h2 class=" text-[#1B41A0] w-4/5 max-w-[1040px] text-center -translate-y-1/2 md:translate-y-0">
                     Raising awareness for LA’s unhoused youth and their mental health.
                 </h2>
                 {#if isLampOn}
@@ -435,16 +491,16 @@ const resetToFrameOne  = () => {
                 <path d="M1.50051 0.340088L1440.48 420.79V624L0.520508 80.4501L1.50051 0.340088Z" fill="#1C4182"/>
               </svg>
 
-              <img class="top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[12vw] w-[80vw] absolute" src={encampment} alt="encampment"/>
+              <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[12vw] w-[80vw] absolute" src={encampment} alt="encampment"/>
               <img class="top-[60vh] lg:top-[40vh] xl:top-[30vh] left-[10vw] w-[80vw] absolute" src={basePeople} alt="people" />
               {#if $activeFrame===2}
               
-              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleOne} alt="people" transition:fade={{duration:1000,delay:500}}/>
-              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleTwo} alt="people" transition:fade={{duration:1000,delay:1500}}/>
-              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleThree} alt="people" transition:fade={{duration:1000,delay:2500}}/>
-              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFour} alt="people" transition:fade={{duration:1000,delay:3500}} />
-              <img class="top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFive} alt="people" transition:fade={{duration:1000,delay:4500}} />
-              <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+              <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleOne} alt="people" transition:fade={{duration:1000,delay:500}}/>
+              <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleTwo} alt="people" transition:fade={{duration:1000,delay:1500}}/>
+              <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleThree} alt="people" transition:fade={{duration:1000,delay:2500}}/>
+              <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFour} alt="people" transition:fade={{duration:1000,delay:3500}} />
+              <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFive} alt="people" transition:fade={{duration:1000,delay:4500}} />
+              <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="negative-bump absolute right-8 sm:right-auto bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto">
                 <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
@@ -456,11 +512,12 @@ const resetToFrameOne  = () => {
               {/if}
 
               <h6 class="z-10 text-pink">DID YOU KNOW</h6>
-              <h3 class="z-10 text-light-pink max-w-screen-lg">Homelessness in youth and young adults has increased</h3>
+              <h3 class="z-10 text-light-pink max-w-screen-lg text-center w-4/5">Homelessness in youth and young adults has increased</h3>
               <h1 class="z-10 text-[#EAD4DF]">{$toThirtyEightFormatted}%</h1>
             <HowWeKnowButton 
                 text="According to LAHSA’s 2023 Greater Los Angeles Homeless Youth Count, there were over 2,000 youth and young adults experiencing homeless in 2023 on any given night."
                 reportLink="https://www.lahsa.org/documents?id=7689-yc2023-la-coc-data-summary"
+                class="z-20"
             />
                 </div>
     </Panel>
@@ -487,17 +544,17 @@ const resetToFrameOne  = () => {
             {#if !isFrameThreeStarted}
             <div out:fly={{x:"-100%", duration:400}}>
             <h1 class="z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h1>
-            <h3 class="z-10 text-light-pink max-w-[992px]">Of homeless youth experience mental illness or crises while unhoused</h3>
-            <button class="z-10 mt-24 bump hover:brightness-125" on:click={runFrameThree}>
+            <h3 class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">Of homeless youth experience mental illness or crises while unhoused</h3>
+            <button class="z-10 mt-12 sm:mt-24 bump hover:brightness-125" on:click={runFrameThree}>
                 <img src={rightArrow} alt="next arrow" />
             </button>
             </div>
             {:else}
-            <h3 in:fly={{delay:400, duration:400, x:"100%"}} class="z-10 text-light-pink max-w-[992px] mt-16">Without adequate care, young people are at greater <span class="text-[#EAD4DF]">risk of suicide attempts and suicide.</span></h3>
+            <h3 in:fly={{delay:400, duration:400, x:"100%"}} class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto mt-16">Without adequate care, young people are at greater <span class="text-[#EAD4DF]">risk of suicide attempts and suicide.</span></h3>
             {/if}
             </div>
             {#if isFrameThreeStarted}
-            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto right-8 sm:right-auto">
                 <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
@@ -517,10 +574,10 @@ const resetToFrameOne  = () => {
         {#if !isMythOne&&!isMythTwo&&!isMythThree}
         <div class="bg-darkest-red w-screen h-screen absolute">
             
-            <div class="w-full h-full flex flex-col items-center justify-center" out:fly={{x:"-100vw", duration:400, opacity:1}}>
-                <h6 class="z-10 text-pink">LET'S GET THESE</h6>
-                <h1 class="z-10 text-[#EAD4DF]">MYTHS</h1>
-                <h3 class="z-10 text-light-pink max-w-screen-lg">OUT OF THE WAY</h3>
+            <div class="w-full h-full flex flex-col items-center justify-center z-20" out:fly={{x:"-100vw", duration:400, opacity:1}}>
+                <h6 class=" text-pink">LET'S GET THESE</h6>
+                <h1 class=" text-[#EAD4DF]">MYTHS</h1>
+                <h3 class=" text-light-pink max-w-screen-lg">OUT OF THE WAY</h3>
                 <button class="hover:brightness-125 bump" on:click={()=>isMythOne=true}>
                     <img src={mythsArrow} alt="arrow right"/>
                 </button>
@@ -531,7 +588,7 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
 
             <div class="absolute w-full h-full flex flex-col items-center justify-center">
-                <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
+                <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg  w-4/5 text-center mx-auto"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
                 <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
                     <span class="flex flex-row justify-center items-center gap-6">
                         <img src={rightArrow} alt="next arrow"/>
@@ -540,13 +597,13 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://www.aclusocal.org/sites/default/files/aclu_socal_oc_shelters_report.pdf" text="Most unhoused people would move to shelter if there were safe and affordable options. In a report by the ACLU, they found that residents in emergency centers in Orange County were met with untrained, abusive, and neglectful shelter staff." />
             </div>
             {#if !isMythOneBusted}
-            <img src={mythOneShatterLeft} alt="shattering background" class="z-10 absolute min-h-screen min-w-screen top-0 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", opacity:1, easing: crackOpenEase}}/>
-            <img src={mythOneShatterRight} alt="shattering background" class="z-10 absolute min-h-screen min-w-screen top-0 object-fill" out:fly={{delay:200, duration:1800, x:"100%", opacity:1, easing: crackOpenEase}}/>
-            <button class="z-10 absolute w-full h-full" on:click={()=>isMythOneBusted=true} transition:fade>
+            <img src={mythOneShatterLeft} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythOneShatterRight} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"100%", opacity:1, easing: crackOpenEase}}/>
+            <button class="absolute w-full h-full z-20" on:click={()=>isMythOneBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center">
-                    <h6 class="z-10 text-pink">01/03</h6>
-                    <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
-                    <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click>
+                    <h6 class=" text-pink">01/03</h6>
+                    <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink ">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
+                    <button class=" mt-24 bump hover:brightness-125 w-full" on:click>
                         <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                             <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                             <img src={rightArrow} alt="next arrow" class="w-20
@@ -562,8 +619,8 @@ const resetToFrameOne  = () => {
             {#if isMythTwo}
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400, opacity:1}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
             <div class="absolute w-full h-full flex flex-col items-center justify-center bg-red">
-                <h3 class="z-10 text-[#EAD4DF]  max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>homeless folks would move inside if housing programs met their needs.</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
+                <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>homeless folks would move inside if housing programs met their needs.</h3>
+                <button class=" mt-24 bump hover:brightness-125 w-full" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
                     <span class="flex flex-row gap-6 justify-center items-center ">
                     <img src={rightArrow} alt="next arrow"/>
                     </span>
@@ -571,14 +628,14 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://nlihc.org/sites/default/files/Housing-First-Research.pdf" text="Homelessness is not a choice. Most individuals are seeking shelter, employment, and support but find it difficult to adhere to “treatment-first” programs. Instead, “housing-first” programs offer flexibility to a larger population and can help them find employment and maintain stable housing" />
             </div>
             {#if !isMythTwoBusted}
-            <img src={mythTwoShatterLeft} alt="shattering background" class="z-10 absolute min-h-screen min-w-screen top-0 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
-            <img src={mythTwoShatterRight} alt="shattering background" class="z-10 absolute min-h-screen min-w-screen top-0 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythTwoShatterLeft} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythTwoShatterRight} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
            
-            <button class="z-10  absolute w-full h-full" on:click={()=>isMythTwoBusted=true} transition:fade>
+            <button class="absolute w-full h-full z-20" on:click={()=>isMythTwoBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center ">
-                <h6 class="z-10 text-pink">02/03</h6>
-                <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click>
+                <h6 class=" text-pink">02/03</h6>
+                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
+                <button class=" mt-24 bump hover:brightness-125 w-full" on:click>
                     <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
@@ -592,9 +649,9 @@ const resetToFrameOne  = () => {
             {/if}
             {#if isMythThree}
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100%", duration:400, opacity:1}} in:fly={{x:"100%", duration:400, delay:400, opacity:1}}>
-            <div class="z-10 absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
-                <h3 class="z-10 text-[#EAD4DF]  max-w-screen-lg text-center"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
-                <button class="z-10  absolute bottom-12 mt-24 bump hover:brightness-125 w-full" on:click={runFrameFive}>
+            <div class=" absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
+                <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
+                <button class="  absolute bottom-12 mt-24 bump hover:brightness-125 right-8 sm:right-auto" on:click={runFrameFive}>
                     <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <svg class="transition-colors text-light-pink" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
@@ -606,14 +663,14 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://bfi.uchicago.edu/wp-content/uploads/2021/06/BFI_WP_2021-65.pdf" text="Many people experiencing homelessness are employed or actively seeking employment and would move inside if housing responsive to their needs were available. " />
             </div>
             {#if !isMythThreeBusted}
-            <img src={mythThreeShatterLeft} alt="shattering background" class="z-10 absolute min-h-screen min-w-screen top-0 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
-            <img src={mythThreeShatterRight} alt="shattering background" class="z-10 absolute min-h-screen min-w-screen top-0 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythThreeShatterLeft} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythThreeShatterRight} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
            
-            <button class="z-10 absolute w-full h-full" on:click={()=>isMythThreeBusted=true} transition:fade>
+            <button class=" absolute w-full h-full z-20" on:click={()=>isMythThreeBusted=true} transition:fade>
                 <span class=" flex-col items-center justify-center">
-                <h6 class="z-10 text-pink">03/03</h6>
-                <h3 class="z-10 text-[#EAD4DF]"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 w-full" on:click>
+                <h6 class=" text-pink">03/03</h6>
+                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>
+                <button class=" mt-24 bump hover:brightness-125 w-full" on:click>
                     <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center">
                     <div class="text-light-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
@@ -631,8 +688,8 @@ const resetToFrameOne  = () => {
 
     <Panel frame={5}>
         <div class="w-full h-full absolute top-0 left-0 flex flex-col items-center justify-center transition-colors duration-[6000ms] delay-1000 ease-out {$activeFrame===5?"bg-day":"bg-night"}">
-            <h4 class="text-blue text-center max-w-screen-xl">With so many young people sleeping without shelter every night, we want to shed light on the issue to</h4>
-            <h2 class="{$activeFrame===5?"text-orange opacity-100":"text-light-pink opacity-10"} transition duration-[8000ms] delay-1000 ease-out">open hearts and minds</h2>
+            <h3 class="text-blue text-center -translate-y-16 lg:translate-y-0 max-w-screen-xl w-5/6">With so many young people sleeping without shelter every night, we want to shed light on the issue to</h3>
+            <h2 class="{$activeFrame===5?"text-orange opacity-100":"text-light-pink opacity-10"} w-5/6 -translate-y-16 lg:translate-y-0  transition duration-[8000ms] delay-1000 ease-out text-center">open hearts and minds</h2>
 
             {#if $activeFrame===5}
             
@@ -656,24 +713,28 @@ const resetToFrameOne  = () => {
             <div class="flex flex-col items-center justify-center max-w-screen-md my-32">
                 <h6 class="text-light-orange">make a difference</h6>
                 <h3 class="text-orange my-9">How to help</h3>
-                <p class="text-center">Here are organizations doing good in Los Angeles so you can learn more about the homeless crisis and become an advocate for our neighbors.</p>
+                <p class="text-center mx-[8%]">Here are organizations doing good in Los Angeles so you can learn more about the homeless crisis and become an advocate for our neighbors.</p>
             </div>
         
-            <div class="bg-help-dark h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden rounded">
+            <div class="bg-help-dark h-[1024px] lg:h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden rounded">
 
-                <div class="p-10 relative flex flex-row gap-16 justify-start items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+                <div class="p-10 relative flex  flex-col lg:flex-row lg:gap-16 justify-start items-start lg:items-center w-full h-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
+                    <div class="lg:hidden flex flex-row gap-5 my-12">
+                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                    </div>
                     <div>
                         <h5 class="text-orange mb-7">Young people to the front</h5>
-                        <p>YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
+                        <p class="text-left">YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
                         <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.yp2f.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
-                        <div class="flex flex-row gap-4 mt-7">
+                        <div class="flex flex-row gap-4 px-4 mt-7">
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/youngpeopletothefront/"><i class="fa-brands fa-instagram fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.linkedin.com/company/yp2f"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117"><i class="fa-regular fa-microphone fa-lg"></i></a>
@@ -682,12 +743,16 @@ const resetToFrameOne  = () => {
                     </div>
                 </div>
 
-                <div class="p-10 relative flex flex-row gap-16 justify-start items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+                <div class="p-10 relative flex flex-col lg:flex-row gap-16 justify-start items-start lg:items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={spyLogo} alt="young people to the front logo" />
+                    <div class="lg:hidden flex flex-row gap-5">
+                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                    </div>
                     <div>
                         <h5 class="text-orange mb-7">Safe place for youth</h5>
-                        <p>S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs.</p>
+                        <p class="text-left">S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs.</p>
                         <a class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.safeplaceforyouth.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -704,12 +769,16 @@ const resetToFrameOne  = () => {
                     </div>
                 </div>
                 
-                <div class="p-10 relative flex flex-row gap-16 justify-start items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
+                <div class="p-10 relative flex flex-col lg:flex-row gap-16 justify-start items-start lg:items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
+                    <div class="lg:hidden flex flex-row gap-5">
+                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                    </div>
                     <div>
                         <h5 class="text-orange mb-7">My Friend's place</h5>
-                        <p>They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency.</p>
+                        <p class="text-left">They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency.</p>
                         <a class="bump flex flex-row pt-5 gap-5  hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.myfriendsplace.org/" target="_blank">
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -728,7 +797,7 @@ const resetToFrameOne  = () => {
                 
                 
                 
-                    <div class="absolute bottom-10 left-10 flex flex-row gap-5">
+                    <div class="absolute bottom-10 left-10 flex-row gap-5 hidden lg:flex">
                         <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
                         <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                     </div>
@@ -736,7 +805,7 @@ const resetToFrameOne  = () => {
 
                 <div class="flex flex-col items-center justify-center max-w-screen-md mb-32">
                     <h3 class="text-orange my-9">Explore</h3>
-                    <p class="text-center mb-32">Look through our complete list of orgs and consider how you can help!</p>
+                    <p class="text-center mb-32 mx-[8%]">Look through our complete list of orgs and consider how you can help!</p>
 
                     <div class="flex flex-row justify-center items-center gap-16">
                         <button class="hover:brightness-90">
@@ -768,8 +837,8 @@ const resetToFrameOne  = () => {
                   <div class="w-full flex flex-col cursor-pointer">
                     {#each orgs as org, i}
                       <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2" on:click={() => activeAccordians[i] = !activeAccordians[i]}>
-                        <div class="h-20 p-8 w-full flex flex-row justify-between items-center text-light-orange">
-                            <h5 class="text-orange">{org.name}</h5>
+                        <div class="lg:h-20 p-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-center text-light-orange">
+                            <h5 class="text-orange text-left">{org.name}</h5>
                             <div class="flex flex-row gap-8">
                                 <div class="btn-text">{activeAccordians[i] ? "less -" :"about +"}</div>
                                 <a href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
@@ -782,12 +851,12 @@ const resetToFrameOne  = () => {
                             </div>
                         </div>
                         {#if activeAccordians[i]}
-                          <div class="flex flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
+                          <div class="flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start p-8" transition:slide="{{ duration: 500 }}">
                             
                                 <img class="w-64" src={org.logo} alt="young people to the front logo" />
                                 <div>
                                     
-                                    <p class=" normal-case">{org.bodyCopy}</p>
+                                    <p class="text-left normal-case">{org.bodyCopy}</p>
             
                                     <div class="flex flex-row gap-4 mt-7">
                                         {#if org.instagram}
@@ -824,10 +893,10 @@ const resetToFrameOne  = () => {
                 <h3 class="text-orange">Our Sources</h3>
                 <p class="text-center mb-20">Interested in learning more about homelessness? Visit the sources below</p>
 
-                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 relative">
-                    <div class="w-3/5 h-full flex flex-col justify-between">
-                        <p>2023 Greater Los Angeles Youth Homeless Count — Los Angeles Continuum of Care</p>
-                        <p class="text-orange">LAHSA</p>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 relative">
+                    <div class="lg:w-3/5 flex flex-col justify-between">
+                        <p class="text-left">2023 Greater Los Angeles Youth Homeless Count — Los Angeles Continuum of Care</p>
+                        <p class="text-orange text-left">LAHSA</p>
                     </div>
                     <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-5 right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
@@ -836,10 +905,10 @@ const resetToFrameOne  = () => {
                         </svg>
                     </a>
                 </div>
-                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 relative">
-                    <div class="w-3/5 h-full flex flex-col justify-between">
-                        <p>Missed opportunities: Youth homelessness in America. National estimates</p>
-                        <p class="text-orange">Chapin Hall at the University of Chicago</p>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 relative">
+                    <div class="lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">Missed opportunities: Youth homelessness in America. National estimates</p>
+                        <p class="text-orange text-left">Chapin Hall at the University of Chicago</p>
                     </div>
                     <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-5 right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
@@ -848,10 +917,10 @@ const resetToFrameOne  = () => {
                         </svg>
                     </a>
                 </div>
-                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 relative">
-                    <div class="w-3/5 h-full flex flex-col justify-between">
-                        <p>Affirming Truths about Homelessness </p>
-                        <p class="text-orange">Community Solutions</p>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 relative">
+                    <div class="lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">Affirming Truths about Homelessness </p>
+                        <p class="text-orange text-left">Community Solutions</p>
                     </div>
                     <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-5 right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
@@ -861,7 +930,7 @@ const resetToFrameOne  = () => {
                     </a>
                 </div>
                 <div class="w-full mt-20 min-h-24 py-5 relative">
-                    <div class="w-3/5 h-full flex flex-col gap-5 justify-between">
+                    <div class="lg:w-3/5 h-full flex flex-col gap-5 justify-between">
                         <p>If you have any suggestions or organizations you would like to share with us, please reach out. We are always looking to improve this site.</p>
                         <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                             <div class="btn-text">I have a suggestion</div>
