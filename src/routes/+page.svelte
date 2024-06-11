@@ -330,7 +330,7 @@ const resetToFrameOne  = () => {
     </div>
     {#if isMobileNavActive}
     <div class="w-screen h-screen bg-masthead-pink fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20" transition:fly={{y:"-100%"}}>
-        <button class="" on:click={()=>activeFrame.set(6)}>
+        <button class="" on:click={()=>{ activeFrame.set(6); isMobileNavActive=false;}}>
             <span class="flex flex-row items-center bump">
                 <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">I WANT TO HELP</div>
                 <img class="h-6" src={helpArrow} alt="down arrow" />
@@ -597,8 +597,8 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://www.aclusocal.org/sites/default/files/aclu_socal_oc_shelters_report.pdf" text="Most unhoused people would move to shelter if there were safe and affordable options. In a report by the ACLU, they found that residents in emergency centers in Orange County were met with untrained, abusive, and neglectful shelter staff." />
             </div>
             {#if !isMythOneBusted}
-            <img src={mythOneShatterLeft} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", opacity:1, easing: crackOpenEase}}/>
-            <img src={mythOneShatterRight} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythOneShatterLeft} alt="shattering background" class="z-20 absolute h-screen w-screen top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 object-cover" out:fly={{delay:200, duration:1800, x:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythOneShatterRight} alt="shattering background" class="z-20 absolute h-screen w-screen top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 object-cover" out:fly={{delay:200, duration:1800, x:"100%", opacity:1, easing: crackOpenEase}}/>
             <button class="absolute w-full h-full z-20" on:click={()=>isMythOneBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center">
                     <h6 class=" text-pink">01/03</h6>
@@ -628,8 +628,8 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://nlihc.org/sites/default/files/Housing-First-Research.pdf" text="Homelessness is not a choice. Most individuals are seeking shelter, employment, and support but find it difficult to adhere to “treatment-first” programs. Instead, “housing-first” programs offer flexibility to a larger population and can help them find employment and maintain stable housing" />
             </div>
             {#if !isMythTwoBusted}
-            <img src={mythTwoShatterLeft} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
-            <img src={mythTwoShatterRight} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythTwoShatterLeft} alt="shattering background" class="z-20 absolute h-screen w-screen top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 object-cover" out:fly={{delay:200, duration:1800, x:"-100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythTwoShatterRight} alt="shattering background" class="z-20 absolute h-screen w-screen top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 object-cover" out:fly={{delay:200, duration:1800, x:"100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
            
             <button class="absolute w-full h-full z-20" on:click={()=>isMythTwoBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center ">
@@ -663,8 +663,8 @@ const resetToFrameOne  = () => {
                 <HowWeKnowButton color="red" reportLink="https://bfi.uchicago.edu/wp-content/uploads/2021/06/BFI_WP_2021-65.pdf" text="Many people experiencing homelessness are employed or actively seeking employment and would move inside if housing responsive to their needs were available. " />
             </div>
             {#if !isMythThreeBusted}
-            <img src={mythThreeShatterLeft} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"-100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
-            <img src={mythThreeShatterRight} alt="shattering background" class="z-20 absolute min-h-screen min-w-screen top-0 left-1/2 -translate-x-1/2 object-fill" out:fly={{delay:200, duration:1800, x:"100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythThreeShatterLeft} alt="shattering background" class="z-20 absolute h-screen w-screen top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 object-cover" out:fly={{delay:200, duration:1800, x:"-100%", y:"100%", opacity:1, easing: crackOpenEase}}/>
+            <img src={mythThreeShatterRight} alt="shattering background" class="z-20 absolute h-screen w-screen top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 object-cover" out:fly={{delay:200, duration:1800, x:"100%", y:"-100%", opacity:1, easing: crackOpenEase}}/>
            
             <button class=" absolute w-full h-full z-20" on:click={()=>isMythThreeBusted=true} transition:fade>
                 <span class=" flex-col items-center justify-center">

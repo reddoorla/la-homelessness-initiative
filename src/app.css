@@ -202,4 +202,5 @@ line-height: 24px; /* 171.429% */
 
 img{
     max-width: none;
+    max-height: none;
 }
