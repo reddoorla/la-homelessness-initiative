@@ -57,6 +57,44 @@
   import { slide } from 'svelte/transition';
   import { onMount } from "svelte";
 
+  import { page } from '$app/stores';
+	import { enhance } from '$app/forms';
+    import type { SubmitFunction } from '@sveltejs/kit';
+
+
+
+    interface FormData {
+    success: boolean;
+    // Add other properties if needed
+  }
+
+  let form: FormData | undefined;
+
+  page.subscribe(($page) => {
+    form = $page.form as FormData | undefined;
+  });
+
+
+    let isEmailSent = false;
+    let isEmailSending = false;
+    let isEmailFailed = false;
+
+
+
+  const handleSubmit: SubmitFunction = () => {
+    isEmailSending = true;
+
+    return async ({ result  }) => {
+        console.log(result.type)
+      if (result.type === 'success') {
+        isEmailSent = true;
+      } else if (result.type === 'failure') {
+        isEmailFailed = true;
+      }
+      isEmailSending = false;
+    };
+  };
+
 
                   
                     const LOREM = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat m dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inc."
@@ -94,6 +132,10 @@
                     labels.forEach(() => activeAccordians.push(false));
 
                     let isMobileNavActive = false;
+
+                    let isHelpModalActive = false;
+
+                    let isSuggestionModalActive = false;
  
   
   let toThirtyEight = tweened(0 as number, { duration: 2000, easing: quintOut })
@@ -303,6 +345,19 @@ const resetToFrameOne  = () => {
         font-weight: 400;
         line-height: 115%; /* 16.1px */
     }
+
+    ::placeholder, ::-moz-placeholder, ::-webkit-input-placeholder{
+        color: rgba(236, 73, 47, 0.40);
+        text-align: left;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: Poleno;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 125%; /* 18.75px */
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
 </style>
 
 <svelte:head>
@@ -320,7 +375,7 @@ const resetToFrameOne  = () => {
         <button class="h-full bump hover:opacity-90" on:click={resetToFrameOne}>
             <img class="h-full" src={logo} alt="hearts & minds" />
         </button>
-        <button class="h-full hidden lg:block">
+        <button class="h-full hidden lg:block" on:click={()=>isHelpModalActive=true}>
             <span class="flex flex-row items-center transition bump">
                 <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
@@ -338,30 +393,109 @@ const resetToFrameOne  = () => {
                 <img class="h-6" src={helpArrow} alt="down arrow" />
             </span>
         </button>
-        <button class="">
+        <button class="" on:click={()=>{isHelpModalActive=true; isMobileNavActive=false}}>
             <span class="flex flex-row items-center transition bump">
                 <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
             </span>
         </button>
-        <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump text-light-pink hover:text-pink flex flex-row gap-3 hover:gap-4">
+        <button class="bump text-light-pink hover:text-pink flex flex-row gap-3 hover:gap-4" on:click={()=>{isSuggestionModalActive=true; isMobileNavActive=false}}>
             <div class="btn-text">I have a suggestion</div>
             <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill={COLOR_KEY["pink"]}/>
             </svg>
-        </a>
+        </button>
         <button class="absolute top-4 right-8 text-pink hover:text-light-pink bump" on:click={()=>isMobileNavActive=false}>
             <i class="fa-solid fa-close fa-xl" />
         </button>
     </div>
     {/if}
+    {#if isSuggestionModalActive}
+    <div class="w-screen h-screen bg-help-light fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"-100%"}}>
+
+        {#if !isEmailSent}
+        {#if isEmailFailed}
+        <button class='z-10 absolute flex flex-col items-center justify-center top-2 border-pink border-4 rounded-sm bg-help-dark' on:click={()=>isEmailFailed=false} transition:fade>
+            <h5 class=' p-8'>Something went wrong. Please fill all fields and retry.</h5>
+        </button>
+            
+        {/if}
+		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" method="POST" action="/" use:enhance={handleSubmit}>
+			    <h5 class="text-light-orange">SEND US A MESSAGE</h5>
+                <input type="text" name="name" placeholder="Your Name" class="p-3 rounded-sm" />
+				<input type="email" name="email" placeholder="Your Email Address" class="p-3 rounded-sm" />
+                <input type="text" name="subject" placeholder="Subject" class="p-3 rounded-sm" />		
+				<textarea name="message" class="w-full h-48 p-3 rounded-sm" placeholder="Your Message" />
+			
+			<button
+				type="submit"
+                class="flex flex-row gap-3"
+			>
+				{#if !isEmailSending} 
+                <div class="btn-text text-orange">Send Message</div>
+                <svg class="w-16 text-orange" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                </svg>
+                {:else} 
+                    <div><i class='text-orange fa fa-spin fa-circle-o-notch fa-2xl leading-4 w-4'></i></div>
+                {/if}
+			</button>
+		</form>
+        {/if}
+        {#if isEmailSent}
+        <div class="w-full h-72 flex flex-col items-start justify-start gap-16 p-16 md:p-32">
+            <h5 class="text-orange">THANK YOU!</h5>
+            <p>We appreciate your feedback. We'll get back to you as soon as we can.</p>
+            <button
+				on:click={()=>isSuggestionModalActive=false}
+                class="flex flex-row gap-3"
+			>
+				
+                <div class="btn-text text-orange">Go Back to site</div>
+                <svg class="w-16 text-orange" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                </svg>
+            </button>
+            
+        </div>
+        {/if}
+        
+        <button class="absolute top-4 right-8 text-pink hover:text-light-pink bump" on:click={()=>isSuggestionModalActive=false}>
+            <i class="fa-solid fa-close fa-xl" />
+        </button>
+    </div>
+    {/if}
+    {#if isHelpModalActive}
+    <div class="w-screen h-screen bg-masthead-pink fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"100%"}}>
+        <h5 class="text-[#A82D7D] max-w-[540px] text-center">If you are experiencing a mental health crisis and need help now, call 988.</h5>
+        <div class="paragraph-2 text-center max-w-[540px]">The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States. </div>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+            
+                <a href="tel:988" class="flex flex-row items-center justify-center transition bump gap-3">
+                    <div class="btn-text text-light-pink hover:text-pink transition-colors ">CALL 988</div>
+                    <img class="h-6" src={lifePreserver} alt="life preserver" />
+                </a>
+            
+            <a href="https://988lifeline.org/chat/" class="bump text-light-pink hover:text-pink flex flex-row gap-3">
+                <div class="btn-text">text or chat 988</div>
+                <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="#A82D7D"/>
+                </svg>
+            </a>
+        </div>
+        
+        <button class="absolute top-4 right-8 text-pink hover:text-light-pink bump" on:click={()=>isHelpModalActive=false}>
+            <i class="fa-solid fa-close fa-xl" />
+        </button>
+    </div>
+    {/if}
     <div class="w-2 gap-4 flex flex-col absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-40">
-        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===1?"bg-opacity-100":"bg-opacity-5"}" on:click={resetToFrameOne}></button>
-        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===2?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameTwo}></button>
-        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===3?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameThree}></button>
-        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===4?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameFour}></button>
-        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===5?"bg-opacity-100":"bg-opacity-5"}" on:click={setFrameFive}></button>
-        <button class="w-2 h-2 rounded-full border-white border-[1px] bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===6?"bg-opacity-100":"bg-opacity-5"}" on:click={setToFrameSix}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===1?"bg-opacity-100":"bg-opacity-55"}" on:click={resetToFrameOne}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===2?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameTwo}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===3?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameThree}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===4?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameFour}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===5?"bg-opacity-100":"bg-opacity-55"}" on:click={setFrameFive}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===6?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameSix}></button>
 
     </div>
         <Panel frame={1}>
@@ -556,7 +690,7 @@ const resetToFrameOne  = () => {
             {/if}
             </div>
             {#if isFrameThreeStarted}
-            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto right-8 sm:right-auto">
+            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="bob-always negative-bump absolute bottom-12 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto right-8 sm:right-auto">
                 <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
@@ -694,7 +828,7 @@ const resetToFrameOne  = () => {
 
             {#if $activeFrame===5}
             
-            <button transition:fade={{delay:6000}} on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+            <button transition:fade={{delay:6000}} on:click={goToNextFrame} class="bob-always negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
@@ -723,8 +857,8 @@ const resetToFrameOne  = () => {
 
                     <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
                     <div class="lg:hidden flex flex-row gap-5 my-12">
-                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                     </div>
                     <div>
                         <h5 class="text-orange mb-7">Young people to the front</h5>
@@ -735,12 +869,18 @@ const resetToFrameOne  = () => {
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
-                        <div class="flex flex-row gap-4 px-4 mt-7">
+                        <div class="flex flex-row gap-4 px-4 sm:px-0 mt-7">
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/youngpeopletothefront/"><i class="fa-brands fa-instagram fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.linkedin.com/company/yp2f"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117"><i class="fa-regular fa-microphone fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.yp2f.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
+                        
+                        <div class="flex-row gap-5 hidden lg:flex mt-7">
+                            <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                            <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        </div>
+                      
                     </div>
                 </div>
 
@@ -748,8 +888,8 @@ const resetToFrameOne  = () => {
 
                     <img class="w-64" src={spyLogo} alt="young people to the front logo" />
                     <div class="lg:hidden flex flex-row gap-5">
-                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                     </div>
                     <div>
                         <h5 class="text-orange mb-7">Safe place for youth</h5>
@@ -767,6 +907,12 @@ const resetToFrameOne  = () => {
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.facebook.com/SafePlaceForYouth/"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.safeplaceforyouth.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
+                        
+                        <div in:fade={{delay: 1200}} out:fade={{delay:800}} class="flex-row gap-5 hidden lg:flex mt-7">
+                            <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                            <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        </div>
+                       
                     </div>
                 </div>
                 
@@ -774,8 +920,8 @@ const resetToFrameOne  = () => {
 
                     <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
                     <div class="lg:hidden flex flex-row gap-5">
-                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                        <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                     </div>
                     <div>
                         <h5 class="text-orange mb-7">My Friend's place</h5>
@@ -793,15 +939,18 @@ const resetToFrameOne  = () => {
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.facebook.com/mfphollywood/"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
                             <a class="text-light-orange hover:text-orange transition-colors" href="https://www.myfriendsplace.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
+                        
+                        <div class="flex-row gap-5 hidden lg:flex mt-7">
+                            <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
+                            <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
+                        </div>
+                        
                     </div>
                 </div>
                 
                 
                 
-                    <div class="absolute bottom-10 left-10 flex-row gap-5 hidden lg:flex">
-                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-0 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                    </div>
+                    
                 </div>
 
                 <div class="flex flex-col items-center justify-center max-w-screen-md mb-32">
@@ -809,20 +958,20 @@ const resetToFrameOne  = () => {
                     <p class="text-center mb-32 mx-[8%]">Look through our complete list of orgs and consider how you can help!</p>
 
                     <div class="flex flex-row justify-center items-center gap-16">
-                        <button class="hover:brightness-90">
+                        <button class="">
                             <span class="bump flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">support</div>
                             <img class="" src={house} alt="house" />
                             </span>
                 
                         </button>
-                        <button class="bump hover:brightness-90">
+                        <button class="">
                             <span class="flex flex-col items-center justify-center gap-2">
                                 <div class="btn-text text-light-orange">support</div>
                                 <img class="" src={present} alt="house" />
                             </span>
                         </button>
-                        <button class="bump hover:brightness-90">
+                        <button class="">
                             <span class="flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">support</div>
                             <img class="" src={heart} alt="house" />
@@ -838,9 +987,9 @@ const resetToFrameOne  = () => {
                   <div class="w-full flex flex-col cursor-pointer">
                     {#each orgs as org, i}
                       <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2" on:click={() => activeAccordians[i] = !activeAccordians[i]}>
-                        <div class="lg:h-20 p-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-center text-light-orange">
+                        <div class="lg:h-20 p-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
                             <h5 class="text-orange text-left">{org.name}</h5>
-                            <div class="flex flex-row gap-8">
+                            <div class="flex flex-row justify-start gap-8">
                                 <div class="btn-text">{activeAccordians[i] ? "less -" :"about +"}</div>
                                 <a href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
                                     <div class="btn-text">Go to Site</div>
@@ -894,36 +1043,36 @@ const resetToFrameOne  = () => {
                 <h3 class="text-orange">Our Sources</h3>
                 <p class="text-center mb-20">Interested in learning more about homelessness? Visit the sources below</p>
 
-                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 relative">
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
                     <div class="lg:w-3/5 flex flex-col justify-between">
                         <p class="text-left">2023 Greater Los Angeles Youth Homeless Count — Los Angeles Continuum of Care</p>
                         <p class="text-orange text-left">LAHSA</p>
                     </div>
-                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-5 right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
                         <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                         </svg>
                     </a>
                 </div>
-                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 relative">
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
                     <div class="lg:w-3/5 h-full flex flex-col justify-between">
                         <p class="text-left">Missed opportunities: Youth homelessness in America. National estimates</p>
                         <p class="text-orange text-left">Chapin Hall at the University of Chicago</p>
                     </div>
-                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-5 right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
                         <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                         </svg>
                     </a>
                 </div>
-                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 relative">
-                    <div class="lg:w-3/5 h-full flex flex-col justify-between">
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+                    <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
                         <p class="text-left">Affirming Truths about Homelessness </p>
                         <p class="text-orange text-left">Community Solutions</p>
                     </div>
-                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-5 right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
                         <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
@@ -932,17 +1081,18 @@ const resetToFrameOne  = () => {
                 </div>
                 <div class="w-full mt-20 min-h-24 py-5 relative">
                     <div class="lg:w-3/5 h-full flex flex-col gap-5 justify-between">
-                        <p>If you have any suggestions or organizations you would like to share with us, please reach out. We are always looking to improve this site.</p>
-                        <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                        <p class="text-left">If you have any suggestions or organizations you would like to share with us, please reach out. We are always looking to improve this site.</p>
+                        <button class="bump text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4" on:click={()=>isSuggestionModalActive=true}>
                             <div class="btn-text">I have a suggestion</div>
                             <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
-                        </a>
+                        </button>
                         
                     </div>
               
                 </div>
+                <img class="mx-auto mt-20 h-5" src={logo} alt="hearts and minds"/>
             </ContentWidth>
 
         </div>
