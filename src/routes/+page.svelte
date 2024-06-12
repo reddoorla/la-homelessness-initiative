@@ -147,22 +147,24 @@
 // frame two
 
 $:{
-    if($activeFrame===2){
-        setTimeout(()=>toThirtyEight.set(38), 500);
+        if($activeFrame===2){
+            setTimeout(()=>toThirtyEight.set(38), 500);
 
-        //for frame 3
-        
-    }
-    else if($activeFrame===3){
-        setTimeout(()=>toSixtyNine.set(69), 500);
-        bgColor.set("mental-health-purple")
+            //for frame 3
+            
+        }
+        else if($activeFrame===3){
+            setTimeout(()=>toSixtyNine.set(69), 500);
+            bgColor.set("mental-health-purple")
 
-    }else{
-        toThirtyEight.set(0)
-        toSixtyNine.set(0)
-        isFrameThreeStarted = false;
-    isFrameThreeFinished = false;
-    }
+        }else{
+            setTimeout(()=>{
+            toThirtyEight.set(0)
+            toSixtyNine.set(0)
+            isFrameThreeStarted = false;
+        isFrameThreeFinished = false;
+        }, 1000
+    )}
 }
 
 const setToFrameTwo = () => {
