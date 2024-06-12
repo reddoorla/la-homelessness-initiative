@@ -458,7 +458,7 @@ const resetToFrameOne  = () => {
                     Raising awareness for LA’s unhoused youth and their mental health.
                 </h2>
                 {#if isLampOn}
-                <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+                <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-12  text-light-pink hover:text-pink transition-colors pointer-events-auto bob-always">
                     <span class="flex flex-col justify-center items-center gap-4">
                     <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">

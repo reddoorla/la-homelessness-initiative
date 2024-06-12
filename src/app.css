@@ -200,6 +200,27 @@ line-height: 24px; /* 171.429% */
     transform: translateY(8px);
 }
 
+@keyframes pos-y-wiggle {
+    0% {
+        transform: translateY(1px);
+    }
+    50% {
+        transform: translateY(-1px);
+    }
+    100% {
+        transform: translateY(1px);
+    }
+}
+.bob-on-hover:hover {
+    animation-name: pos-y-wiggle;
+    animation-play-state: running;
+}
+
+.bob-always{
+
+    animation: 1s infinite forwards pos-y-wiggle ease-out;
+}
+
 img{
     max-width: none;
     max-height: none;
