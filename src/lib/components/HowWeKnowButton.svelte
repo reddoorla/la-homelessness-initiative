@@ -19,7 +19,8 @@
     let reservedTextHeight = 0;
 
     onMount(()=>{
-        reservedTextHeight=infoBox.getBoundingClientRect().height;
+        reservedTextHeight=infoBox.getBoundingClientRect().height
+        setTimeout(()=>reservedTextHeight=infoBox.getBoundingClientRect().height,1800);
     })
 
 </script>
