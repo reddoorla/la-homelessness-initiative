@@ -1006,7 +1006,7 @@ const resetToFrameOne  = () => {
                                 <img class="w-64" src={org.logo} alt="young people to the front logo" />
                                 <div>
                                     
-                                    <p class="text-left normal-case">{org.bodyCopy}</p>
+                                    <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
             
                                     <div class="flex flex-row gap-4 mt-7">
                                         {#if org.instagram}
@@ -1092,7 +1092,10 @@ const resetToFrameOne  = () => {
                     </div>
               
                 </div>
-                <img class="mx-auto mt-20 h-5" src={logo} alt="hearts and minds"/>
+
+                <div class="w-full">
+                    <img class="align-self-start mt-20 h-5" src={logo} alt="hearts and minds"/>
+                </div>
             </ContentWidth>
 
         </div>
