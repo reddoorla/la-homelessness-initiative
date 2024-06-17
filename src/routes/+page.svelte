@@ -247,12 +247,14 @@ const setToFrameFour = () => {
     isMythTwoBusted=false;
     isMythThree=false;
     isMythThreeBusted = false;
+    bgColor.set('darkest-red');
 
     activeFrame.set(4)
 }
 
 $:{
-    
+
+    activeFrame;
 
 
     if(get(activeFrame)===4)
@@ -277,15 +279,54 @@ const crackOpenEase = (t:number) =>{
 
 ///frame 5
 
+let frameFiveBench:SVGSVGElement;
+let frameFiveBenchOffsetLeft = 0;
+let isFrameFiveStarted=false;
+let showStandingPerson=false;
+let showStandingHeart = false;
+let showSittingHeart = false;
+let showArm = false;
 
-
-const runFrameFive = () =>{
-    bgColor.set('day');
+const setFrameFive = () =>{
+    isFrameFiveStarted=false;
+    showStandingPerson=false;
+    showStandingHeart = false;
+    showSittingHeart = false;
+    showArm=false;
+    bgColor.set('night');
     activeFrame.set(5);
-
+    isFrameFiveStarted = false;
+    
+    setTimeout(()=> {
+        frameFiveBenchOffsetLeft = frameFiveBench.getBoundingClientRect().left; 
+        runFrameFive();
+    } , 5);
+    
 }
 
-const setFrameFive = runFrameFive;
+
+
+const runFrameFive = async () => {
+        if(!isFrameFiveStarted){
+        bgColor.set('night');
+
+            isFrameFiveStarted=true;
+            setTimeout(()=>{
+                bgColor.set('day');
+                showStandingPerson=true;
+            }, 2000*FRAME_SPEED);
+            
+            setTimeout(()=>showArm=true, 4000*FRAME_SPEED);
+            
+            setTimeout(()=>{
+                showStandingHeart=true;
+            },8000*FRAME_SPEED);
+
+            setTimeout(()=>{
+                showSittingHeart=true;
+            },10000*FRAME_SPEED)
+        }
+    };
 
 //frame 6
 
@@ -331,8 +372,19 @@ const resetToFrameOne  = () => {
  onMount(()=>{
     
     runFrameOne()
-    window.addEventListener('resize', ()=>{if(isLampOn){isLampOn=false; setTimeout(()=>isLampOn=true, 800)} })
+    window.addEventListener('resize', ()=>{
+        if(isLampOn){
+            isLampOn=false; 
+            setTimeout(()=>isLampOn=true, 800);
+        } 
+        
+        if(get(activeFrame)===5){
+           frameFiveBenchOffsetLeft = frameFiveBench.getBoundingClientRect().left;
+        }
+    } )
     })
+
+    
 </script>
 
 <style>
@@ -561,7 +613,7 @@ const resetToFrameOne  = () => {
                     {/if}
     
                 <!--lamp-->
-                <svg class="absolute -top-32 md:-top-16 lg:top-auto lg:bottom-16 -left-48 md:-left-40 lg:left-16 sm:scale-75 scale-[50%] lg:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] transition-opacity ease-linear {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
+                <svg class="absolute overflow-visible -top-32 md:-top-16 lg:top-auto lg:bottom-16 -left-48 md:-left-40 lg:left-16 sm:scale-75 scale-[50%] lg:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] transition-opacity ease-linear {$bgColor==="masthead-blue"? "opacity-10":"opacity-35"}" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
                     <g class="lg:-translate-y-[144px]">
                         
                         <path d="M323.382 428.602C352.477 427.849 376.723 406.978 382.542 379.115L261.637 382.235C268.964 409.775 294.18 429.355 323.275 428.602H323.382Z" fill={$bgColor}/>
@@ -786,7 +838,7 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100%", duration:400, opacity:1}} in:fly={{x:"100%", duration:400, delay:400, opacity:1}}>
             <div class=" absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
                 <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
-                <button class="  absolute bottom-12 mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always" on:click={runFrameFive}>
+                <button class="  absolute bottom-12 mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always" on:click={setFrameFive}>
                     <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <svg class="transition-colors text-light-pink" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
@@ -822,13 +874,101 @@ const resetToFrameOne  = () => {
     </Panel>
 
     <Panel frame={5}>
-        <div class="w-full h-full absolute top-0 left-0 flex flex-col items-center justify-center transition-colors duration-[6000ms] delay-1000 ease-out {$activeFrame===5?"bg-day":"bg-night"}">
-            <h3 class="text-blue text-center -translate-y-16 lg:translate-y-0 max-w-screen-xl w-5/6">With so many young people sleeping without shelter every night, we want to shed light on the issue to</h3>
-            <h2 class="{$activeFrame===5?"text-orange opacity-100":"text-light-pink opacity-10"} w-5/6 -translate-y-16 lg:translate-y-0  transition duration-[8000ms] delay-1000 ease-out text-center">open hearts and minds</h2>
-
-            {#if $activeFrame===5}
+        <div class="w-full h-full absolute top-0 left-0 overflow-hidden flex flex-col items-center justify-start pt-28 sm:pt-32 transition-colors duration-[6000ms] delay-1000 ease-out ">
             
-            <button transition:fade={{delay:6000}} on:click={goToNextFrame} class="bob-always negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+            {#if $activeFrame===5}
+                 <!--bench-->
+                 
+                 <svg bind:this={frameFiveBench} class="absolute bottom-0 sm:bottom-16 -right-[400px] sm:-right-[25vw] lg:-right-96 xl:right-0 md:scale-100 sm:scale-75 scale-[50%] transition-opacity ease-linear xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] opacity-35" style="transition-duration:{2000*FRAME_SPEED}ms;" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_5151_6604)">
+                    <path d="M0 163.93L718.68 150.39V225.42L0 213.45V163.93Z" />
+                    <path d="M606.83 0.620209L598.93 98.2102L581.8 97.8402L578.67 128.87L366.86 132.84L362.83 98.4202L334.24 97.8402L330.64 133.69L113.92 137.62L109.26 98.4202L82.31 97.8902L75.37 13.2402L606.83 0.620209Z"/>
+                    <path d="M115.26 230.09L186.99 235.35L173.07 319.01H125.48L115.26 230.1V230.09Z" />
+                    <path d="M570.17 319L526.43 318.13L516.88 237.26H586.32L570.17 319Z" />
+                    </g>
+                    <defs>
+                    <clipPath  id="clip0_5151_6604">
+                    <rect width="718.68" height="318.38" fill="white" transform="translate(0 0.620209)"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+
+                <!--lamp-->
+                <svg class="absolute overflow-visible -top-32 md:-top-16 lg:top-auto lg:bottom-16 -left-48 md:-left-40 lg:left-16 sm:scale-75 scale-[50%] lg:scale-100 xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] transition-opacity ease-linear opacity-35" width="400" height="864" viewBox="0 0 400 864" fill="white" xmlns="http://www.w3.org/2000/svg" style="transition-duration:{2000*FRAME_SPEED}ms;">
+                    <g class="lg:-translate-y-[144px]">
+                        
+                        <path d="M323.382 428.602C352.477 427.849 376.723 406.978 382.542 379.115L261.637 382.235C268.964 409.775 294.18 429.355 323.275 428.602H323.382Z" fill={$bgColor}/>
+                        <path d="M56.8971 492.72L125.647 480.886L141.164 883.453L47.9531 882.485L56.8971 492.72Z" fill={$bgColor}/>
+                        <path d="M134.483 430.108L48.8152 427.849L47.9531 472.602L133.621 464.103L134.483 430.108Z" fill={$bgColor}/>
+                        <path d="M113.146 135.229C113.146 84.7736 154.203 43.7854 204.741 43.7854C255.28 43.7854 296.336 85.5267 296.336 135.229C296.336 155.777 285.56 181.919 285.56 181.919L340.086 175.572V135.229C340.086 60.6756 279.31 0 204.634 0C129.957 0 69.3965 60.6756 69.3965 135.229V416.875H125.646L113.146 135.229Z" fill={$bgColor}/>
+                        <path d="M373.061 187.621L257.975 198.272L231.035 362.332L400.108 367.819L373.169 187.621H373.061Z" fill={$bgColor}/>
+                        <path d="M20.7974 894.749H160.776L185.022 1009H0L20.7974 894.749Z" fill={$bgColor}/>
+                    </g>
+                        
+                       
+                </svg>
+
+                <!--sitting person-->
+           {#key frameFiveBenchOffsetLeft}
+                <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} style="left:{frameFiveBenchOffsetLeft}px" class="absolute -bottom-6 sm:bottom-12 md:bottom-16 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 -translate-x-24 xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_5372_1634)">
+                    <path class="ease-linear" d="M155.49 94L186.99 165L226.41 271.405L210.84 284.395L103.04 298.475L99.0702 315.875L141.28 401.585L140.51 430.785L105.65 442.615L-0.00976562 313.225L15.8402 268.935L103.04 234.595L78.4902 133L155.49 94Z" fill={$bgColor==='day'?"#F0C480":"#19294B"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
+                    <path class="ease-linear" d="M76.3714 103.775H118.421L147.291 40.6754L113.921 -0.15457L80.3714 -0.18457L52.2414 22.8054L50.4414 72.0554L76.3714 103.775Z" fill={$bgColor==='day'?"#F0C480":"#19294B"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
+                    {#if showSittingHeart}
+                    <g  in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} clip-path="url(#clip1_5372_1634)">
+                    
+                        <path d="M114.114 157.89C114.114 157.89 117.236 152.439 119.014 151.39C120.792 150.342 125.164 149.159 125.164 149.159L132.247 152.885C132.247 152.885 133.256 160.624 133.242 163.093C133.228 165.563 126.396 174.635 126.396 174.635L114.039 183.783C114.039 183.783 105.611 178.157 101.73 174.559C97.8492 170.961 94.9585 162.977 94.9585 162.977C94.9585 162.977 96.0074 155.745 97.4648 152.799C98.9221 149.853 103.116 149.096 103.116 149.096L109.252 151.364L114.111 157.9L114.114 157.89Z" fill="#EC492F"/>
+                 
+                    </g>
+                    {/if}
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_5372_1634">
+                    <rect width="226" height="443" fill="white" transform="translate(-0.00976562)"/>
+                    </clipPath>
+                    <clipPath id="clip1_5372_1634">
+                    <rect width="37.38" height="36.36" fill="white" transform="translate(101.438 141) rotate(18.9782)"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+
+                {#if showStandingPerson}
+
+                <svg in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} style="left:{frameFiveBenchOffsetLeft}px" class="absolute -bottom-6 sm:bottom-12 md:bottom-16 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 -translate-x-72 sm:-translate-x-[440px] lg:-translate-x-[200%] xl:-translate-x-[175%] translate-y-7 md:translate-y-0 xl:-translate-y-[5%]" width="285" height="510" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 285 510" xmlns="http://www.w3.org/2000/svg">
+                
+                    <g clip-path="url(#clip0_5372_1620)">
+                    <path d="M161.46 278.34V124.77H72.59L25.32 188.89V322.22H43.89V376.79L0 509.57H69.77L115.9 379.6V322.22H127.7V345.84L165.41 393.11V509.56H234.04V379.05L161.46 278.34Z" fill="#EFAD81"/>   
+                    <path d="M130.76 109.8L93.0898 91.12L95.2598 21.76L143.28 0L173.36 14.88L188.35 47.97L168.09 92.89L130.76 109.8Z" fill="#EFAD81"/>
+                    </g>
+                    {#if showArm}
+                    <g>
+                        <path in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} d="M160.51 218.12L225.35 245.86H278.86L284.8 226.82L222.66 203.26L161.46 124.77L160.51 218.12Z" fill="#EFAD81"/>
+                    </g>
+                    {/if}
+                    {#if showStandingHeart}
+                    <g in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}}>
+                    
+                        <path   d="M130.91 165.55C130.91 165.55 134.56 160.44 136.43 159.56C138.3 158.68 142.77 157.95 142.77 157.95L149.45 162.35C149.45 162.35 149.69 170.15 149.43 172.61C149.17 175.07 141.48 183.42 141.48 183.42L128.27 191.3C128.27 191.3 120.44 184.87 116.94 180.91C113.43 176.95 111.34 168.71 111.34 168.71C111.34 168.71 113.1 161.62 114.85 158.83C116.6 156.04 120.84 155.71 120.84 155.71L126.72 158.57L130.91 165.55Z" fill="#EC492F"/>
+                  
+                    </g>
+                    {/if}
+                    <defs>
+                    <clipPath id="clip0_5372_1620">
+                    <rect width="284.8" height="509.57" fill="white"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
+                {/if}
+            {/key}
+                    
+               
+     
+                <h5 class="{isFrameFiveStarted? "opacity-0 transition delay-[2000ms] duration-[5000ms]":""}  text-blue text-2xl sm:text-[28px] text-center -translate-y-16 lg:translate-y-0 max-w-screen-xl w-5/6">With so many young people sleeping without shelter every night, we want to shed light on the issue to</h5>
+                <h5 class="{isFrameFiveStarted?"text-orange opacity-100 transition duration-[8000ms] delay-[3s]":"text-light-pink opacity-0"} text-2xl sm:text-[28px] w-5/6 -translate-y-16 lg:translate-y-0   ease-out text-center">open hearts and minds</h5>
+
+
+            {#if isFrameFiveStarted}   
+            <button transition:fade={{delay:10000}} on:click={goToNextFrame} class="bob-always negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
@@ -839,6 +979,7 @@ const resetToFrameOne  = () => {
                     LET'S DO SOMETHING
                 </div>
             </button>
+            {/if}
             {/if}
         </div>
     </Panel>
@@ -958,25 +1099,25 @@ const resetToFrameOne  = () => {
                     <p class="text-center mb-32 mx-[8%]">Look through our complete list of orgs and consider how you can help!</p>
 
                     <div class="flex flex-row justify-center items-center gap-16">
-                        <button class="">
+                        <div class="">
                             <span class="bump flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">support</div>
                             <img class="" src={house} alt="house" />
                             </span>
                 
-                        </button>
-                        <button class="">
+                        </div>
+                        <div class="">
                             <span class="flex flex-col items-center justify-center gap-2">
                                 <div class="btn-text text-light-orange">support</div>
                                 <img class="" src={present} alt="house" />
                             </span>
-                        </button>
-                        <button class="">
+                        </div>
+                        <div class="">
                             <span class="flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">support</div>
                             <img class="" src={heart} alt="house" />
                             </span>
-                        </button>
+                        </div>
 
                     </div>
                 </div>
