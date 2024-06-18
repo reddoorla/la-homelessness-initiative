@@ -1249,7 +1249,7 @@ const resetToFrameOne  = () => {
                         {#if activeAccordians[i]}
                           <div class="flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start p-8" transition:slide="{{ duration: 500 }}">
                                 
-                                <img class="max-h-48 w-64" src={org.logo} alt="young people to the front logo" />
+                                <img class=" lg:max-h-48 w-64" src={org.logo} alt="young people to the front logo" />
                                 <div>
                                     
                                     <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
