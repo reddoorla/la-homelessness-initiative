@@ -37,6 +37,17 @@
     import yp2fLogo from "$lib/assets/logos/orgs/stickerified/yp2f_logo.svg"
     import spyLogo from "$lib/assets/logos/orgs/stickerified/spy_logo.svg"
     import mfpLogo from "$lib/assets/logos/orgs/stickerified/mfp_logo.svg"
+    import covenantLogo from "$lib/assets/logos/orgs/stickerified/YMH_covenant-house_sticker.png"
+    import illuminationLogo from "$lib/assets/logos/orgs/stickerified/YMH_illumination-foundation_sticker.png"
+    import insideSafeLogo from "$lib/assets/logos/orgs/stickerified/YMH_inside-safe_sticker.png"
+    import invisiblePeopleLogo from "$lib/assets/logos/orgs/stickerified/YMH_invisible-people_sticker.png"
+    import laYouthCountLogo from "$lib/assets/logos/orgs/stickerified/YMH_la-youth-count_sticker.png"
+    import lahsaLogo from "$lib/assets/logos/orgs/stickerified/YMH_LAHSA_sticker.png"
+    import midnightMissionLogo from "$lib/assets/logos/orgs/stickerified/YMH_midnight-mission_sticker.png"
+    import pathLogo from "$lib/assets/logos/orgs/stickerified/YMH_PATH_sticker.png"
+    import nineEightEightLogo from "$lib/assets/logos/orgs/988.png"
+    
+    
     import house from "$lib/assets/icons/house.svg"
     import present from "$lib/assets/icons/present.svg"
     import heart from "$lib/assets/icons/heart.svg"
@@ -102,7 +113,7 @@
                     export let labels = ["Is this thing on?", "It could be why don't you check"]
      
 
-                    let orgs = [
+                    const orgs = [
                         {
                             name: "Young People to the Front",
                             logo: yp2fLogo,
@@ -123,7 +134,101 @@
                             bodyCopy: "S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs."
 
                         },
-
+                        {
+                            name: "My Friend's Place",
+                            logo: mfpLogo,
+                            siteUrl: "https://www.myfriendsplace.org/",
+                            instagram:"http://instagram.com/myfriendsplace",
+                            facebook: "https://www.facebook.com/mfphollywood/",
+                            twitter: "https://twitter.com/MFPLA",
+                            youtube: "https://www.youtube.com/channel/UCwP9v838Jx58xYUjZoqehIg",
+                            bodyCopy: "They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency."
+                        },
+                        {
+                            name: "Inside Safe",
+                            logo: insideSafeLogo,
+                            siteUrl: "https://mayor.lacity.gov/InsideSafe",
+                            instagram:"https://www.instagram.com/mayorofla/",
+                            facebook: "https://www.facebook.com/mayorofla",
+                            twitter: "https://twitter.com/mayorofla",
+                            youtube: "https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg",
+                            bodyCopy: "A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside."
+                        },
+                        {
+                            name: "Illumination Foundation",
+                            logo: illuminationLogo,
+                            siteUrl: "https://www.ifhomeless.org/",
+                            instagram:"https://www.instagram.com/ifhomeless",
+                            facebook: "https://www.facebook.com/ifhomeless/",
+                            youtube: "https://www.youtube.com/channel/UCaYOwnK9WQ13b5LF5Lc1xBA",
+                            linkedin: "http://linkedin.com/company/illumination-foundation",
+                            bodyCopy: "Every person has an intrinsic right to home, health, and dignity. Our mission is to disrupt the cycle of homelessness in Southern California by providing a comprehensive safety net of client-centered services for the most vulnerable individuals, families, and children."
+                        },
+                        {
+                            name: "Covenant House",
+                            logo: covenantLogo,
+                            siteUrl: "https://www.covenanthouse.org/homeless-issues/youth-homelessness-statistics",
+                            instagram:"https://www.instagram.com/covenant_house/",
+                            facebook: "https://www.facebook.com/CovenantHouse",
+                            twitter: "https://twitter.com/pathpartners",
+                            linkedin: "https://www.linkedin.com/company/covenant-house/",
+                            bodyCopy: "Covenant House is the largest, primarily privately funded charity in North and Central America providing immediate and long-term support for young people facing homelessness and survivors of trafficking."},
+                        {
+                            name: "PATH",
+                            logo: pathLogo,
+                            siteUrl: "https://epath.org/",
+                            instagram:"https://instagram.com/pathpartners",
+                            facebook: "https://facebook.com/path.la",
+                            twitter: "https://twitter.com/pathpartners",
+                            youtube: "https://www.youtube.com/user/pathpartners",
+                            bodyCopy: "Across the state, we help people find permanent housing and provide case management, medical and mental healthcare, benefits advocacy, employment training, and other services to help them maintain their homes stably."
+                        },
+                        {
+                            name:"Midnight Mission",
+                            logo:midnightMissionLogo,
+                            siteUrl:"https://www.midnightmission.org/",
+                            facebook: "https://www.facebook.com/TheMidnightMission",
+                            instagram: "https://www.instagram.com/themidnightmission/",
+                            linkedin: "https://www.linkedin.com/company/1710372/",
+                            youtube:"https://www.youtube.com/tmmvolunteer",
+                            twitter: "https://twitter.com/midnightmission",
+                            tiktok: "https://tiktok.com/@themidnightmission",
+                            bodyCopy: "We remove obstacles and provide the accountability and structure that people who are experiencing homelessness need to be productive in their communities. Our conviction and commitment to their success define us."
+                            
+                        },
+                        {
+                            name:"Invisible People",
+                            logo:invisiblePeopleLogo,
+                            siteUrl:"https://invisiblepeople.tv/",
+                            facebook: "https://www.facebook.com/invisiblepeopletv",
+                            instagram: "https://instagram.com/invisiblepeople",
+                            youtube:"https://www.youtube.com/user/invisiblepeopletv",
+                            twitter: "https://twitter.com/invisiblepeople",
+                            tiktok: "https://www.tiktok.com/@invisiblepeopletv",
+                            bodyCopy: "Each year, our groundbreaking educational content reaches more than a billion people across the globe. Our real and unfiltered stories of homelessness shatter stereotypes, demand attention and deliver a call-to-action that is being answered by governments, major brands, nonprofit organizations, and everyday citizens just like you."
+                        },
+                        {
+                            name:"Los Angeles Homeless Services Authority",
+                            logo:lahsaLogo,
+                            siteUrl:"https://www.lahsa.org/",
+                            facebook: "https://www.facebook.com/lahsa.org/",
+                            instagram: "https://www.instagram.com/lahomelessservices/",
+                            youtube:"https://www.youtube.com/user/LAHSAIT",
+                            twitter: "https://twitter.com/LAHomeless",
+                            bodyCopy: "LAHSA is the lead agency in the Los Angeles Continuum of Care, which is the regional planning body that coordinates housing and services for homeless families and individuals in Los Angeles County. LAHSA coordinates and manages over $800 million annually in federal, state, county, and city funds for programs that provide shelter, housing, and services to people experiencing homelessness."
+                        },
+                        {
+                            name: "LA Youth Count",
+                            logo:laYouthCountLogo,
+                            siteUrl: "https://youthcount.org/",
+                            bodyCopy: "The Youth Count is a point-in-time estimate of the unsheltered youth population in the county, required by HUD. It helps with funding, understanding, and advocacy. While it focuses on unsheltered youth, it acknowledges that many young people, such as couch surfers and those in non-voucher hotels/motels, may not be counted."
+                        },
+                        {
+                            name: "988",
+                            logo:nineEightEightLogo,
+                            siteUrl: "https://www.988california.org/",
+                            bodyCopy: "The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States."
+                        }
 
                     ]
                   
@@ -1143,8 +1248,8 @@ const resetToFrameOne  = () => {
                         </div>
                         {#if activeAccordians[i]}
                           <div class="flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start p-8" transition:slide="{{ duration: 500 }}">
-                            
-                                <img class="w-64" src={org.logo} alt="young people to the front logo" />
+                                
+                                <img class="max-h-48 w-64" src={org.logo} alt="young people to the front logo" />
                                 <div>
                                     
                                     <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
@@ -1167,6 +1272,9 @@ const resetToFrameOne  = () => {
                                         {/if}
                                         {#if org.podcast}
                                             <a class="text-light-orange hover:text-orange transition-colors" href={org.podcast}><i class="fa-regular fa-microphone fa-lg"></i></a>
+                                        {/if}
+                                        {#if org.tiktok}
+                                            <a class="text-light-orange hover:text-orange transition-colors" href={org.tiktok}><i class="fa-brands fa-tiktok fa-lg"></i></a>
                                         {/if}
                                         <a class="text-light-orange hover:text-orange transition-colors" href={org.siteUrl}><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                                     </div>
@@ -1198,10 +1306,10 @@ const resetToFrameOne  = () => {
                 </div>
                 <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
                     <div class="lg:w-3/5 h-full flex flex-col justify-between">
-                        <p class="text-left">Missed opportunities: Youth homelessness in America. National estimates</p>
+                        <p class="text-left">One in 10 Young Adults Experience Homelessness During One Year/p>
                         <p class="text-orange text-left">Chapin Hall at the University of Chicago</p>
                     </div>
-                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                    <a href="https://www.chapinhall.org/research/one-in-10-young-adults-experience-homelessness-during-one-year/" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
                         <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
@@ -1213,7 +1321,55 @@ const resetToFrameOne  = () => {
                         <p class="text-left">Affirming Truths about Homelessness </p>
                         <p class="text-orange text-left">Community Solutions</p>
                     </div>
-                    <a href="https://www.lahsa.org/news?article=944-2023-greater-los-angeles-homeless-count-data" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                    <a href="https://community.solutions/research-posts/the-truth-about-homelessness/" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                        <div class="btn-text">Go to Source</div>
+                        <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+                    <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">The Case for Housing First</p>
+                        <p class="text-orange text-left">National Low Income Housing Coalition</p>
+                    </div>
+                    <a href="https://nlihc.org/sites/default/files/Housing-First-Research.pdf" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                        <div class="btn-text">Go to Source</div>
+                        <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+                    <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">Learning about Homelessness Using Linked Survey and Administrative Data</p>
+                        <p class="text-orange text-left">B. D. Meyer, A. Wyse, A. Grunwaldt, C. Medalia, and D. Wu</p>
+                    </div>
+                    <a href="https://bfi.uchicago.edu/wp-content/uploads/2021/06/BFI_WP_2021-65.pdf" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                        <div class="btn-text">Go to Source</div>
+                        <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+                    <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">Abuse and Neglect in Orange County Emergency Shelters</p>
+                        <p class="text-orange text-left">ACLU SoCal</p>
+                    </div>
+                    <a href="https://www.aclusocal.org/sites/default/files/aclu_socal_oc_shelters_report.pdf" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                        <div class="btn-text">Go to Source</div>
+                        <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+                    <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">Mental Health Among Students Experiencing Homelessness</p>
+                        <p class="text-orange text-left">After 8 to Educate</p>
+                    </div>
+                    <a href="https://after8toeducate.com/mental-health-students-experiencing-homelessness/" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
                         <div class="btn-text">Go to Source</div>
                         <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
@@ -1235,7 +1391,9 @@ const resetToFrameOne  = () => {
                 </div>
 
                 <div class="w-full">
-                    <img class="align-self-start mt-20 h-5" src={logo} alt="hearts and minds"/>
+                    <button class="bump hover:opacity-90" on:click={resetToFrameOne}>
+                        <img class="align-self-start mt-20 h-5" src={logo} alt="hearts and minds"/>
+                    </button>
                 </div>
             </ContentWidth>
 
