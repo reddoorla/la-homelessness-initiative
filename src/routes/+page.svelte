@@ -1131,10 +1131,6 @@ const resetToFrameOne  = () => {
                 <div class="p-10 relative flex  flex-col lg:flex-row lg:gap-16 justify-start items-start lg:items-center w-full h-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
-                    <div class="lg:hidden flex flex-row gap-5 my-12">
-                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                    </div>
                     <div>
                         <h5 class="text-orange mb-7">Young people to the front</h5>
                         <p class="text-left">YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
@@ -1144,14 +1140,14 @@ const resetToFrameOne  = () => {
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
-                        <div class="flex flex-row gap-4 px-4 sm:px-0 mt-7">
+                        <div class="flex flex-row gap-4 mt-7">
                             <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/youngpeopletothefront/"><i class="fa-brands fa-instagram fa-lg"></i></a>
                             <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.linkedin.com/company/yp2f"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
                             <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117"><i class="fa-regular fa-microphone fa-lg"></i></a>
                             <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.yp2f.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                         
-                        <div class="flex-row gap-5 hidden lg:flex mt-7">
+                        <div class="flex-row gap-5 flex mt-7">
                             <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
                             <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                         </div>
@@ -1162,10 +1158,6 @@ const resetToFrameOne  = () => {
                 <div class="p-10 relative flex flex-col lg:flex-row gap-16 justify-start items-start lg:items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={spyLogo} alt="young people to the front logo" />
-                    <div class="lg:hidden flex flex-row gap-5">
-                        <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                    </div>
                     <div>
                         <h5 class="text-orange mb-7">Safe place for youth</h5>
                         <p class="text-left">S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs.</p>
@@ -1183,7 +1175,7 @@ const resetToFrameOne  = () => {
                             <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.safeplaceforyouth.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                         
-                        <div in:fade={{delay: 1200}} out:fade={{delay:800}} class="flex-row gap-5 hidden lg:flex mt-7">
+                        <div in:fade={{delay: 1200}} out:fade={{delay:800}} class="flex-row gap-5 flex mt-7">
                             <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
                             <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                         </div>
@@ -1194,10 +1186,6 @@ const resetToFrameOne  = () => {
                 <div class="p-10 relative flex flex-col lg:flex-row gap-16 justify-start items-start lg:items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
                     <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
-                    <div class="lg:hidden flex flex-row gap-5">
-                        <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                        <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                    </div>
                     <div>
                         <h5 class="text-orange mb-7">My Friend's place</h5>
                         <p class="text-left">They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency.</p>
@@ -1215,7 +1203,7 @@ const resetToFrameOne  = () => {
                             <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.myfriendsplace.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
                         
-                        <div class="flex-row gap-5 hidden lg:flex mt-7">
+                        <div class="flex-row gap-5 flex mt-7">
                             <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
                             <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
                         </div>
@@ -1232,7 +1220,7 @@ const resetToFrameOne  = () => {
                     <h3 class="text-orange my-9">Explore</h3>
                     <p class="text-center mb-32 mx-[8%]">Look through our complete list of orgs and consider how you can help!</p>
 
-                    <div class="flex flex-row justify-center items-center gap-16">
+                    <div class="flex flex-row justify-center items-center gap-16 px-4">
                         <div class="">
                             <span class="bump flex flex-col items-center justify-center gap-2">
                             <div class="btn-text text-light-orange">share</div>
@@ -1258,11 +1246,11 @@ const resetToFrameOne  = () => {
 
 
      
-                 <ContentWidth class="w-full mb-32">
+                 <ContentWidth class="mb-32">
                   <div class="w-full flex flex-col cursor-pointer">
                     {#each orgs as org, i}
                       <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2" on:click={()=>handleAccordianClick(i)}>
-                        <div class="lg:h-20 p-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
+                        <div class="lg:h-20 py-8 lg:px-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
                             <h5 class="text-orange text-left">{org.name}</h5>
                             <div class="flex flex-row justify-start gap-8">
                                 <div class="btn-text">{activeAccordians[i] ? "less -" :"about +"}</div>
@@ -1335,7 +1323,7 @@ const resetToFrameOne  = () => {
                 </div>
                 <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
                     <div class="lg:w-3/5 h-full flex flex-col justify-between">
-                        <p class="text-left">One in 10 Young Adults Experience Homelessness During One Year/p>
+                        <p class="text-left">One in 10 Young Adults Experience Homelessness During One Year</p>
                         <p class="text-orange text-left">Chapin Hall at the University of Chicago</p>
                     </div>
                     <a target="_blank" href="https://www.chapinhall.org/research/one-in-10-young-adults-experience-homelessness-during-one-year/" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
