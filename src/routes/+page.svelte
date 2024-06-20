@@ -1044,10 +1044,10 @@ const resetToFrameOne  = () => {
 
                 <!--sitting person-->
            {#key frameFiveBenchOffsetLeft}
-                <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} style="left:{frameFiveBenchOffsetLeft}px" class="absolute -bottom-6 sm:bottom-12 md:bottom-16 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 -translate-x-24 xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
+                <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} style="left:{frameFiveBenchOffsetLeft}px" class="absolute -bottom-6 sm:bottom-12 md:bottom-16 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 -translate-x-24 xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY['day']} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5372_1634)">
-                    <path class="ease-linear" d="M155.49 94L186.99 165L226.41 271.405L210.84 284.395L103.04 298.475L99.0702 315.875L141.28 401.585L140.51 430.785L105.65 442.615L-0.00976562 313.225L15.8402 268.935L103.04 234.595L78.4902 133L155.49 94Z" fill={$bgColor==='day'?"#F0C480":"#19294B"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
-                    <path class="ease-linear" d="M76.3714 103.775H118.421L147.291 40.6754L113.921 -0.15457L80.3714 -0.18457L52.2414 22.8054L50.4414 72.0554L76.3714 103.775Z" fill={$bgColor==='day'?"#F0C480":"#19294B"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
+                    <path class="ease-linear" d="M155.49 94L186.99 165L226.41 271.405L210.84 284.395L103.04 298.475L99.0702 315.875L141.28 401.585L140.51 430.785L105.65 442.615L-0.00976562 313.225L15.8402 268.935L103.04 234.595L78.4902 133L155.49 94Z" fill={"#F0C480"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
+                    <path class="ease-linear" d="M76.3714 103.775H118.421L147.291 40.6754L113.921 -0.15457L80.3714 -0.18457L52.2414 22.8054L50.4414 72.0554L76.3714 103.775Z" fill={"#F0C480"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
                     {#if showArm}
                     <g  in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} clip-path="url(#clip1_5372_1634)">
                     
@@ -1102,7 +1102,7 @@ const resetToFrameOne  = () => {
 
 
             {#if isFrameFiveStarted}   
-            <button transition:fade={{delay:10000}} on:click={goToNextFrame} class="bob-always negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+            <button transition:fade={{delay:4000}} on:click={setToFrameSix} class="bob-always negative-bump absolute bottom-12  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>
@@ -1246,11 +1246,11 @@ const resetToFrameOne  = () => {
 
 
      
-                 <ContentWidth class="mb-32">
+                 <ContentWidth class="mb-32 w-full">
                   <div class="w-full flex flex-col cursor-pointer">
                     {#each orgs as org, i}
-                      <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2" on:click={()=>handleAccordianClick(i)}>
-                        <div class="lg:h-20 py-8 lg:px-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
+                      <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 " on:click={()=>handleAccordianClick(i)}>
+                        <div class="lg:h-20 py-8  w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
                             <h5 class="text-orange text-left">{org.name}</h5>
                             <div class="flex flex-row justify-start gap-8">
                                 <div class="btn-text">{activeAccordians[i] ? "less -" :"about +"}</div>
@@ -1264,7 +1264,7 @@ const resetToFrameOne  = () => {
                             </div>
                         </div>
                         {#if activeAccordians[i]}
-                          <div class="flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start p-8" transition:slide="{{ duration: 500 }}">
+                          <div class="w-full flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
                                 
                                 <img class=" lg:max-h-48 w-64" src={org.logo} alt="young people to the front logo" />
                                 <div>
