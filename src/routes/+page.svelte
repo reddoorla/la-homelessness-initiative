@@ -596,7 +596,7 @@ const resetToFrameOne  = () => {
     </div>
     {/if}
     {#if isSuggestionModalActive}
-    <div class="w-screen overflow-y-auto overflow-x-hidden h-screen bg-help-light fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"-100%"}}>
+    <div class="w-screen overflow-y-auto overflow-x-hidden h-screen bg-help-light fixed z-50 top-0 left-0" transition:fly={{x:"-100%"}}>
         <div class="flex flex-col items-center justify-center gap-20 p-12">
 
         
