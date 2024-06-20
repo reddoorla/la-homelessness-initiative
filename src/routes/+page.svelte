@@ -430,6 +430,8 @@ let activeFeature = 0;
 const setToFrameSix = () => {
     activeFeature = 0 ;
     activeFrame.set(6)
+    sources = document.getElementById("sources");
+    document.getElementById("help")?.scrollIntoView({ behavior: "smooth" });
 }
 
 const handleAccordianClick = (i:number) =>{
@@ -440,6 +442,27 @@ const handleAccordianClick = (i:number) =>{
         activeAccordians[i]=true;
     }
 }
+
+const setToSources = () => {
+    activeFrame.set(6)
+
+        sources = document.getElementById("sources");
+
+    document.getElementById("sources")?.scrollIntoView({ behavior: "smooth" });
+    
+}
+
+let isSourcesInView = false;
+let sources:HTMLElement|null;
+ 
+const handleScroll = () =>{
+    if(get(activeFrame)===6&&sources){
+        isSourcesInView=sources?.getBoundingClientRect().top<10;
+    }
+    console.log('scrolled')
+}
+    
+ 
 
 
 
@@ -485,6 +508,9 @@ const resetToFrameOne  = () => {
            frameFiveBenchOffsetLeft = frameFiveBench.getBoundingClientRect().left;
         }
     } )
+
+    
+    Array.from(document.getElementsByClassName('panel')).forEach((e)=>e.addEventListener('scroll', handleScroll));
     })
 
     
@@ -650,7 +676,8 @@ const resetToFrameOne  = () => {
         <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===3?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameThree}></button>
         <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===4?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameFour}></button>
         <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===5?"bg-opacity-100":"bg-opacity-55"}" on:click={setFrameFive}></button>
-        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===6?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameSix}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===6&&!isSourcesInView?"bg-opacity-100":"bg-opacity-55"}" on:click={setToFrameSix}></button>
+        <button class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame===6&&isSourcesInView?"bg-opacity-100":"bg-opacity-55"}" on:click={setToSources}></button>
 
     </div>
         <Panel frame={1}>
@@ -1088,9 +1115,9 @@ const resetToFrameOne  = () => {
     </Panel>
 
     <Panel frame={6} class="overflow-y-scroll overflow-x-hidden">
-        <div class="w-full min-h-screen flex flex-col items-center justify-center bg-help-light">
+        <div class="w-full min-h-screen flex flex-col items-center justify-center bg-help-light" id="help">
             <div class="flex flex-col items-center justify-center max-w-screen-md my-32">
-                <h6 class="text-light-orange">make a difference</h6>
+                <h6 class="text-light-orange" >make a difference</h6>
                 <h3 class="text-orange my-9">How to help</h3>
                 <p class="text-center mx-[8%]">Here are organizations doing good in Los Angeles so you can learn more about the homeless crisis and become an advocate for our neighbors.</p>
             </div>
