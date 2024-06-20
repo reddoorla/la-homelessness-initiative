@@ -435,8 +435,9 @@ const setToFrameSix = () => {
 }
 
 const handleAccordianClick = (i:number) =>{
+
     if(activeAccordians[i]){
-        activeAccordians.fill(false);
+        activeAccordians[i]=false;
     } else{
         activeAccordians.fill(false);
         activeAccordians[i]=true;
@@ -508,6 +509,9 @@ const resetToFrameOne  = () => {
            frameFiveBenchOffsetLeft = frameFiveBench.getBoundingClientRect().left;
         }
     } )
+
+    if(get(activeFrame)===6)
+        sources=document.getElementById("sources");
 
     
     Array.from(document.getElementsByClassName('panel')).forEach((e)=>e.addEventListener('scroll', handleScroll));
