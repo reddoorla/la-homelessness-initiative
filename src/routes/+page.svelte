@@ -596,7 +596,7 @@ const resetToFrameOne  = () => {
     </div>
     {/if}
     {#if isSuggestionModalActive}
-    <div class="w-screen h-screen bg-help-light fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"-100%"}}>
+    <div class="w-screen min-h-screen bg-help-light fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"-100%"}}>
 
         {#if !isEmailSent}
         {#if isEmailFailed}
@@ -1249,7 +1249,7 @@ const resetToFrameOne  = () => {
                  <ContentWidth class="mb-32 w-full">
                   <div class="w-full flex flex-col cursor-pointer">
                     {#each orgs as org, i}
-                      <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 " on:click={()=>handleAccordianClick(i)}>
+                      <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 px-8" on:click={()=>handleAccordianClick(i)}>
                         <div class="lg:h-20 py-8  w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
                             <h5 class="text-orange text-left">{org.name}</h5>
                             <div class="flex flex-row justify-start gap-8">
