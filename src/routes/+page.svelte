@@ -844,7 +844,7 @@ const resetToFrameOne  = () => {
                 </div>
     </Panel>
 
-    <Panel frame={3} class="flex flex-col items-center pt-32 md: pt-0 justify-start md:justify-center text-center will-change-transform">
+    <Panel frame={3} class="flex flex-col items-center justify-start md:justify-center text-center will-change-transform">
 
         <img class="absolute w-screen h-screen object-cover" src={scribblesOne} alt="background-scribbles" transition:fade/>
         {#if isFrameThreeStarted&&!isFrameThreeFinished}
@@ -860,7 +860,7 @@ const resetToFrameOne  = () => {
         {#if isFrameThreeFinished}
         <img class="absolute w-screen h-screen object-cover " src={fullScribbles} alt="background-scribbles" transition:fade={{duration:600}}/>
         {/if}
-            <h6 class="z-10 text-pink">WHAT'S ON THE LINE</h6>
+            <h6 class="z-10 text-pink mt-32 md:mt-0">WHAT'S ON THE LINE</h6>
             
             <div class="z-10 h-[40vh]">
             {#if !isFrameThreeStarted}
