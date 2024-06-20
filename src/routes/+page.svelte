@@ -910,8 +910,8 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
 
             <div class="absolute w-full h-full flex flex-col items-center justify-center">
-                <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg  w-4/5 text-center mx-auto"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
-                <button class="z-10 mt-24 bump hover:brightness-125 w-full bob-always" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
+                <h3 class="z-10 text-[#EAD4DF] max-w-screen-lg  md:w-4/5 text-center mx-auto"><span class="text-light-pink">FALSE</span><br/>SHELTERS ARE NOTORIOUSLY UNDERFUNDED AND UNDERSTAFFED, CREATING UNSAFE CONDITIONS</h3>
+                <button class="z-10 mt-8 md:mt-24 bump hover:brightness-125 w-full bob-always" on:click={()=>{isMythTwo=true; isMythOne=false;}}>
                     <span class="flex flex-row justify-center items-center gap-6">
                         <img src={rightArrow} alt="next arrow"/>
                     </span>
@@ -924,8 +924,8 @@ const resetToFrameOne  = () => {
             <button class="absolute w-full h-full z-20" on:click={()=>isMythOneBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center">
                     <h6 class=" text-pink">01/03</h6>
-                    <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink ">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
-                    <button class=" mt-24 bump hover:brightness-125 w-full" on:click>
+                    <h3 class=" text-[#EAD4DF] max-w-[992px] md:w-4/5 text-center mx-auto"><span class="text-light-pink ">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
+                    <button class="mt-8 md:mt-24 bump hover:brightness-125 w-full" on:click>
                         <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                             <div class="text-pink btn-text">BREAK THE STIGMA</div>
                             <img src={rightArrow} alt="next arrow" class="w-20"/>
@@ -940,8 +940,8 @@ const resetToFrameOne  = () => {
             {#if isMythTwo}
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100vw", duration:400, opacity:1}} in:fly={{x:"100vw", duration:400, delay:400, opacity:1}}>
             <div class="absolute w-full h-full flex flex-col items-center justify-center bg-red">
-                <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>homeless folks would move inside if housing programs met their needs.</h3>
-                <button class=" mt-24 bump hover:brightness-125 w-full bob-always" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
+                <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center md:w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>homeless folks would move inside if housing programs met their needs.</h3>
+                <button class="mt-8 md:mt-24 bump hover:brightness-125 w-full bob-always" on:click={()=>{isMythThree=true; isMythTwo=false;}}>
                     <span class="flex flex-row gap-6 justify-center items-center ">
                     <img src={rightArrow} alt="next arrow"/>
                     </span>
@@ -955,8 +955,8 @@ const resetToFrameOne  = () => {
             <button class="absolute w-full h-full z-20" on:click={()=>isMythTwoBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center ">
                 <h6 class=" text-pink">02/03</h6>
-                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
-                <button class=" mt-24 bump hover:brightness-125 w-full" on:click>
+                <h3 class=" text-[#EAD4DF] max-w-[992px] md:w-4/5 text-center mx-auto"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
+                <button class="mt-8 md:mt-24 bump hover:brightness-125 w-full" on:click>
                     <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <div class="text-pink btn-text">BREAK THE STIGMA</div>
                     <img src={rightArrow} alt="next arrow" class="w-20
@@ -971,8 +971,8 @@ const resetToFrameOne  = () => {
             {#if isMythThree}
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100%", duration:400, opacity:1}} in:fly={{x:"100%", duration:400, delay:400, opacity:1}}>
             <div class=" absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
-                <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
-                <button class="  absolute bottom-12 mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always" on:click={setFrameFive}>
+                <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center md:w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
+                <button class="  absolute bottom-12 mt-8 md:mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always" on:click={setFrameFive}>
                     <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <svg class="transition-colors text-light-pink" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
