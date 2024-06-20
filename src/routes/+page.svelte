@@ -61,7 +61,7 @@
     
 
     import { tweened } from 'svelte/motion'
-    import { expoIn, expoInOut, linear, quintIn, quintOut } from 'svelte/easing'
+    import { expoIn, expoInOut, expoOut, linear, quintIn, quintOut } from 'svelte/easing'
     import { derived } from 'svelte/store'
   import ContentWidth from "$lib/components/ContentWidth.svelte";
 
@@ -413,23 +413,13 @@ const setFrameFive = () =>{
 
 const runFrameFive = async () => {
         if(!isFrameFiveStarted){
-        bgColor.set('night');
+        bgColor.set('day');
 
             isFrameFiveStarted=true;
-            setTimeout(()=>{
-                bgColor.set('day');
-                showStandingPerson=true;
-            }, 2000*FRAME_SPEED);
+    
+            setTimeout(()=>showArm=true, 2000*FRAME_SPEED);
             
-            setTimeout(()=>showArm=true, 4000*FRAME_SPEED);
-            
-            setTimeout(()=>{
-                showStandingHeart=true;
-            },8000*FRAME_SPEED);
-
-            setTimeout(()=>{
-                showSittingHeart=true;
-            },10000*FRAME_SPEED)
+  
         }
     };
 
@@ -1019,7 +1009,7 @@ const resetToFrameOne  = () => {
                     <g clip-path="url(#clip0_5372_1634)">
                     <path class="ease-linear" d="M155.49 94L186.99 165L226.41 271.405L210.84 284.395L103.04 298.475L99.0702 315.875L141.28 401.585L140.51 430.785L105.65 442.615L-0.00976562 313.225L15.8402 268.935L103.04 234.595L78.4902 133L155.49 94Z" fill={$bgColor==='day'?"#F0C480":"#19294B"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
                     <path class="ease-linear" d="M76.3714 103.775H118.421L147.291 40.6754L113.921 -0.15457L80.3714 -0.18457L52.2414 22.8054L50.4414 72.0554L76.3714 103.775Z" fill={$bgColor==='day'?"#F0C480":"#19294B"} style="transition-duration:{1000*FRAME_SPEED}ms"/>
-                    {#if showSittingHeart}
+                    {#if showArm}
                     <g  in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} clip-path="url(#clip1_5372_1634)">
                     
                         <path d="M114.114 157.89C114.114 157.89 117.236 152.439 119.014 151.39C120.792 150.342 125.164 149.159 125.164 149.159L132.247 152.885C132.247 152.885 133.256 160.624 133.242 163.093C133.228 165.563 126.396 174.635 126.396 174.635L114.039 183.783C114.039 183.783 105.611 178.157 101.73 174.559C97.8492 170.961 94.9585 162.977 94.9585 162.977C94.9585 162.977 96.0074 155.745 97.4648 152.799C98.9221 149.853 103.116 149.096 103.116 149.096L109.252 151.364L114.111 157.9L114.114 157.89Z" fill="#EC492F"/>
@@ -1037,7 +1027,7 @@ const resetToFrameOne  = () => {
                     </defs>
                 </svg>
 
-                {#if showStandingPerson}
+                
 
                 <svg in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} style="left:{frameFiveBenchOffsetLeft}px" class="absolute -bottom-6 sm:bottom-12 md:bottom-16 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 -translate-x-72 sm:-translate-x-[440px] lg:-translate-x-[200%] xl:-translate-x-[175%] translate-y-7 md:translate-y-0 xl:-translate-y-[5%]" width="285" height="510" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 285 510" xmlns="http://www.w3.org/2000/svg">
                 
@@ -1046,11 +1036,11 @@ const resetToFrameOne  = () => {
                     <path d="M130.76 109.8L93.0898 91.12L95.2598 21.76L143.28 0L173.36 14.88L188.35 47.97L168.09 92.89L130.76 109.8Z" fill="#EFAD81"/>
                     </g>
                     {#if showArm}
-                    <g>
-                        <path in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}} d="M160.51 218.12L225.35 245.86H278.86L284.8 226.82L222.66 203.26L161.46 124.77L160.51 218.12Z" fill="#EFAD81"/>
+                    <g in:fade={{easing:expoOut, duration:4000*FRAME_SPEED}}>
+                        <path  d="M160.51 218.12L225.35 245.86H278.86L284.8 226.82L222.66 203.26L161.46 124.77L160.51 218.12Z" fill="#EFAD81"/>
                     </g>
                     {/if}
-                    {#if showStandingHeart}
+                    {#if showArm}
                     <g in:fade={{easing:(t)=>t, duration:4000*FRAME_SPEED}}>
                     
                         <path   d="M130.91 165.55C130.91 165.55 134.56 160.44 136.43 159.56C138.3 158.68 142.77 157.95 142.77 157.95L149.45 162.35C149.45 162.35 149.69 170.15 149.43 172.61C149.17 175.07 141.48 183.42 141.48 183.42L128.27 191.3C128.27 191.3 120.44 184.87 116.94 180.91C113.43 176.95 111.34 168.71 111.34 168.71C111.34 168.71 113.1 161.62 114.85 158.83C116.6 156.04 120.84 155.71 120.84 155.71L126.72 158.57L130.91 165.55Z" fill="#EC492F"/>
@@ -1063,13 +1053,13 @@ const resetToFrameOne  = () => {
                     </clipPath>
                     </defs>
                     </svg>
-                {/if}
+                
             {/key}
                     
                
      
-                <h5 class="{isFrameFiveStarted? "opacity-0 transition delay-[2000ms] duration-[5000ms]":""}  text-blue text-2xl sm:text-[28px] text-center -translate-y-16 lg:translate-y-0 max-w-screen-xl w-5/6">With so many young people sleeping without shelter every night, we want to shed light on the issue to</h5>
-                <h5 class="{isFrameFiveStarted?"text-orange opacity-100 transition duration-[8000ms] delay-[3s]":"text-light-pink opacity-0"} text-2xl sm:text-[28px] w-5/6 -translate-y-16 lg:translate-y-0   ease-out text-center">open hearts and minds</h5>
+                <h5 class="{isFrameFiveStarted? "opacity-100 transition delay-[2000ms] duration-[5000ms]":"opacity-80"}  text-blue text-2xl sm:text-[28px][] text-center -translate-y-16 lg:translate-y-16 max-w-screen-xl w-5/6">We want to shed light on the issue to</h5>
+                <h2 class="{isFrameFiveStarted?"text-orange opacity-100 transition duration-[4000ms] delay-[1800ms]":"text-light-pink opacity-0"}  w-5/6 -translate-y-16 lg:translate-y-16 uppercase ease-out text-center">open hearts and minds</h2>
 
 
             {#if isFrameFiveStarted}   
