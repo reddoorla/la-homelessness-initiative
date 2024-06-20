@@ -596,7 +596,10 @@ const resetToFrameOne  = () => {
     </div>
     {/if}
     {#if isSuggestionModalActive}
-    <div class="w-screen overflow-y-auto min-h-screen bg-help-light fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"-100%"}}>
+    <div class="w-screen overflow-y-auto overflow-x-hidden h-screen bg-help-light fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"-100%"}}>
+        <div class="flex flex-col items-center justify-center gap-20 p-12">
+
+        
 
         {#if !isEmailSent}
         {#if isEmailFailed}
@@ -644,14 +647,16 @@ const resetToFrameOne  = () => {
             
         </div>
         {/if}
-        
+        </div>
+
         <button class="absolute top-4 right-8 text-pink hover:text-light-pink bump" on:click={()=>isSuggestionModalActive=false}>
             <i class="fa-solid fa-close fa-xl" />
         </button>
     </div>
     {/if}
     {#if isHelpModalActive}
-    <div class="w-screen min-h-screen overflow-y-auto bg-masthead-pink fixed z-50 top-0 left-0 flex flex-col items-center justify-center gap-20 p-12" transition:fly={{x:"100%"}}>
+    <div class="w-screen h-screen bg-masthead-pink fixed z-50 top-0 left-0 overflow-y-auto overflow-x-hidden" transition:fly={{x:"100%"}}>
+        <div class="flex flex-col items-center justify-center gap-20 p-12">
         <h5 class="text-[#A82D7D] max-w-[540px] text-center">If you are experiencing a mental health crisis and need help now, call 988.</h5>
         <p class="text-center max-w-[540px]">The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States. </p>
         <div class="flex flex-col md:flex-row justify-center items-center gap-10">
@@ -668,7 +673,7 @@ const resetToFrameOne  = () => {
                 </svg>
             </a>
         </div>
-        
+    </div>
         <button class="absolute top-4 right-8 text-pink hover:text-light-pink bump" on:click={()=>isHelpModalActive=false}>
             <i class="fa-solid fa-close fa-xl"/>
         </button>
