@@ -844,7 +844,7 @@ const resetToFrameOne  = () => {
                 </div>
     </Panel>
 
-    <Panel frame={3} class="flex flex-col items-center justify-start md:justify-center text-center will-change-transform">
+    <Panel frame={3} class="flex flex-col items-center pt-32 md: pt-0 justify-start md:justify-center text-center will-change-transform">
 
         <img class="absolute w-screen h-screen object-cover" src={scribblesOne} alt="background-scribbles" transition:fade/>
         {#if isFrameThreeStarted&&!isFrameThreeFinished}
