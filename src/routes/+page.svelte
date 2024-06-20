@@ -844,7 +844,7 @@ const resetToFrameOne  = () => {
                 </div>
     </Panel>
 
-    <Panel frame={3} class="flex flex-col items-center justify-center text-center will-change-transform">
+    <Panel frame={3} class="flex flex-col items-center justify-start md:justify-center text-center will-change-transform">
 
         <img class="absolute w-screen h-screen object-cover" src={scribblesOne} alt="background-scribbles" transition:fade/>
         {#if isFrameThreeStarted&&!isFrameThreeFinished}
@@ -866,7 +866,7 @@ const resetToFrameOne  = () => {
             {#if !isFrameThreeStarted}
             <div out:fly={{x:"-100%", duration:400}}>
             <h1 class="z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h1>
-            <h3 class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">Of homeless youth experience mental illness or crises while unhoused</h3>
+            <h3 class="z-10 text-light-pink max-w-[992px] md:w-4/5 text-center mx-auto">Of homeless youth experience mental illness or crises while unhoused</h3>
             <button class="z-10 mt-12 sm:mt-24 bump hover:brightness-125" on:click={runFrameThree}>
                 <img src={rightArrow} alt="next arrow" />
             </button>
