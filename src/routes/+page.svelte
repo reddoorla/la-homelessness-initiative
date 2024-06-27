@@ -712,9 +712,11 @@ const resetToFrameOne  = () => {
                         {#if showSittingPerson}
                         <svg out:fade={{easing:(t)=>t, duration:2000*FRAME_SPEED}} class="absolute -bottom-6 sm:bottom-12 md:bottom-16 left-[200px] sm:left-[400px] md:left-[480px] right-auto lg:left-auto lg:right-20 xl:right-52 md:scale-100 sm:scale-75 scale-[50%]  xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%]" width="227" height="410" fill={COLOR_KEY[$bgColor]||'white'} viewBox="0 0 227 410" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5151_6609)" >
-                            <path  fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-colors ease-linear" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" style="transition-duration:{1000*FRAME_SPEED}ms"/>
-                            <path fill={COLOR_KEY[$bgColor]||'white'} class="brightness-90 transition-colors ease-linear" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" style="transition-duration:{1000*FRAME_SPEED}ms"/>
-                            </g>
+                            <path  fill={COLOR_KEY[$bgColor]||'white'} class=" transition-colors ease-linear" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z" style="transition-duration:{1000*FRAME_SPEED}ms; filter:brightness(0.9);"/>
+                            <path fill={COLOR_KEY[$bgColor]||'white'} class="transition-colors ease-linear" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z" style="transition-duration:{1000*FRAME_SPEED}ms;  filter:brightness(0.9);"/>
+                            <path  fill="black" class=" transition-colors ease-linear opacity-10" d="M67.85 62.2901L5.6 141.34L0 238.45L15.56 251.44L123.37 265.52L127.33 282.91L85.12 368.63L85.9 397.83L120.76 409.66L226.42 280.27L210.56 235.97L123.37 201.64L153.75 128.87L67.85 62.2901Z"/>
+                            <path fill="black" class="transition-colors ease-linear opacity-10" d="M119.39 94.8501L92.78 62.2901L123.37 9.15527e-05H176.09L197.35 25.9601V62.2901L160.36 94.8501H119.39Z"/>
+                        </g>
                             <defs>
                             <clipPath id="clip0_5151_6609">
                             <rect width="226.42" height="409.66" fill={COLOR_KEY[$bgColor]||'white'}/>
