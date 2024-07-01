@@ -1020,7 +1020,7 @@ const resetToFrameOne  = () => {
             {#if $activeFrame===5}
                  <!--bench-->
                  
-                 <svg bind:this={frameFiveBench} class="absolute bottom-0 sm:bottom-16 -right-[400px] sm:-right-[25vw] lg:-right-96 xl:right-0 md:scale-100 sm:scale-75 scale-[50%] transition-opacity ease-linear xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] opacity-35" style="transition-duration:{2000*FRAME_SPEED}ms;" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
+                 <svg bind:this={frameFiveBench} class="absolute bottom-16 -right-[400px] sm:-right-[25vw] lg:-right-96 xl:right-0 md:scale-100 sm:scale-75 scale-[50%] transition-opacity ease-linear xl:scale-110 xl:-translate-x-[5%] xl:-translate-y-[5%] opacity-35" style="transition-duration:{2000*FRAME_SPEED}ms;" width="719" height="319" viewBox="0 0 719 319" fill='white' xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5151_6604)">
                     <path d="M0 163.93L718.68 150.39V225.42L0 213.45V163.93Z" />
                     <path d="M606.83 0.620209L598.93 98.2102L581.8 97.8402L578.67 128.87L366.86 132.84L362.83 98.4202L334.24 97.8402L330.64 133.69L113.92 137.62L109.26 98.4202L82.31 97.8902L75.37 13.2402L606.83 0.620209Z"/>
