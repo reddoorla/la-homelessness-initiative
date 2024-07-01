@@ -787,7 +787,7 @@ const resetToFrameOne  = () => {
                     Raising awareness for LA’s unhoused youth and their mental health.
                 </h2>
                 {#if isLampOn}
-                <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-20  text-light-pink hover:text-pink transition-colors pointer-events-auto bob-always">
+                <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-32 md:bottom-20  text-light-pink hover:text-pink transition-colors pointer-events-auto bob-always">
                     <span class="flex flex-col justify-center items-center gap-4">
                     <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
@@ -829,7 +829,7 @@ const resetToFrameOne  = () => {
               <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleThree} alt="people" transition:fade={{duration:1000,delay:2500}}/>
               <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFour} alt="people" transition:fade={{duration:1000,delay:3500}} />
               <img class="top-[75vh] sm:top-[60vh] lg:top-[40vh] xl:top-[35vh] left-[19vw] w-[80vw] absolute" src={newPeopleFive} alt="people" transition:fade={{duration:1000,delay:4500}} />
-              <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="bob-always negative-bump absolute right-8 sm:right-auto bottom-20  text-light-pink hover:text-pink transition-colors pointer-events-auto">
+              <button transition:fade={{delay:2500}} on:click={goToNextFrame} class="bob-always negative-bump absolute right-8 sm:right-auto bottom-32 md:bottom-20  text-light-pink hover:text-pink transition-colors pointer-events-auto">
                 <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
@@ -883,7 +883,7 @@ const resetToFrameOne  = () => {
             {/if}
             </div>
             {#if isFrameThreeStarted}
-            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="bob-always negative-bump absolute bottom-20 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto right-8 sm:right-auto">
+            <button transition:fade={{delay:2500}} on:click={()=>{goToNextFrame(); bgColor.set('darkest-red');}} class="bob-always negative-bump absolute bottom-32 md:bottom-20 mx-auto  text-light-pink hover:text-pink transition-colors pointer-events-auto right-8 sm:right-auto">
                 <span class="flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
@@ -979,7 +979,7 @@ const resetToFrameOne  = () => {
             <div class="absolute h-screen w-screen top-0 left-0" out:fly={{x:"-100%", duration:400, opacity:1}} in:fly={{x:"100%", duration:400, delay:400, opacity:1}}>
             <div class=" absolute w-full h-full flex flex-col items-center justify-center bg-light-red" >
                 <h3 class=" text-[#EAD4DF]  max-w-screen-lg text-center w-4/5 mx-auto"><span class="text-light-pink">FALSE</span><br/>many are employed or seeking employment, but lack the resources for safe housing</h3>
-                <button class="  absolute bottom-20 mt-8 md:mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always" on:click={setFrameFive}>
+                <button class="  absolute bottom-32 md:bottom-20 mt-8 md:mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always" on:click={setFrameFive}>
                     <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <svg class="transition-colors text-light-pink" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame 226">
@@ -1109,7 +1109,7 @@ const resetToFrameOne  = () => {
 
 
             {#if isFrameFiveStarted}   
-            <button transition:fade={{delay:4000}} on:click={setToFrameSix} class="bob-always negative-bump absolute bottom-20  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
+            <button transition:fade={{delay:4000}} on:click={setToFrameSix} class="bob-always negative-bump absolute bottom-32 md:bottom-20  text-light-orange hover:text-orange transition-colors pointer-events-auto flex flex-col justify-center items-center gap-4">
                 <svg class="transition-colors" width="26" height="58" viewBox="0 0 26 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 226">
                         <path id="Vector" d="M7.42627 52.3481C8.32294 53.4848 9.24153 54.6446 10.2427 55.69C10.4417 55.8994 10.6651 56.1136 10.9055 56.3037C10.9513 56.3519 11.0076 56.3901 11.0598 56.4242C11.6157 56.8246 12.2563 57.1046 12.9538 56.9999C14.0556 56.8298 14.7432 55.7581 15.3206 54.9146C16.1296 53.7275 16.9044 52.5212 17.6572 51.2958C19.2013 48.7767 20.6184 46.1868 21.9042 43.5264C22.2364 42.8441 22.5248 41.5579 21.8285 40.976C21.1322 40.3941 20.3249 41.2727 20.0423 41.8561C18.998 44.0119 17.877 46.1292 16.6575 48.1845C16.0894 49.1427 15.499 50.0902 14.8846 51.0207C14.623 51.4207 14.3554 51.8184 14.0898 52.2142C13.9093 52.4773 13.731 52.7385 13.5464 53.0055C13.4651 53.3059 13.3267 53.3657 13.1294 53.1665C13.0826 53.1592 13.0358 53.1519 12.9769 53.136C12.1983 36.5194 13.8455 19.8262 17.9448 3.70897C18.115 3.04913 18.2727 1.75545 17.3947 1.48572C16.5695 1.2296 15.8555 2.37823 15.6921 3.01167C11.7586 18.4818 9.92463 34.4158 10.3013 50.3624C9.76788 49.7254 9.24093 49.0743 8.73471 48.4115C7.25756 46.4793 5.90533 44.4562 4.66088 42.3745C3.6319 40.6581 1.76864 43.9906 2.52501 45.2607C4.02921 47.7332 5.6527 50.0963 7.42633 52.349L7.42627 52.3481Z" fill="currentColor"/>

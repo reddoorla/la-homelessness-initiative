@@ -57,7 +57,7 @@
 	}
 </style>
 
-<div class="w-[320px] sm:w-[400px] absolute bottom-16 md:bottom-4 z-20 left-4 lg:left-32 transition-all pointer-events-none {$$props.class ||''}" bind:this={infoBox}>
+<div class="w-[320px] sm:w-[400px] absolute bottom-32 md:bottom-12 z-20 left-4 lg:left-32 transition-all pointer-events-none {$$props.class ||''}" bind:this={infoBox}>
     <button class="absolute z-10 transition-all duration-500 left-5 pointer-events-auto {isHovered ? "boop brightness-125":""}" style="top: {isOpen ? "-32":reservedTextHeight-64}px" on:click={()=>isOpen=!isOpen} on:mouseover={()=>isHovered=true} on:focus={()=>isHovered=true} on:mouseout={()=>isHovered=false} on:blur={()=>isHovered=false}>
         <svg class="{color==="red" ? "text-light-pink" : "text-light-"+color}" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="asterisk icon pulse">
