@@ -742,7 +742,7 @@ const resetToFrameOne  = () => {
                         {/if}
         
                       <!--light cone-->
-                      {#if isLampOn}
+                      {#if isLampOn&&$activeFrame===1}
                       <svg bind:this={lightCone} in:fade={{delay:400*FRAME_SPEED, easing:(t)=>t, duration:600*FRAME_SPEED}}  class="absolute top-[110px] sm:top-[260px] md:top-[320px] lg:top-auto lg:bottom-0 -left-[406px] sm:-left-[290px] md:-left-[240px] lg:left-[2px] scale-[50%] sm:scale-100  xl:scale-110 xl:translate-x-[5%] xl:-translate-y-[5%] mix-blend-overlay" width="1155" height="683" viewBox="0 0 1155 683" fill="#C6D8EF" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.4" d="M438.05 0.114746L315.785 3.29375L-338.319 638.423L13.3617 743.44H778.313L1154.13 650.435L438.05 0.114746Z"/>
                     </svg>
