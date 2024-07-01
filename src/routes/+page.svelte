@@ -659,7 +659,7 @@ const resetToFrameOne  = () => {
         <div class="flex flex-col items-center justify-center gap-20 p-12 py-24">
         <h5 class="text-[#A82D7D] max-w-[540px] text-center">If you are experiencing a mental health crisis and need help now, call 988.</h5>
         <p class="text-center max-w-[540px]">The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States. </p>
-        <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+        <div class="flex flex-col md:flex-row justify-center items-center gap-10 pb-24">
             
                 <a target="_blank" href="tel:988" class="flex flex-row items-center justify-center transition bump gap-3">
                     <div class="btn-text text-light-pink hover:text-pink transition-colors ">CALL 988</div>
