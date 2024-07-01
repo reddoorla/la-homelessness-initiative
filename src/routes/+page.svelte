@@ -72,6 +72,9 @@
 	import { enhance } from '$app/forms';
     import type { SubmitFunction } from '@sveltejs/kit';
 
+ 
+let reCaptchaToken="i'm invalid"
+    
 
 
     interface FormData {
@@ -80,6 +83,7 @@
   }
 
   let form: FormData | undefined;
+
 
   page.subscribe(($page) => {
     form = $page.form as FormData | undefined;
@@ -92,19 +96,59 @@
 
 
 
-  const handleSubmit: SubmitFunction = () => {
-    isEmailSending = true;
+    async function executeReCaptcha(): Promise<string> {
+        //@ts-ignore
+  if (typeof window.grecaptcha !== 'undefined' && window.grecaptcha.enterprise) {
+    try {
+        //@ts-ignore
+      const token = await window.grecaptcha.enterprise.execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, { action: 'submit' });
+      console.log('reCAPTCHA token:', token);
+      return token;
+    } catch (error) {
+      console.error('reCAPTCHA execution failed:', error);
+      throw error;
+    }
+  } else {
+    console.error('reCAPTCHA is not loaded');
+    throw new Error('reCAPTCHA not loaded');
+  }
+}
 
-    return async ({ result  }) => {
-        console.log(result.type)
-      if (result.type === 'success') {
-        isEmailSent = true;
-      } else if (result.type === 'failure') {
-        isEmailFailed = true;
-      }
-      isEmailSending = false;
-    };
-  };
+async function handleSubmit(event: Event) {
+  event.preventDefault();
+  isEmailSending = true;
+  isEmailSent = false;
+  isEmailFailed = false;
+
+  try {
+    reCaptchaToken = await executeReCaptcha();
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+    formData.append('recaptcha-token', reCaptchaToken);
+    console.log(reCaptchaToken)
+
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      isEmailSent = true;
+    } else {
+      isEmailFailed = true;
+      console.error('Submission failed:', result);
+    }
+  } catch (error) {
+    console.error('Error during form submission:', error);
+    isEmailFailed = true;
+  } finally {
+    isEmailSending = false;
+  }
+}
+
+ 
 
 
                   
@@ -515,9 +559,8 @@ const resetToFrameOne  = () => {
 
     
     Array.from(document.getElementsByClassName('panel')).forEach((e)=>e.addEventListener('scroll', handleScroll));
-    })
 
-    
+ });
 </script>
 
 <style>
@@ -547,6 +590,7 @@ const resetToFrameOne  = () => {
 
 <svelte:head>
     <title>Hearts and Minds</title>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render={import.meta.env.VITE_RECAPTCHA_SITE_KEY}"></script>
 </svelte:head>
 
 <main class="w-screen h-screen fixed">
@@ -608,16 +652,20 @@ const resetToFrameOne  = () => {
         </button>
             
         {/if}
-		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" method="POST" action="/" use:enhance={handleSubmit}>
+		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" id="contact" method="POST" action="/" on:submit|preventDefault={handleSubmit}>
 			    <h5 class="text-light-orange">SEND US A MESSAGE</h5>
                 <input type="text" name="name" placeholder="Your Name" class="p-3 rounded-sm" />
 				<input type="email" name="email" placeholder="Your Email Address" class="p-3 rounded-sm" />
-                <input type="text" name="subject" placeholder="Subject" class="p-3 rounded-sm" />		
+                <input type="text" name="subject" placeholder="Subject" class="p-3 rounded-sm" />
+                	
 				<textarea name="message" class="w-full h-48 p-3 rounded-sm" placeholder="Your Message" />
 			
 			<button
 				type="submit"
-                class="flex flex-row gap-3"
+                class="flex flex-row gap-3 g-recaptcha"
+                id="submitButton"
+                
+                
 			>
 				{#if !isEmailSending} 
                 <div class="btn-text text-orange">Send Message</div>
@@ -628,6 +676,10 @@ const resetToFrameOne  = () => {
                     <div><i class='text-orange fa fa-spin fa-circle-o-notch fa-2xl leading-4 w-4'></i></div>
                 {/if}
 			</button>
+            <small>This site is protected by reCAPTCHA and the Google 
+                <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+            </small>
 		</form>
         {/if}
         {#if isEmailSent}
