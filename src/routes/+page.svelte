@@ -188,16 +188,7 @@ async function handleSubmit(event: Event) {
                             youtube: "https://www.youtube.com/channel/UCwP9v838Jx58xYUjZoqehIg",
                             bodyCopy: "They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency."
                         },
-                        {
-                            name: "Inside Safe",
-                            logo: insideSafeLogo,
-                            siteUrl: "https://mayor.lacity.gov/InsideSafe",
-                            instagram:"https://www.instagram.com/mayorofla/",
-                            facebook: "https://www.facebook.com/mayorofla",
-                            twitter: "https://twitter.com/mayorofla",
-                            youtube: "https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg",
-                            bodyCopy: "A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside."
-                        },
+                        
                         {
                             name: "Illumination Foundation",
                             logo: illuminationLogo,
@@ -240,16 +231,38 @@ async function handleSubmit(event: Event) {
                             bodyCopy: "We remove obstacles and provide the accountability and structure that people who are experiencing homelessness need to be productive in their communities. Our conviction and commitment to their success define us."
                             
                         },
+                        
+                        
                         {
-                            name:"Invisible People",
-                            logo:invisiblePeopleLogo,
-                            siteUrl:"https://invisiblepeople.tv/",
-                            facebook: "https://www.facebook.com/invisiblepeopletv",
-                            instagram: "https://instagram.com/invisiblepeople",
-                            youtube:"https://www.youtube.com/user/invisiblepeopletv",
-                            twitter: "https://twitter.com/invisiblepeople",
-                            tiktok: "https://www.tiktok.com/@invisiblepeopletv",
-                            bodyCopy: "Each year, our groundbreaking educational content reaches more than a billion people across the globe. Our real and unfiltered stories of homelessness shatter stereotypes, demand attention and deliver a call-to-action that is being answered by governments, major brands, nonprofit organizations, and everyday citizens just like you."
+                            name: "LA Youth Count",
+                            logo:laYouthCountLogo,
+                            siteUrl: "https://youthcount.org/",
+                            bodyCopy: "The Youth Count is a point-in-time estimate of the unsheltered youth population in the county, required by HUD. It helps with funding, understanding, and advocacy. While it focuses on unsheltered youth, it acknowledges that many young people, such as couch surfers and those in non-voucher hotels/motels, may not be counted."
+                        },
+                        
+
+                    ]
+
+                    const groups = [
+                        {
+                            name: "Measure A",
+                            logo: insideSafeLogo,
+                            siteUrl: "https://mayor.lacity.gov/InsideSafe",
+                            instagram:"https://www.instagram.com/mayorofla/",
+                            facebook: "https://www.facebook.com/mayorofla",
+                            twitter: "https://twitter.com/mayorofla",
+                            youtube: "https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg",
+                            bodyCopy: "A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside."
+                        },
+                        {
+                            name: "Inside Safe",
+                            logo: insideSafeLogo,
+                            siteUrl: "https://mayor.lacity.gov/InsideSafe",
+                            instagram:"https://www.instagram.com/mayorofla/",
+                            facebook: "https://www.facebook.com/mayorofla",
+                            twitter: "https://twitter.com/mayorofla",
+                            youtube: "https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg",
+                            bodyCopy: "A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside."
                         },
                         {
                             name:"Los Angeles Homeless Services Authority",
@@ -262,16 +275,21 @@ async function handleSubmit(event: Event) {
                             bodyCopy: "LAHSA is the lead agency in the Los Angeles Continuum of Care, which is the regional planning body that coordinates housing and services for homeless families and individuals in Los Angeles County. LAHSA coordinates and manages over $800 million annually in federal, state, county, and city funds for programs that provide shelter, housing, and services to people experiencing homelessness."
                         },
                         {
-                            name: "LA Youth Count",
-                            logo:laYouthCountLogo,
-                            siteUrl: "https://youthcount.org/",
-                            bodyCopy: "The Youth Count is a point-in-time estimate of the unsheltered youth population in the county, required by HUD. It helps with funding, understanding, and advocacy. While it focuses on unsheltered youth, it acknowledges that many young people, such as couch surfers and those in non-voucher hotels/motels, may not be counted."
-                        },
-                        {
                             name: "988",
                             logo:nineEightEightLogo,
                             siteUrl: "https://www.988california.org/",
                             bodyCopy: "The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States."
+                        },
+                        {
+                            name:"Invisible People",
+                            logo:invisiblePeopleLogo,
+                            siteUrl:"https://invisiblepeople.tv/",
+                            facebook: "https://www.facebook.com/invisiblepeopletv",
+                            instagram: "https://instagram.com/invisiblepeople",
+                            youtube:"https://www.youtube.com/user/invisiblepeopletv",
+                            twitter: "https://twitter.com/invisiblepeople",
+                            tiktok: "https://www.tiktok.com/@invisiblepeopletv",
+                            bodyCopy: "Each year, our groundbreaking educational content reaches more than a billion people across the globe. Our real and unfiltered stories of homelessness shatter stereotypes, demand attention and deliver a call-to-action that is being answered by governments, major brands, nonprofit organizations, and everyday citizens just like you."
                         }
 
                     ]
@@ -1275,32 +1293,33 @@ const resetToFrameOne  = () => {
                     
                 </div>
 
-                <div class="flex flex-col items-center justify-center max-w-screen-md mb-32">
-                    <h3 class="text-orange my-9">Explore</h3>
-                    <p class="text-center mb-32 mx-[8%]">Look through our complete list of orgs and consider how you can help!</p>
+                <div class="flex flex-col items-center justify-center max-w-screen-md mb-12">
+                    
+                    
 
                     <div class="flex flex-row justify-center items-center gap-16 px-4">
                         <div class="">
-                            <span class="bump flex flex-col items-center justify-center gap-2">
-                            <div class="btn-text text-light-orange">share</div>
+                            <span class="flex flex-col items-center justify-center gap-2">
+                           
                             <img class="" src={house} alt="house" />
                             </span>
                 
                         </div>
                         <div class="">
                             <span class="flex flex-col items-center justify-center gap-2">
-                                <div class="btn-text text-light-orange">support</div>
+                                
                                 <img class="" src={present} alt="present" />
                             </span>
                         </div>
                         <div class="">
                             <span class="flex flex-col items-center justify-center gap-2">
-                            <div class="btn-text text-light-orange">engage</div>
+                        
                             <img class="" src={heart} alt="heart" />
                             </span>
                         </div>
 
                     </div>
+                    <p class="text-center my-12 mx-[8%]">Explore this list to see how you can share, support, or engage with these organizations!</p>
                 </div>
 
 
@@ -1361,6 +1380,60 @@ const resetToFrameOne  = () => {
                     {/each}
                   </div>
                 </ContentWidth> 
+
+                <h3 class="text-orange my-9">Awareness Groups & Initiatives</h3>
+
+                <ContentWidth class="mb-32 w-full">
+                    <div class="w-full flex flex-col cursor-pointer">
+                      {#each groups as org, i}
+                        <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 px-8" on:click={()=>handleAccordianClick(i+orgs.length)}>
+                          <div class="lg:h-20 py-8  w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
+                              <h5 class="text-orange text-left">{org.name}</h5>
+                              <div class="flex flex-row justify-start gap-8">
+                                  <div class="btn-text">{activeAccordians[i+orgs.length] ? "less -" :"about +"}</div>
+                                  <a target="_blank" href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
+                                      <div class="btn-text">Go to Site</div>
+                                      <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                                          </svg>
+                                          
+                                  </a>
+                              </div>
+                          </div>
+                          {#if activeAccordians[i+orgs.length]}
+                            <div class="w-full flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
+                                  
+                                  <img class=" lg:max-h-48 w-64 drop-shadow" src={org.logo} alt="young people to the front logo" />
+                                  <div>
+                                      
+                                      <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
+              
+                                      <div class="flex flex-row gap-4 mt-7">
+                                          {#if org.instagram}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.instagram}><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                          {/if}
+                                          {#if org.youtube}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.youtube}><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                          {/if}
+                                          {#if org.twitter}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.twitter}><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                          {/if}
+                                          {#if org.facebook}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.facebook}><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                                          {/if}
+                                         
+                                          {#if org.tiktok}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.tiktok}><i class="fa-brands fa-tiktok fa-lg"></i></a>
+                                          {/if}
+                                          <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.siteUrl}><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          {/if}
+                        </button>
+                      {/each}
+                    </div>
+                  </ContentWidth> 
                 
         </div>
         <div class="w-screen bg-help-dark py-20" id="sources">
