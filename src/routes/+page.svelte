@@ -46,6 +46,7 @@
     import midnightMissionLogo from "$lib/assets/logos/orgs/stickerified/YMH_midnight-mission_sticker.png"
     import pathLogo from "$lib/assets/logos/orgs/stickerified/YMH_PATH_sticker.png"
     import nineEightEightLogo from "$lib/assets/logos/orgs/988.png"
+    import twoOneOneLALogo from "$lib/assets/logos/orgs/stickerified/211LA.png"
     
     
     import house from "$lib/assets/icons/house.svg"
@@ -245,14 +246,10 @@ async function handleSubmit(event: Event) {
 
                     const groups = [
                         {
-                            name: "Measure A",
-                            logo: insideSafeLogo,
-                            siteUrl: "https://mayor.lacity.gov/InsideSafe",
-                            instagram:"https://www.instagram.com/mayorofla/",
-                            facebook: "https://www.facebook.com/mayorofla",
-                            twitter: "https://twitter.com/mayorofla",
-                            youtube: "https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg",
-                            bodyCopy: "A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside."
+                            name: "Affordable Housing, Homelessness Solutions & Prevention Now",
+                            logo: "",
+                            siteUrl: "https://file.lacounty.gov/SDSInter/bos/supdocs/186696.pdf",
+                            bodyCopy: "The purpose of this citizens initiative is to use goals-based accountability to fund L.A. County’s comprehensive homelessness response system as well as invest in new strategies to address street encampments, prevent homelessness and create affordable housing."
                         },
                         {
                             name: "Inside Safe",
@@ -279,6 +276,17 @@ async function handleSubmit(event: Event) {
                             logo:nineEightEightLogo,
                             siteUrl: "https://www.988california.org/",
                             bodyCopy: "The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States."
+                        },
+                        {
+                            name: "211LA",
+                            logo:twoOneOneLALogo,
+                            siteUrl: "https://211la.org/",
+                            bodyCopy: "211 LA (or 211 LA County) is the hub for community members and community organizations looking for all types of health, human, and social services in Los Angeles County.",
+                            instagram: "https://www.instagram.com/211lacounty/",
+                            linkedin: "https://www.linkedin.com/company/211-la/about/",
+                            facebook: "https://www.facebook.com/211lacounty",
+                            twitter: "https://twitter.com/211LACounty"
+
                         },
                         {
                             name:"Invisible People",
@@ -1388,7 +1396,7 @@ const resetToFrameOne  = () => {
                       {#each groups as org, i}
                         <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 px-8" on:click={()=>handleAccordianClick(i+orgs.length)}>
                           <div class="lg:h-20 py-8  w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
-                              <h5 class="text-orange text-left">{org.name}</h5>
+                              <h5 class="text-orange text-left lg:max-w-[70%]">{org.name}</h5>
                               <div class="flex flex-row justify-start gap-8">
                                   <div class="btn-text">{activeAccordians[i+orgs.length] ? "less -" :"about +"}</div>
                                   <a target="_blank" href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
@@ -1403,7 +1411,7 @@ const resetToFrameOne  = () => {
                           {#if activeAccordians[i+orgs.length]}
                             <div class="w-full flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
                                   
-                                  <img class=" lg:max-h-48 w-64 drop-shadow" src={org.logo} alt="young people to the front logo" />
+                                  <img class=" lg:max-h-48 w-64 drop-shadow" src={org.logo} alt="" />
                                   <div>
                                       
                                       <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
