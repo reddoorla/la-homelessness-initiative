@@ -734,7 +734,7 @@ const resetToFrameOne  = () => {
     {/if}
     {#if isHelpModalActive}
     <div class="w-screen h-screen bg-masthead-pink fixed z-50 top-0 left-0 overflow-y-auto overflow-x-hidden" transition:fly={{x:"100%"}}>
-        <div class="flex flex-col items-center justify-center gap-20 p-12 py-24">
+        <div class="flex flex-col items-center justify-center gap-12 p-12 py-24">
         <h5 class="text-[#A82D7D] max-w-[540px] text-center">If you are experiencing a mental health crisis and need help now, call 988.</h5>
         <p class="text-center max-w-[540px]">The National Suicide Prevention Lifeline provides confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States. </p>
         <div class="flex flex-col md:flex-row justify-center items-center gap-10 pb-24">
@@ -746,6 +746,22 @@ const resetToFrameOne  = () => {
             
             <a target="_blank" href="https://988lifeline.org/chat/" class="bump text-light-pink hover:text-pink flex flex-row gap-3">
                 <div class="btn-text">text or chat 988</div>
+                <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="#A82D7D"/>
+                </svg>
+            </a>
+        </div>
+        <h5 class="text-[#A82D7D] max-w-[540px] text-center mt-6">If you are in search of support in the form of health, human and social services, call 211.</h5>
+        <p class="text-center max-w-[540px]">211 LA (or 211 LA County) is the hub for community members and community organizations looking for all types of health, human, and social services in Los Angeles County. </p>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-10 pb-24">
+            
+                <a target="_blank" href="tel:211" class="flex flex-row items-center justify-center transition bump gap-3">
+                    <div class="btn-text text-light-pink hover:text-pink transition-colors ">CALL 211</div>
+                    <img class="h-6" src={lifePreserver} alt="life preserver" />
+                </a>
+            
+            <a target="_blank" href="https://211la.org/" class="bump text-light-pink hover:text-pink flex flex-row gap-3">
+                <div class="btn-text">Go to 211LA.org</div>
                 <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="#A82D7D"/>
                 </svg>
