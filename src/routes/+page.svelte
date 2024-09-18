@@ -245,12 +245,6 @@ async function handleSubmit(event: Event) {
 
                     const groups = [
                         {
-                            name: "Affordable Housing, Homelessness Solutions & Prevention Now",
-                            logo: "",
-                            siteUrl: "https://file.lacounty.gov/SDSInter/bos/supdocs/186696.pdf",
-                            bodyCopy: "The purpose of this citizens initiative is to use goals-based accountability to fund L.A. County’s comprehensive homelessness response system as well as invest in new strategies to address street encampments, prevent homelessness and create affordable housing."
-                        },
-                        {
                             name: "Inside Safe",
                             logo: insideSafeLogo,
                             siteUrl: "https://mayor.lacity.gov/InsideSafe",
@@ -260,6 +254,8 @@ async function handleSubmit(event: Event) {
                             youtube: "https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg",
                             bodyCopy: "A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside."
                         },
+                        
+                        
                         {
                             name:"Los Angeles Homeless Services Authority",
                             logo:lahsaLogo,
@@ -269,6 +265,12 @@ async function handleSubmit(event: Event) {
                             youtube:"https://www.youtube.com/user/LAHSAIT",
                             twitter: "https://twitter.com/LAHomeless",
                             bodyCopy: "LAHSA is the lead agency in the Los Angeles Continuum of Care, which is the regional planning body that coordinates housing and services for homeless families and individuals in Los Angeles County. LAHSA coordinates and manages over $800 million annually in federal, state, county, and city funds for programs that provide shelter, housing, and services to people experiencing homelessness."
+                        },
+                        {
+                            name: "Affordable Housing, Homelessness Solutions & Prevention Now",
+                            logo: "",
+                            siteUrl: "https://file.lacounty.gov/SDSInter/bos/supdocs/186696.pdf",
+                            bodyCopy: "The purpose of this citizens initiative is to use goals-based accountability to fund L.A. County’s comprehensive homelessness response system as well as invest in new strategies to address street encampments, prevent homelessness and create affordable housing."
                         },
                         {
                             name: "988",
@@ -649,7 +651,7 @@ const resetToFrameOne  = () => {
         </button>
         <button class="" on:click={()=>{isHelpModalActive=true; isMobileNavActive=false}}>
             <span class="flex flex-row items-center transition bump">
-                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">EMERGENCY HELP</div>
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
             </span>
         </button>
@@ -877,7 +879,7 @@ const resetToFrameOne  = () => {
             </div>
             <div class="w-screen h-screen absolute top-0 left-0 flex justify-center items-center pointer-events-none">
                 <h2 class=" text-[#1B41A0] w-4/5 max-w-[1040px] text-center -translate-y-1/2 md:translate-y-0">
-                    Raising awareness for LA’s unhoused youth and their mental health.
+                    Raising awareness for LA’s unhoused population and their mental health.
                 </h2>
                 {#if isLampOn}
                 <button transition:fade on:click={goToNextFrame} class="negative-bump absolute bottom-32 md:bottom-20  text-light-pink hover:text-pink transition-colors pointer-events-auto bob-always">
