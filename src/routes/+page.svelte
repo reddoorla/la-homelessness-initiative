@@ -70,8 +70,7 @@
   import { onMount } from "svelte";
 
   import { page } from '$app/stores';
-	import { enhance } from '$app/forms';
-    import type { SubmitFunction } from '@sveltejs/kit';
+
 
  
 let reCaptchaToken="i'm invalid"
@@ -298,8 +297,8 @@ async function handleSubmit(event: Event) {
                             twitter: "https://twitter.com/invisiblepeople",
                             tiktok: "https://www.tiktok.com/@invisiblepeopletv",
                             bodyCopy: "Each year, our groundbreaking educational content reaches more than a billion people across the globe. Our real and unfiltered stories of homelessness shatter stereotypes, demand attention and deliver a call-to-action that is being answered by governments, major brands, nonprofit organizations, and everyday citizens just like you."
-                        }
-
+                        },
+             
                     ]
                   
                     let activeAccordians: boolean[] = [];
@@ -365,13 +364,13 @@ async function handleSubmit(event: Event) {
 
 $:{
         if($activeFrame===2){
-            setTimeout(()=>toThirtyEight.set(38), 500);
+            setTimeout(()=>toThirtyEight.set(27.8), 500);
 
             //for frame 3
             
         }
         else if($activeFrame===3){
-            setTimeout(()=>toSixtyNine.set(69), 500);
+            setTimeout(()=>toSixtyNine.set(77), 500);
             bgColor.set("mental-health-purple")
 
         }else{
@@ -632,7 +631,7 @@ const resetToFrameOne  = () => {
         </button>
         <button class="h-full hidden lg:block" on:click={()=>isHelpModalActive=true}>
             <span class="flex flex-row items-center transition bump">
-                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">SOS, I NEED HELP</div>
+                <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors ">EMERGENCY HELP</div>
                 <img class="h-6" src={lifePreserver} alt="life preserver" />
             </span>
         </button>
@@ -935,11 +934,11 @@ const resetToFrameOne  = () => {
               {/if}
 
               <h6 class="z-10 text-pink">DID YOU KNOW</h6>
-              <h3 class="z-10 text-light-pink max-w-screen-lg text-center w-4/5">Homelessness in youth and young adults has increased</h3>
+              <h3 class="z-10 text-light-pink max-w-screen-lg text-center w-4/5">Over 5 years, homelessness in LA county increased</h3>
               <h1 class="z-10 text-[#EAD4DF] -translate-y-[30px]">{$toThirtyEightFormatted}%</h1>
             <HowWeKnowButton 
-                text="According to LAHSA’s 2023 Greater Los Angeles Homeless Youth Count, there were over 2,000 youth and young adults experiencing homeless in 2023 on any given night."
-                reportLink="https://www.lahsa.org/documents?id=7689-yc2023-la-coc-data-summary"
+                text="According to LAHSA’s 2024 Greater Los Angeles Homeless Youth Count, there were over 75,000 individuals who experienced homeless in 2024."
+                reportLink="https://www.lahsa.org/documents?id=8170-los-angeles-county-hc2024-data-summary"
                 class="z-20"
             />
                 </div>
@@ -967,13 +966,13 @@ const resetToFrameOne  = () => {
             {#if !isFrameThreeStarted}
             <div out:fly={{x:"-100%", duration:400}}>
             <h1 class="z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h1>
-            <h3 class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">Of homeless youth experience mental illness or crises while unhoused</h3>
+            <h3 class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">Of unhoused persons have experienced mental illness</h3>
             <button class="z-10 mt-12 sm:mt-24 bump hover:brightness-125" on:click={runFrameThree}>
                 <img src={rightArrow} alt="next arrow" />
             </button>
             </div>
             {:else}
-            <h3 in:fly={{delay:400, duration:400, x:"100%"}} class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto mt-16">Without adequate care, young people are at greater <span class="text-[#EAD4DF]">risk of suicide attempts and suicide.</span></h3>
+            <h3 in:fly={{delay:400, duration:400, x:"100%"}} class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto mt-16">Without adequate care, unhoused people are at greater <span class="text-[#EAD4DF]">risk of suicide attempts and suicide.</span></h3>
             {/if}
             </div>
             {#if isFrameThreeStarted}
@@ -987,8 +986,8 @@ const resetToFrameOne  = () => {
                     </span>
             </button>
             <HowWeKnowButton 
-                text="Chapin University conducted a national survey of in 2017 and found that 69% of homeless youth report mental health challenges that can lead to significant and long term health issues."
-                reportLink="https://www.chapinhall.org/research/one-in-10-young-adults-experience-homelessness-during-one-year/"
+                text="A 2024 meta-analysis of the literature found that 77% of unhoused homeless individuals have had been diagnosed with a mental health disorder in their lifetime."
+                reportLink="https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2817602/"
                 color="purple"
             />
             {/if}
@@ -1229,90 +1228,30 @@ const resetToFrameOne  = () => {
         
             <div class="bg-help-dark h-[1024px] lg:h-[480px] w-4/5 max-w-screen-lg  mb-32 relative flex flex-row flex-nowrap overflow-hidden rounded">
 
-                <div class="p-10 relative flex  flex-col lg:flex-row lg:gap-16 justify-start items-start lg:items-center w-full h-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
-
-                    <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
-                    <div>
-                        <h5 class="text-orange mb-7">Young people to the front</h5>
-                        <p class="text-left">YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a research and policy lab that cultivates a platform for the amplification of youth voices and in turn, strengthens the system and ultimately gets us closer to making youth homelessness as rare and brief as possible</p>
-                        <a target="_blank" class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.yp2f.org/" >
-                            <div class="btn-text">GO TO SITE</div>
-                            <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
-                            </svg>
-                        </a>
-                        <div class="flex flex-row gap-4 mt-7">
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/youngpeopletothefront/"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.linkedin.com/company/yp2f"><i class="fa-brands fa-linkedin-in fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117"><i class="fa-regular fa-microphone fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.yp2f.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
-                        </div>
-                        
-                        <div class="flex-row gap-5 flex mt-7">
-                            <button on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                            <button on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                        </div>
-                      
-                    </div>
-                </div>
-
+                
                 <div class="p-10 relative flex flex-col lg:flex-row gap-16 justify-start items-start lg:items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
 
-                    <img class="w-64" src={spyLogo} alt="young people to the front logo" />
+                    <img class="w-64" src={insideSafeLogo} alt="young people to the front logo" />
                     <div>
-                        <h5 class="text-orange mb-7">Safe place for youth</h5>
-                        <p class="text-left">S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach, and the provision of a safe, supportive environment. We do this through a continuum of care that includes street outreach, access center services, case management, health and wellness, and education and employment programs.</p>
-                        <a target="_blank" class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.safeplaceforyouth.org/" >
+                        <h5 class="text-orange mb-7">Inside Safe</h5>
+                        <p class="text-left">A bold city-wide, voluntary, proactive housing-led strategy to bring people inside from tents and encampments, and to prevent encampments from returning. It is one feature in a comprehensive strategy to confront the homelessness crisis that in the first year of the Bass administration, brought more than 21,000 Angelenos inside.</p>
+                        <a target="_blank" class="bump flex flex-row pt-5 gap-5 hover:gap-6 my-7 text-orange hover:brightness-125" href="https://mayor.lacity.gov/InsideSafe/" >
                             <div class="btn-text">GO TO SITE</div>
                             <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
                             </svg>
                         </a>
                         <div class="flex flex-row gap-4 mt-7">
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/safeplaceforyouth/"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.youtube.com/channel/UCUy5AnugYb4OhLuooZEByDA"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://twitter.com/safeplace4youth"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.facebook.com/SafePlaceForYouth/"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.safeplaceforyouth.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/mayorofla/"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.youtube.com/channel/UC2rvX04kIK5BqcLUDVXJThg"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://twitter.com/mayorofla"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="hhttps://www.facebook.com/mayorofla"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://mayor.lacity.gov/InsideSafe/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
                         </div>
-                        
-                        <div in:fade={{delay: 1200}} out:fade={{delay:800}} class="flex-row gap-5 flex mt-7">
-                            <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                            <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                        </div>
+            
                        
                     </div>
                 </div>
-                
-                <div class="p-10 relative flex flex-col lg:flex-row gap-16 justify-start items-start lg:items-center w-full flex-shrink-0 transition-transform duration-700 ease-in" style="transform: translateX(-{activeFeature*100}%)">
-
-                    <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
-                    <div>
-                        <h5 class="text-orange mb-7">My Friend's place</h5>
-                        <p class="text-left">They offer a comprehensive continuum of services to 1,000 youth experiencing homelessness between the ages of 12 and 25, and their children, each year, helping our young people who are experiencing homelessness to move toward wellness, stability and self-sufficiency.</p>
-                        <a target="_blank" class="bump flex flex-row pt-5 gap-5  hover:gap-6 my-7 text-orange hover:brightness-125" href="https://www.myfriendsplace.org/">
-                            <div class="btn-text">GO TO SITE</div>
-                            <svg class="w-20 hover:brightness-125" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
-                            </svg>
-                        </a>
-                        <div class="flex flex-row gap-4 mt-7">
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.instagram.com/myfriendsplace"><i class="fa-brands fa-instagram fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.youtube.com/channel/UCwP9v838Jx58xYUjZoqehIg"><i class="fa-brands fa-youtube fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://twitter.com/MFPLA"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.facebook.com/mfphollywood/"><i class="fa-brands fa-facebook-f fa-lg"></i></a>
-                            <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href="https://www.myfriendsplace.org/"><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
-                        </div>
-                        
-                        <div class="flex-row gap-5 flex mt-7">
-                            <button transition:fade on:click={()=>activeFeature--} class="{activeFeature===0 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"< back"}</button>
-                            <button transition:fade on:click={()=>activeFeature++}  class="{activeFeature===2 ? "opacity-40 pointer-events-none":""} carousel-nav text-light-orange hover:text-orange bump">{"next >"}</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                
                 
                     
                 </div>
@@ -1346,7 +1285,7 @@ const resetToFrameOne  = () => {
                     <p class="text-center my-12 mx-[8%]">Explore this list to see how you can share, support, or engage with these organizations!</p>
                 </div>
 
-
+                <h3 class="text-orange my-9">Service Groups</h3>
      
                  <ContentWidth class="mb-32 w-full">
                   <div class="w-full flex flex-col cursor-pointer">
@@ -1549,6 +1488,19 @@ const resetToFrameOne  = () => {
                         </svg>
                     </a>
                 </div>
+                <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+                    <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
+                        <p class="text-left">Prevalence of Mental Health Disorders Among Individuals Experiencing Homelessness</p>
+                        <p class="text-orange text-left">JAMA Psychiatry</p>
+                    </div>
+                    <a target="_blank" href="https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2817602" class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4">
+                        <div class="btn-text">Go to Source</div>
+                        <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                
                 <div class="w-full mt-20 min-h-24 py-5 relative">
                     <div class="lg:w-3/5 h-full flex flex-col gap-5 justify-between">
                         <p class="text-left">If you have any suggestions or organizations you would like to share with us, please reach out. We are always looking to improve this site.</p>
@@ -1562,6 +1514,7 @@ const resetToFrameOne  = () => {
                     </div>
               
                 </div>
+                
 
                 <div class="w-full">
                     <button class="bump hover:opacity-90" on:click={resetToFrameOne}>
