@@ -85,6 +85,33 @@
   let form: FormData | undefined;
 
 
+  async function handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    isEmailSending = true;
+    isEmailFailed = false;
+    
+    const formData = new FormData(event.target as HTMLFormElement);
+    
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString()
+      });
+      
+      if (response.ok) {
+        isEmailSent = true;
+      } else {
+        isEmailFailed = true;
+      }
+    } catch (error) {
+      isEmailFailed = true;
+    } finally {
+      isEmailSending = false;
+    }
+  }
+
+
   page.subscribe(($page) => {
     form = $page.form as FormData | undefined;
   });
@@ -632,11 +659,11 @@ const resetToFrameOne  = () => {
         {/if}
         <!--- on:submit|preventDefault={handleSubmit} -->
 		<form 
-  name="contact" 
-  method="POST" 
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  class="w-full flex flex-col gap-8 max-w-[600px]"
+            name="contact" 
+            method="POST" 
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            class="w-full flex flex-col gap-8 max-w-[600px]"
 >
   <!-- Netlify Forms hidden input -->
   <input type="hidden" name="form-name" value="contact" />
