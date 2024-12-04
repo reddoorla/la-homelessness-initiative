@@ -73,7 +73,7 @@
 
 
  
-let reCaptchaToken="i'm invalid"
+let reCaptchaToken="6Lf3s5EqAAAAAKm8hM6KXr07q-BrEjwlatgK5vBn"
     
 
 
@@ -1287,7 +1287,62 @@ const resetToFrameOne  = () => {
                     <p class="text-center my-12 mx-[8%]">Explore this list to see how you can share, support, or engage with these organizations!</p>
                 </div>
 
-                <h3 class="text-orange my-9">Service Groups</h3>
+                
+
+                <h3 class="text-orange my-9">Awareness Groups & Initiatives</h3>
+
+                <ContentWidth class="mb-32 w-full">
+                    <div class="w-full flex flex-col cursor-pointer">
+                      {#each groups as org, i}
+                        <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 px-8" on:click={()=>handleAccordianClick(i+orgs.length)}>
+                          <div class="lg:h-20 py-8  w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
+                              <h5 class="text-orange text-left lg:max-w-[70%]">{org.name}</h5>
+                              <div class="flex flex-row justify-start gap-8">
+                                  <div class="btn-text">{activeAccordians[i+orgs.length] ? "less -" :"about +"}</div>
+                                  <a target="_blank" href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
+                                      <div class="btn-text">Go to Site</div>
+                                      <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
+                                          </svg>
+                                          
+                                  </a>
+                              </div>
+                          </div>
+                          {#if activeAccordians[i+orgs.length]}
+                            <div class="w-full flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
+                                  
+                                  <img class=" lg:max-h-48 w-64 drop-shadow" src={org.logo} alt="" />
+                                  <div>
+                                      
+                                      <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
+              
+                                      <div class="flex flex-row gap-4 mt-7">
+                                          {#if org.instagram}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.instagram}><i class="fa-brands fa-instagram fa-lg"></i></a>
+                                          {/if}
+                                          {#if org.youtube}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.youtube}><i class="fa-brands fa-youtube fa-lg"></i></a>
+                                          {/if}
+                                          {#if org.twitter}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.twitter}><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+                                          {/if}
+                                          {#if org.facebook}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.facebook}><i class="fa-brands fa-facebook-f fa-lg"></i></a>
+                                          {/if}
+                                         
+                                          {#if org.tiktok}
+                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.tiktok}><i class="fa-brands fa-tiktok fa-lg"></i></a>
+                                          {/if}
+                                          <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.siteUrl}><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          {/if}
+                        </button>
+                      {/each}
+                    </div>
+                  </ContentWidth> 
+                  <h3 class="text-orange my-9">Service Groups</h3>
      
                  <ContentWidth class="mb-32 w-full">
                   <div class="w-full flex flex-col cursor-pointer">
@@ -1345,60 +1400,6 @@ const resetToFrameOne  = () => {
                     {/each}
                   </div>
                 </ContentWidth> 
-
-                <h3 class="text-orange my-9">Awareness Groups & Initiatives</h3>
-
-                <ContentWidth class="mb-32 w-full">
-                    <div class="w-full flex flex-col cursor-pointer">
-                      {#each groups as org, i}
-                        <button class="w-full cursor-pointer border-light-orange border-opacity-25 border-b-2 px-8" on:click={()=>handleAccordianClick(i+orgs.length)}>
-                          <div class="lg:h-20 py-8  w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange">
-                              <h5 class="text-orange text-left lg:max-w-[70%]">{org.name}</h5>
-                              <div class="flex flex-row justify-start gap-8">
-                                  <div class="btn-text">{activeAccordians[i+orgs.length] ? "less -" :"about +"}</div>
-                                  <a target="_blank" href={org.siteUrl} class="flex flex-row bump gap-3 hover:text-orange">
-                                      <div class="btn-text">Go to Site</div>
-                                      <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path id="Vector" d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z" fill="currentColor"/>
-                                          </svg>
-                                          
-                                  </a>
-                              </div>
-                          </div>
-                          {#if activeAccordians[i+orgs.length]}
-                            <div class="w-full flex flex-col lg:flex-row gap-16 py-16 text-left items-start justify-start" transition:slide="{{ duration: 500 }}">
-                                  
-                                  <img class=" lg:max-h-48 w-64 drop-shadow" src={org.logo} alt="" />
-                                  <div>
-                                      
-                                      <p class="text-left normal-case tracking-normal">{org.bodyCopy}</p>
-              
-                                      <div class="flex flex-row gap-4 mt-7">
-                                          {#if org.instagram}
-                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.instagram}><i class="fa-brands fa-instagram fa-lg"></i></a>
-                                          {/if}
-                                          {#if org.youtube}
-                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.youtube}><i class="fa-brands fa-youtube fa-lg"></i></a>
-                                          {/if}
-                                          {#if org.twitter}
-                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.twitter}><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-                                          {/if}
-                                          {#if org.facebook}
-                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.facebook}><i class="fa-brands fa-facebook-f fa-lg"></i></a>
-                                          {/if}
-                                         
-                                          {#if org.tiktok}
-                                              <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.tiktok}><i class="fa-brands fa-tiktok fa-lg"></i></a>
-                                          {/if}
-                                          <a target="_blank" class="text-light-orange hover:text-orange transition-colors" href={org.siteUrl}><i class="fa-regular fa-link-simple fa-rotate-by fa-lg" style="--fa-rotate-angle: 135deg;"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                          {/if}
-                        </button>
-                      {/each}
-                    </div>
-                  </ContentWidth> 
                 
         </div>
         <div class="w-screen bg-help-dark py-20" id="sources">
