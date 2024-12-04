@@ -1018,7 +1018,7 @@ const resetToFrameOne  = () => {
             <button class="absolute w-full h-full z-20" on:click={()=>isMythOneBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center">
                     <h6 class=" text-pink">01/03</h6>
-                    <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink ">"BUT I THOUGHT</span><br/>There are enough people helping"</h3>
+                    <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink ">“BUT I THOUGHT</span><br/>There are enough people helping”</h3>
                     <button class="mt-8 md:mt-24 bump hover:brightness-125 w-full" on:click>
                         <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                             <div class="text-pink btn-text">BREAK THE STIGMA</div>
@@ -1049,7 +1049,7 @@ const resetToFrameOne  = () => {
             <button class="absolute w-full h-full z-20" on:click={()=>isMythTwoBusted=true} transition:fade>
                 <span class="flex flex-col items-center justify-center ">
                 <h6 class=" text-pink">02/03</h6>
-                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They don't want anyone's help"</h3>
+                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">“BUT I THOUGHT</span><br/>They don’t want anyone’s help”</h3>
                 <button class="mt-8 md:mt-24 bump hover:brightness-125 w-full" on:click>
                     <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center ">
                     <div class="text-pink btn-text">BREAK THE STIGMA</div>
@@ -1084,7 +1084,7 @@ const resetToFrameOne  = () => {
             <button class=" absolute w-full h-full z-20" on:click={()=>isMythThreeBusted=true} transition:fade>
                 <span class=" flex-col items-center justify-center">
                 <h6 class=" text-pink">03/03</h6>
-                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">"BUT I THOUGHT</span><br/>They are just lazy and unambitious"</h3>
+                <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto"><span class="text-light-pink">“BUT I THOUGHT</span><br/>They are just lazy and unambitious”</h3>
                 <button class=" mt-24 bump hover:brightness-125 w-full" on:click>
                     <span class=" flex flex-row gap-6 hover:gap-7 justify-center items-center">
                     <div class="text-pink btn-text">BREAK THE STIGMA</div>
