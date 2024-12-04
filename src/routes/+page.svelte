@@ -73,7 +73,7 @@
 
 
  
-let reCaptchaToken="6Lf3s5EqAAAAAKm8hM6KXr07q-BrEjwlatgK5vBn"
+
     
 
 
@@ -95,58 +95,6 @@ let reCaptchaToken="6Lf3s5EqAAAAAKm8hM6KXr07q-BrEjwlatgK5vBn"
     let isEmailFailed = false;
 
 
-
-    async function executeReCaptcha(): Promise<string> {
-        //@ts-ignore
-  if (typeof window.grecaptcha !== 'undefined' && window.grecaptcha.enterprise) {
-    try {
-        //@ts-ignore
-      const token = await window.grecaptcha.enterprise.execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, { action: 'submit' });
-      console.log('reCAPTCHA token:', token);
-      return token;
-    } catch (error) {
-      console.error('reCAPTCHA execution failed:', error);
-      throw error;
-    }
-  } else {
-    console.error('reCAPTCHA is not loaded');
-    throw new Error('reCAPTCHA not loaded');
-  }
-}
-
-async function handleSubmit(event: Event) {
-  event.preventDefault();
-  isEmailSending = true;
-  isEmailSent = false;
-  isEmailFailed = false;
-
-  try {
-    reCaptchaToken = await executeReCaptcha();
-    const form = event.target as HTMLFormElement;
-    const formData = new FormData(form);
-    formData.append('recaptcha-token', reCaptchaToken);
-    console.log(reCaptchaToken)
-
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: formData
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      isEmailSent = true;
-    } else {
-      isEmailFailed = true;
-      console.error('Submission failed:', result);
-    }
-  } catch (error) {
-    console.error('Error during form submission:', error);
-    isEmailFailed = true;
-  } finally {
-    isEmailSending = false;
-  }
-}
 
  
 
