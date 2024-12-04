@@ -716,7 +716,7 @@ const resetToFrameOne  = () => {
             
         {/if}
         <!--- on:submit|preventDefault={handleSubmit} -->
-		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" data-netlify="true" id="contact" method="POST" action="/" >
+		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" data-netlify="true" id="contact" method="POST" >
 			    <h5 class="text-light-orange">SEND US A MESSAGE</h5>
                 <p class="hidden">
                     <label>
