@@ -663,6 +663,7 @@ const resetToFrameOne  = () => {
   class="w-full flex flex-col gap-8 max-w-[600px]"
   data-netlify="true"
   name="contact"
+  on:submit={handleSubmit}
 >
   <input type="text" 
     name="name" 
