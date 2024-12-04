@@ -679,8 +679,14 @@ const resetToFrameOne  = () => {
         </button>
             
         {/if}
-		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" id="contact" method="POST" action="/" on:submit|preventDefault={handleSubmit}>
+        <!--- on:submit|preventDefault={handleSubmit} -->
+		<form class="w-full flex flex-col gap-8 max-w-[600px]" name="contact" netlify-honeypot="bot-field" data-netlify="true" id="contact" method="POST" action="/" >
 			    <h5 class="text-light-orange">SEND US A MESSAGE</h5>
+                <p class="hidden">
+                    <label>
+                      Don’t fill this out if you’re human: <input name="bot-field" />
+                    </label>
+                  </p>
                 <input type="text" name="name" placeholder="Your Name" class="p-3 rounded-sm" />
 				<input type="email" name="email" placeholder="Your Email Address" class="p-3 rounded-sm" />
                 <input type="text" name="subject" placeholder="Subject" class="p-3 rounded-sm" />
@@ -703,10 +709,10 @@ const resetToFrameOne  = () => {
                     <div><i class='text-orange fa fa-spin fa-circle-o-notch fa-2xl leading-4 w-4'></i></div>
                 {/if}
 			</button>
-            <small>This site is protected by reCAPTCHA and the Google 
+            <!-- <small>This site is protected by reCAPTCHA and the Google 
                 <a href="https://policies.google.com/privacy">Privacy Policy</a> and
                 <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-            </small>
+            </small> -->
 		</form>
         {/if}
         {#if isEmailSent}
