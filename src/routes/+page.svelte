@@ -669,8 +669,8 @@ const resetToFrameOne  = () => {
 
   
 
-    {#if isSuggestionModalActive}
-    <div class="w-screen overflow-y-auto overflow-x-hidden h-screen bg-help-light fixed z-50 top-0 left-0" transition:fly={{x:"-100%"}}>
+    
+    <div class="w-screen overflow-y-auto overflow-x-hidden h-screen bg-help-light fixed z-50 top-0 left-0 transition-transform {isSuggestionModalActive?"translate-x-0":"translate-x-[100vw]"}">
         <div class="flex flex-col items-center justify-center gap-20 p-12 pb-24">
 
         
@@ -698,7 +698,7 @@ const resetToFrameOne  = () => {
 			
 			<button
 				type="submit"
-                class="flex flex-row gap-3 g-recaptcha"
+                class="flex flex-row gap-3"
                 id="submitButton"
                 
                 
@@ -741,7 +741,7 @@ const resetToFrameOne  = () => {
             <i class="fa-solid fa-close fa-xl" />
         </button>
     </div>
-    {/if}
+    
     {#if isHelpModalActive}
     <div class="w-screen h-screen bg-masthead-pink fixed z-50 top-0 left-0 overflow-y-auto overflow-x-hidden" transition:fly={{x:"100%"}}>
         <div class="flex flex-col items-center justify-center gap-12 p-12 py-24">
