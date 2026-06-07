@@ -8,3 +8,12 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# adapter-netlify build output
+/.netlify
+
+# test + audit artifacts
+/test-results
+/playwright-report
+/.reddoor-a11y
+.reddoor-a11y-spec-*/
