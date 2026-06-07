@@ -1,21 +1,24 @@
-<script lang='ts'>
+<script lang="ts">
+  import type { Snippet } from "svelte";
+  import { bgColor } from "$lib/stores/colors";
+  import { activeFrame } from "$lib/stores/activeFrame";
 
-    import { bgColor } from "$lib/stores/colors";
-    import { activeFrame } from '$lib/stores/activeFrame'
-    export let horizontal = false;
-    export let frame:number;
+  interface Props {
+    horizontal?: boolean;
+    frame: number;
+    class?: string;
+    children?: Snippet;
+  }
+  let { horizontal = false, frame, class: klass = "", children }: Props = $props();
 
-    let axis="y";
-
-    if(horizontal)
-        axis="x";
-    
-
-
+  const axis = $derived(horizontal ? "x" : "y");
 </script>
 
-<div class="panel w-screen h-screen absolute transition-all duration-1000 top-0 left-0 bg-{$bgColor} {$$props.class || '' } {frame>$activeFrame ? "translate-"+axis+"-full" : ""} {frame<$activeFrame ? "-translate-"+axis+"-full" : ""}" >
-    
-        <slot/>
-    
+<div
+  class="panel w-screen h-screen absolute transition-all duration-1000 top-0 left-0 bg-{$bgColor} {klass} {frame >
+  $activeFrame
+    ? 'translate-' + axis + '-full'
+    : ''} {frame < $activeFrame ? '-translate-' + axis + '-full' : ''}"
+>
+  {@render children?.()}
 </div>
