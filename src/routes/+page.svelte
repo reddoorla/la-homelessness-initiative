@@ -629,7 +629,9 @@
               onclick={() => (isEmailFailed = false)}
               transition:fade
             >
-              <h2 class="h-as-h5 p-8">Something went wrong. Please fill all fields and retry.</h2>
+              <h2 class="h-as-h5 text-night p-8">
+                Something went wrong. Please fill all fields and retry.
+              </h2>
             </button>
           {/if}
           <form
