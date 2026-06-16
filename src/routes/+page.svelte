@@ -610,6 +610,7 @@
       <button
         class="absolute top-4 right-8 text-pink hover:text-light-pink bump"
         onclick={() => (isMobileNavActive = false)}
+        aria-label="Close"
       >
         <X size={24} />
       </button>
@@ -628,7 +629,7 @@
               onclick={() => (isEmailFailed = false)}
               transition:fade
             >
-              <h5 class=" p-8">Something went wrong. Please fill all fields and retry.</h5>
+              <h2 class="h-as-h5 p-8">Something went wrong. Please fill all fields and retry.</h2>
             </button>
           {/if}
           <form
@@ -638,7 +639,7 @@
             method="POST"
             onsubmit={handleSubmit}
           >
-            <h5 class="text-light-orange">SEND US A MESSAGE</h5>
+            <h2 class="h-as-h5 text-light-orange">SEND US A MESSAGE</h2>
             <!-- Honeypot: hidden from real users; a filled value is screened as a bot. -->
             <input
               type="text"
@@ -703,7 +704,7 @@
         {/if}
         {#if isEmailSent}
           <div class="w-full h-72 flex flex-col items-start justify-start gap-16 p-16 md:p-32">
-            <h5 class="text-orange">THANK YOU!</h5>
+            <h2 class="h-as-h5 text-orange">THANK YOU!</h2>
             <p>We appreciate your feedback. We'll get back to you as soon as we can.</p>
             <button onclick={() => (isSuggestionModalActive = false)} class="flex flex-row gap-3">
               <div class="btn-text text-orange">Go Back to site</div>
@@ -727,6 +728,7 @@
       <button
         class="absolute top-4 right-8 text-pink hover:text-light-pink bump"
         onclick={() => (isSuggestionModalActive = false)}
+        aria-label="Close"
       >
         <X size={24} />
       </button>
@@ -738,9 +740,9 @@
       transition:fly={{ x: "100%" }}
     >
       <div class="flex flex-col items-center justify-center gap-12 p-12 py-24">
-        <h5 class="text-[#A82D7D] max-w-[540px] text-center">
+        <h3 class="h-as-h5 text-[#A82D7D] max-w-[540px] text-center">
           If you are experiencing a mental health crisis and need help now, call 988.
-        </h5>
+        </h3>
         <p class="text-center max-w-[540px]">
           The National Suicide Prevention Lifeline provides confidential emotional support to people
           in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United
@@ -771,10 +773,10 @@
             </svg>
           </a>
         </div>
-        <h5 class="text-[#A82D7D] max-w-[540px] text-center mt-6">
+        <h3 class="h-as-h5 text-[#A82D7D] max-w-[540px] text-center mt-6">
           If you are in search of support in the form of health, human and social services, call
           211.
-        </h5>
+        </h3>
         <p class="text-center max-w-[540px]">
           211 LA (or 211 LA County) is the hub for community members and community organizations
           looking for all types of health, human, and social services in Los Angeles County.
@@ -808,6 +810,7 @@
       <button
         class="absolute top-4 right-8 text-pink hover:text-light-pink bump"
         onclick={() => (isHelpModalActive = false)}
+        aria-label="Close"
       >
         <X size={24} />
       </button>
@@ -820,6 +823,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={resetToFrameOne}
+      aria-label="Go to slide 1"
     ></button>
     <button
       class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame ===
@@ -827,6 +831,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={setToFrameTwo}
+      aria-label="Go to slide 2"
     ></button>
     <button
       class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame ===
@@ -834,6 +839,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={setToFrameThree}
+      aria-label="Go to slide 3"
     ></button>
     <button
       class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame ===
@@ -841,6 +847,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={setToFrameFour}
+      aria-label="Go to slide 4"
     ></button>
     <button
       class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame ===
@@ -848,6 +855,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={setFrameFive}
+      aria-label="Go to slide 5"
     ></button>
     <button
       class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame ===
@@ -855,6 +863,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={setToFrameSix}
+      aria-label="Go to slide 6"
     ></button>
     <button
       class="w-2 h-2 rounded-full bg-pink opacity-75 hover:bg-opacity-100 cursor-pointer transition {$activeFrame ===
@@ -862,6 +871,7 @@
         ? 'bg-opacity-100'
         : 'bg-opacity-55'}"
       onclick={setToSources}
+      aria-label="Go to slide 7"
     ></button>
   </div>
   <Panel frame={1}>
@@ -1198,6 +1208,7 @@
         <button
           transition:fade={{ delay: 2500 }}
           onclick={goToNextFrame}
+          aria-label="Next"
           class="bob-always negative-bump absolute right-8 sm:right-auto bottom-32 md:bottom-20 text-light-pink hover:text-pink transition-colors pointer-events-auto"
         >
           <span class="flex flex-col justify-center items-center gap-4">
@@ -1221,13 +1232,13 @@
         </button>
       {/if}
 
-      <h6 class="z-10 text-pink">DID YOU KNOW</h6>
+      <h2 class="h-as-h6 z-10 text-pink">DID YOU KNOW</h2>
       <h3 class="z-10 text-light-pink max-w-screen-lg text-center w-4/5">
         Homelessness in youth and young adults has increased
       </h3>
-      <h1 class="z-10 text-[#EAD4DF] -translate-y-[30px]">
+      <h4 class="h-as-h1 z-10 text-[#EAD4DF] -translate-y-[30px]">
         {$toThirtyEightFormatted}%
-      </h1>
+      </h4>
       <HowWeKnowButton
         text="According to LAHSA’s 2023 Greater Los Angeles Homeless Youth Count, there were over 2,000 youth and young adults experiencing homeless in 2023 on any given night."
         reportLink="https://www.lahsa.org/documents?id=7689-yc2023-la-coc-data-summary"
@@ -1305,15 +1316,15 @@
         transition:fade={{ duration: 600 }}
       />
     {/if}
-    <h6 class="z-10 text-pink mt-32 md:mt-0">WHAT'S ON THE LINE</h6>
+    <h2 class="h-as-h6 z-10 text-pink mt-32 md:mt-0">WHAT'S ON THE LINE</h2>
 
     <div class="z-10 h-[40vh]">
       {#if !isFrameThreeStarted}
         <div out:fly={{ x: "-100%", duration: 400 }}>
-          <h1 class="z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h1>
-          <h3 class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">
+          <h3 class="h-as-h1 z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h3>
+          <h4 class="h-as-h3 z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">
             Of homeless youth experience mental illness or crises while unhoused
-          </h3>
+          </h4>
           <button class="z-10 mt-12 sm:mt-24 bump hover:brightness-125" onclick={runFrameThree}>
             <img src={rightArrow} alt="next arrow" />
           </button>
@@ -1336,6 +1347,7 @@
           goToNextFrame();
           bgColor.set("darkest-red");
         }}
+        aria-label="Next"
         class="bob-always negative-bump absolute bottom-32 md:bottom-20 mx-auto text-light-pink hover:text-pink transition-colors pointer-events-auto right-8 sm:right-auto"
       >
         <span class="flex flex-col justify-center items-center gap-4">
@@ -1371,9 +1383,9 @@
           class="w-full h-full flex flex-col items-center justify-center z-20"
           out:fly={{ x: "-100vw", duration: 400, opacity: 1 }}
         >
-          <h6 class=" text-pink">LET'S GET THESE</h6>
-          <h1 class=" text-[#EAD4DF]">MYTHS</h1>
-          <h3 class=" text-light-pink max-w-screen-lg">OUT OF THE WAY</h3>
+          <h2 class="h-as-h6 text-pink">LET'S GET THESE</h2>
+          <h3 class="h-as-h1 text-[#EAD4DF]">MYTHS</h3>
+          <h4 class="h-as-h3 text-light-pink max-w-screen-lg">OUT OF THE WAY</h4>
           <button class="hover:brightness-125 bump bob-always" onclick={() => (isMythOne = true)}>
             <img src={mythsArrow} alt="arrow right" />
           </button>
@@ -1439,7 +1451,7 @@
             transition:fade
           >
             <span class="flex flex-col items-center justify-center">
-              <h6 class=" text-pink">01/03</h6>
+              <h2 class="h-as-h6 text-pink">01/03</h2>
               <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto">
                 <span class="text-light-pink">"BUT I THOUGHT</span><br />There are enough people
                 helping"
@@ -1517,7 +1529,7 @@
             transition:fade
           >
             <span class="flex flex-col items-center justify-center">
-              <h6 class=" text-pink">02/03</h6>
+              <h2 class="h-as-h6 text-pink">02/03</h2>
               <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto">
                 <span class="text-light-pink">"BUT I THOUGHT</span><br />They don't want anyone's
                 help"
@@ -1552,6 +1564,7 @@
           <button
             class="  absolute bottom-32 md:bottom-20 mt-8 md:mt-24 bump hover:brightness-125 right-8 sm:right-auto bob-always"
             onclick={setFrameFive}
+            aria-label="Next"
           >
             <span class="flex flex-row gap-6 hover:gap-7 justify-center items-center">
               <svg
@@ -1612,7 +1625,7 @@
             transition:fade
           >
             <span class=" flex-col items-center justify-center">
-              <h6 class=" text-pink">03/03</h6>
+              <h2 class="h-as-h6 text-pink">03/03</h2>
               <h3 class=" text-[#EAD4DF] max-w-[992px] w-4/5 text-center mx-auto">
                 <span class="text-light-pink">"BUT I THOUGHT</span><br />They are just lazy and
                 unambitious"
@@ -1798,13 +1811,13 @@
           </svg>
         {/key}
 
-        <h5
+        <h3
           class="{isFrameFiveStarted
             ? 'opacity-100 transition delay-[2000ms] duration-[5000ms]'
-            : 'opacity-80'}  text-blue text-2xl sm:text-[28px][] text-center -translate-y-16 lg:translate-y-16 max-w-screen-xl w-5/6"
+            : 'opacity-80'}  h-as-h5-metrics text-blue text-2xl sm:text-[28px][] text-center -translate-y-16 lg:translate-y-16 max-w-screen-xl w-5/6"
         >
           We want to shed light on the issue to
-        </h5>
+        </h3>
         <h2
           class="{isFrameFiveStarted
             ? 'text-orange opacity-100 transition duration-[4000ms] delay-[1800ms]'
@@ -1849,8 +1862,8 @@
       id="help"
     >
       <div class="flex flex-col items-center justify-center max-w-screen-md my-32">
-        <h6 class="text-light-orange">make a difference</h6>
-        <h3 class="text-orange my-9">How to help</h3>
+        <h2 class="h-as-h6 text-light-orange">make a difference</h2>
+        <h2 class="h-as-h3 text-orange my-9">How to help</h2>
         <p class="text-center mx-[8%]">
           Here are organizations doing good in Los Angeles so you can learn more about the homeless
           crisis and become an advocate for our neighbors.
@@ -1866,7 +1879,7 @@
         >
           <img class="w-64" src={yp2fLogo} alt="young people to the front logo" />
           <div>
-            <h5 class="text-orange mb-7">Young people to the front</h5>
+            <h3 class="h-as-h5 text-orange mb-7">Young people to the front</h3>
             <p class="text-left">
               YP2F is a reimagined think tank, one that combines advocacy with outcomes. We are a
               research and policy lab that cultivates a platform for the amplification of youth
@@ -1896,23 +1909,26 @@
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.instagram.com/youngpeopletothefront/"><Instagram size={20} /></a
+                href="https://www.instagram.com/youngpeopletothefront/"
+                aria-label="Instagram"><Instagram size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.linkedin.com/company/yp2f"><Linkedin size={20} /></a
+                href="https://www.linkedin.com/company/yp2f"
+                aria-label="LinkedIn"><Linkedin size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
                 href="https://podcasts.apple.com/us/podcast/young-people-to-the-front/id1686036117"
-                ><Mic size={20} /></a
+                aria-label="Podcast"><Mic size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.yp2f.org/"><ExternalLink size={20} /></a
+                href="https://www.yp2f.org/"
+                aria-label="Website"><ExternalLink size={20} /></a
               >
             </div>
 
@@ -1939,7 +1955,7 @@
         >
           <img class="w-64" src={spyLogo} alt="young people to the front logo" />
           <div>
-            <h5 class="text-orange mb-7">Safe place for youth</h5>
+            <h3 class="h-as-h5 text-orange mb-7">Safe place for youth</h3>
             <p class="text-left">
               S.P.Y. prioritizes low barriers for entry, harm-reduction, a trauma-informed approach,
               and the provision of a safe, supportive environment. We do this through a continuum of
@@ -1969,28 +1985,32 @@
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.instagram.com/safeplaceforyouth/"><Instagram size={20} /></a
+                href="https://www.instagram.com/safeplaceforyouth/"
+                aria-label="Instagram"><Instagram size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
                 href="https://www.youtube.com/channel/UCUy5AnugYb4OhLuooZEByDA"
-                ><Youtube size={20} /></a
+                aria-label="YouTube"><Youtube size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://twitter.com/safeplace4youth"><BrandX size={20} /></a
+                href="https://twitter.com/safeplace4youth"
+                aria-label="X (Twitter)"><BrandX size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.facebook.com/SafePlaceForYouth/"><Facebook size={20} /></a
+                href="https://www.facebook.com/SafePlaceForYouth/"
+                aria-label="Facebook"><Facebook size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.safeplaceforyouth.org/"><ExternalLink size={20} /></a
+                href="https://www.safeplaceforyouth.org/"
+                aria-label="Website"><ExternalLink size={20} /></a
               >
             </div>
 
@@ -2023,7 +2043,7 @@
         >
           <img class="w-64" src={mfpLogo} alt="young people to the front logo" />
           <div>
-            <h5 class="text-orange mb-7">My Friend's place</h5>
+            <h3 class="h-as-h5 text-orange mb-7">My Friend's place</h3>
             <p class="text-left">
               They offer a comprehensive continuum of services to 1,000 youth experiencing
               homelessness between the ages of 12 and 25, and their children, each year, helping our
@@ -2053,28 +2073,32 @@
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.instagram.com/myfriendsplace"><Instagram size={20} /></a
+                href="https://www.instagram.com/myfriendsplace"
+                aria-label="Instagram"><Instagram size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
                 href="https://www.youtube.com/channel/UCwP9v838Jx58xYUjZoqehIg"
-                ><Youtube size={20} /></a
+                aria-label="YouTube"><Youtube size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://twitter.com/MFPLA"><BrandX size={20} /></a
+                href="https://twitter.com/MFPLA"
+                aria-label="X (Twitter)"><BrandX size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.facebook.com/mfphollywood/"><Facebook size={20} /></a
+                href="https://www.facebook.com/mfphollywood/"
+                aria-label="Facebook"><Facebook size={20} /></a
               >
               <a
                 target="_blank"
                 class="text-light-orange hover:text-orange transition-colors"
-                href="https://www.myfriendsplace.org/"><ExternalLink size={20} /></a
+                href="https://www.myfriendsplace.org/"
+                aria-label="Website"><ExternalLink size={20} /></a
               >
             </div>
 
@@ -2131,7 +2155,7 @@
               <div
                 class="lg:h-20 py-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange"
               >
-                <h5 class="text-orange text-left">{org.name}</h5>
+                <h3 class="h-as-h5 text-orange text-left">{org.name}</h3>
                 <div class="flex flex-row justify-start gap-8">
                   <div class="btn-text">
                     {activeAccordians[i] ? "less -" : "about +"}
@@ -2177,55 +2201,63 @@
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.instagram}><Instagram size={20} /></a
+                          href={org.instagram}
+                          aria-label="Instagram"><Instagram size={20} /></a
                         >
                       {/if}
                       {#if org.youtube}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.youtube}><Youtube size={20} /></a
+                          href={org.youtube}
+                          aria-label="YouTube"><Youtube size={20} /></a
                         >
                       {/if}
                       {#if org.twitter}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.twitter}><BrandX size={20} /></a
+                          href={org.twitter}
+                          aria-label="X (Twitter)"><BrandX size={20} /></a
                         >
                       {/if}
                       {#if org.facebook}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.facebook}><Facebook size={20} /></a
+                          href={org.facebook}
+                          aria-label="Facebook"><Facebook size={20} /></a
                         >
                       {/if}
                       {#if org.linkedin}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.linkedin}><Linkedin size={20} /></a
+                          href={org.linkedin}
+                          aria-label="LinkedIn"><Linkedin size={20} /></a
                         >
                       {/if}
                       {#if org.podcast}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.podcast}><Mic size={20} /></a
+                          href={org.podcast}
+                          aria-label="Podcast"><Mic size={20} /></a
                         >
                       {/if}
                       {#if org.tiktok}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.tiktok}><BrandTiktok size={20} /></a
+                          href={org.tiktok}
+                          aria-label="TikTok"><BrandTiktok size={20} /></a
                         >
                       {/if}
                       <a
                         target="_blank"
                         class="text-light-orange hover:text-orange transition-colors"
-                        href={org.siteUrl}><ExternalLink size={20} /></a
+                        href={org.siteUrl}
+                        aria-label="Website"><ExternalLink size={20} /></a
                       >
                     </div>
                   </div>
@@ -2236,7 +2268,7 @@
         </div>
       </ContentWidth>
 
-      <h3 class="text-orange my-9">Awareness Groups & Initiatives</h3>
+      <h2 class="h-as-h3 text-orange my-9">Awareness Groups & Initiatives</h2>
 
       <ContentWidth class="mb-32 w-full">
         <div class="w-full flex flex-col cursor-pointer">
@@ -2248,7 +2280,7 @@
               <div
                 class="lg:h-20 py-8 w-full flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center text-light-orange"
               >
-                <h5 class="text-orange text-left lg:max-w-[70%]">{org.name}</h5>
+                <h3 class="h-as-h5 text-orange text-left lg:max-w-[70%]">{org.name}</h3>
                 <div class="flex flex-row justify-start gap-8">
                   <div class="btn-text">
                     {activeAccordians[i + orgs.length] ? "less -" : "about +"}
@@ -2290,28 +2322,32 @@
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.instagram}><Instagram size={20} /></a
+                          href={org.instagram}
+                          aria-label="Instagram"><Instagram size={20} /></a
                         >
                       {/if}
                       {#if org.youtube}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.youtube}><Youtube size={20} /></a
+                          href={org.youtube}
+                          aria-label="YouTube"><Youtube size={20} /></a
                         >
                       {/if}
                       {#if org.twitter}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.twitter}><BrandX size={20} /></a
+                          href={org.twitter}
+                          aria-label="X (Twitter)"><BrandX size={20} /></a
                         >
                       {/if}
                       {#if org.facebook}
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.facebook}><Facebook size={20} /></a
+                          href={org.facebook}
+                          aria-label="Facebook"><Facebook size={20} /></a
                         >
                       {/if}
 
@@ -2319,13 +2355,15 @@
                         <a
                           target="_blank"
                           class="text-light-orange hover:text-orange transition-colors"
-                          href={org.tiktok}><BrandTiktok size={20} /></a
+                          href={org.tiktok}
+                          aria-label="TikTok"><BrandTiktok size={20} /></a
                         >
                       {/if}
                       <a
                         target="_blank"
                         class="text-light-orange hover:text-orange transition-colors"
-                        href={org.siteUrl}><ExternalLink size={20} /></a
+                        href={org.siteUrl}
+                        aria-label="Website"><ExternalLink size={20} /></a
                       >
                     </div>
                   </div>
@@ -2338,7 +2376,7 @@
     </div>
     <div class="w-screen bg-help-dark py-20" id="sources">
       <ContentWidth>
-        <h3 class="text-orange">Our Sources</h3>
+        <h2 class="h-as-h3 text-orange">Our Sources</h2>
         <p class="text-center mb-20">
           Interested in learning more about homelessness? Visit the sources below
         </p>
