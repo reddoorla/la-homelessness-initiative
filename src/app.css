@@ -195,6 +195,92 @@
   }
 }
 
+/* Heading-LOOK mirror utilities: reproduce the per-tag base styling so a
+   heading TAG can be renumbered for correct heading-order (a11y) WITHOUT any
+   visual change. Color/layout still come from each element's own text-* class;
+   these set only the font metrics the tag used to provide. */
+@utility h-as-h1 {
+  font-family: Poleno;
+  font-size: 120px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: normal;
+  text-transform: none;
+  leading-trim: both;
+  text-edge: cap;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  @media screen and (max-width: 1024px) {
+    font-family: Poleno;
+    font-size: 85px;
+    font-weight: 500;
+    line-height: 125%;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+}
+
+@utility h-as-h3 {
+  font-family: Neuzon;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  @media screen and (max-width: 1024px) {
+    font-family: Neuzon;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+}
+
+@utility h-as-h5 {
+  font-family: Neuzon;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+}
+
+@utility h-as-h6 {
+  font-family: Poleno;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: 1px;
+  text-transform: none;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+}
+
+/* Metrics-only mirror for headings whose font-size already comes from a
+   text-* utility (so we must NOT re-assert font-size). Restores the h5 tag's
+   line-height + letter-spacing after a tag renumber. */
+@utility h-as-h5-metrics {
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
 @utility paragraph-2 {
   font-family: "area-normal";
   font-size: 14px;

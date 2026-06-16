@@ -34,6 +34,7 @@
     onfocus={() => (isHovered = true)}
     onmouseout={() => (isHovered = false)}
     onblur={() => (isHovered = false)}
+    aria-label="How we know"
   >
     <svg
       class={color === "red" ? "text-light-pink" : "text-light-" + color}
