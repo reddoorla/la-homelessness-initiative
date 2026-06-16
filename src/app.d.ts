@@ -8,14 +8,6 @@ declare global {
     // interface PageState {}
     // interface Platform {}
   }
-  interface Window {
-    grecaptcha?: {
-      enterprise: {
-        ready: (cb: () => void) => void;
-        execute: (siteKey: string, options: { action: string }) => Promise<string>;
-      };
-    };
-  }
 }
 
 export {};

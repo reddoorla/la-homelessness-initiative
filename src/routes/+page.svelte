@@ -72,52 +72,45 @@
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
 
-  let reCaptchaToken = "i'm invalid";
-
   let isEmailSent = $state(false);
   let isEmailSending = $state(false);
   let isEmailFailed = $state(false);
 
-  async function executeReCaptcha(): Promise<string> {
-    if (typeof window.grecaptcha !== "undefined" && window.grecaptcha.enterprise) {
-      try {
-        const token = await window.grecaptcha.enterprise.execute(
-          import.meta.env.VITE_RECAPTCHA_SITE_KEY,
-          { action: "submit" },
-        );
-        console.log("reCAPTCHA token:", token);
-        return token;
-      } catch (error) {
-        console.error("reCAPTCHA execution failed:", error);
-        throw error;
-      }
-    } else {
-      console.error("reCAPTCHA is not loaded");
-      throw new Error("reCAPTCHA not loaded");
-    }
-  }
+  // Honeypot: a real user never fills this; a filled value is screened as a bot
+  // by the central ingest endpoint.
+  let botField = $state("");
+
+  // Suggestion form fields (bound below).
+  let suggestionName = $state("");
+  let suggestionEmail = $state("");
+  let suggestionSubject = $state("");
+  let suggestionMessage = $state("");
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
+    if (isEmailSending) return; // re-entry guard
     isEmailSending = true;
     isEmailSent = false;
     isEmailFailed = false;
 
     try {
-      reCaptchaToken = await executeReCaptcha();
-      const form = event.target as HTMLFormElement;
-      const formData = new FormData(form);
-      formData.append("recaptcha-token", reCaptchaToken);
-      console.log(reCaptchaToken);
-
-      const response = await fetch(form.action, {
+      const response = await fetch("/api/forms", {
         method: "POST",
-        body: formData,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          formType: "contact",
+          name: suggestionName,
+          email: suggestionEmail,
+          subject: suggestionSubject,
+          message: suggestionMessage,
+          "bot-field": botField,
+          sourceUrl: window.location.href,
+        }),
       });
 
       const result = await response.json();
 
-      if (response.ok) {
+      if (response.ok && result?.ok) {
         isEmailSent = true;
       } else {
         isEmailFailed = true;
@@ -533,10 +526,6 @@
 
 <svelte:head>
   <title>Hearts and Minds</title>
-  <script
-    src="https://www.google.com/recaptcha/enterprise.js?render={import.meta.env
-      .VITE_RECAPTCHA_SITE_KEY}"
-  ></script>
 </svelte:head>
 
 <main class="w-screen h-screen fixed">
@@ -647,23 +636,49 @@
             name="contact"
             id="contact"
             method="POST"
-            action="/"
             onsubmit={handleSubmit}
           >
             <h5 class="text-light-orange">SEND US A MESSAGE</h5>
-            <input type="text" name="name" placeholder="Your Name" class="p-3 rounded-sm" />
+            <!-- Honeypot: hidden from real users; a filled value is screened as a bot. -->
+            <input
+              type="text"
+              name="bot-field"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              class="hidden"
+              bind:value={botField}
+            />
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              class="p-3 rounded-sm"
+              bind:value={suggestionName}
+            />
             <input
               type="email"
               name="email"
               placeholder="Your Email Address"
               class="p-3 rounded-sm"
+              bind:value={suggestionEmail}
             />
-            <input type="text" name="subject" placeholder="Subject" class="p-3 rounded-sm" />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              class="p-3 rounded-sm"
+              bind:value={suggestionSubject}
+            />
 
-            <textarea name="message" class="w-full h-48 p-3 rounded-sm" placeholder="Your Message"
+            <textarea
+              name="message"
+              class="w-full h-48 p-3 rounded-sm"
+              placeholder="Your Message"
+              bind:value={suggestionMessage}
             ></textarea>
 
-            <button type="submit" class="flex flex-row gap-3 g-recaptcha" id="submitButton">
+            <button type="submit" class="flex flex-row gap-3" id="submitButton">
               {#if !isEmailSending}
                 <div class="btn-text text-orange">Send Message</div>
                 <svg
@@ -684,12 +699,6 @@
                 </div>
               {/if}
             </button>
-            <small
-              >This site is protected by reCAPTCHA and the Google
-              <a href="https://policies.google.com/privacy">Privacy Policy</a>
-              and
-              <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-            </small>
           </form>
         {/if}
         {#if isEmailSent}

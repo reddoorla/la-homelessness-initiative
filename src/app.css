@@ -193,10 +193,6 @@
     max-width: none;
     max-height: none;
   }
-
-  .grecaptcha-badge {
-    visibility: hidden !important;
-  }
 }
 
 @utility paragraph-2 {
