@@ -546,7 +546,7 @@
     <button class="h-full hidden lg:block" onclick={() => (isHelpModalActive = true)}>
       <span class="flex flex-row items-center transition bump">
         <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">
-          SOS, I NEED HELP
+          EMERGENCY HELP
         </div>
         <img class="h-6" src={lifePreserver} alt="life preserver" />
       </span>
@@ -586,7 +586,7 @@
       >
         <span class="flex flex-row items-center transition bump">
           <div class="w-40 btn-text text-light-pink hover:text-pink transition-colors">
-            SOS, I NEED HELP
+            EMERGENCY HELP
           </div>
           <img class="h-6" src={lifePreserver} alt="life preserver" />
         </span>
