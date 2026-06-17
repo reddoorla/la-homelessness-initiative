@@ -335,11 +335,11 @@
 
   $effect(() => {
     if ($activeFrame === 2) {
-      setTimeout(() => toThirtyEight.set(38), 500);
+      setTimeout(() => toThirtyEight.set(27.8), 500);
 
       //for frame 3
     } else if ($activeFrame === 3) {
-      setTimeout(() => toSixtyNine.set(69), 500);
+      setTimeout(() => toSixtyNine.set(77), 500);
       bgColor.set("mental-health-purple");
     } else {
       setTimeout(() => {
@@ -1092,7 +1092,7 @@
       <h2
         class=" text-[#1B41A0] w-4/5 max-w-[1040px] text-center -translate-y-1/2 md:translate-y-0"
       >
-        Raising awareness for LA’s unhoused youth and their mental health.
+        Raising awareness for LA’s unhoused population and their mental health.
       </h2>
       {#if isLampOn}
         <button
@@ -1236,14 +1236,14 @@
 
       <h2 class="h-as-h6 z-10 text-pink">DID YOU KNOW</h2>
       <h3 class="z-10 text-light-pink max-w-screen-lg text-center w-4/5">
-        Homelessness in youth and young adults has increased
+        Over 5 years, homelessness in LA county increased
       </h3>
       <h4 class="h-as-h1 z-10 text-[#EAD4DF] -translate-y-[30px]">
         {$toThirtyEightFormatted}%
       </h4>
       <HowWeKnowButton
-        text="According to LAHSA’s 2023 Greater Los Angeles Homeless Youth Count, there were over 2,000 youth and young adults experiencing homeless in 2023 on any given night."
-        reportLink="https://www.lahsa.org/documents?id=7689-yc2023-la-coc-data-summary"
+        text="According to LAHSA’s 2024 Greater Los Angeles Homeless Youth Count, there were over 75,000 individuals who experienced homeless in 2024."
+        reportLink="https://www.lahsa.org/documents?id=8170-los-angeles-county-hc2024-data-summary"
         class="z-20"
       />
     </div>
@@ -1325,7 +1325,7 @@
         <div out:fly={{ x: "-100%", duration: 400 }}>
           <h3 class="h-as-h1 z-10 text-[#EAD4DF]">{$toSixtyNineFormatted}%</h3>
           <h4 class="h-as-h3 z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto">
-            Of homeless youth experience mental illness or crises while unhoused
+            Of unhoused persons have experienced mental illness
           </h4>
           <button class="z-10 mt-12 sm:mt-24 bump hover:brightness-125" onclick={runFrameThree}>
             <img src={rightArrow} alt="next arrow" />
@@ -1336,7 +1336,7 @@
           in:fly={{ delay: 400, duration: 400, x: "100%" }}
           class="z-10 text-light-pink max-w-[992px] w-4/5 text-center mx-auto mt-16"
         >
-          Without adequate care, young people are at greater <span class="text-[#EAD4DF]"
+          Without adequate care, unhoused people are at greater <span class="text-[#EAD4DF]"
             >risk of suicide attempts and suicide.</span
           >
         </h3>
@@ -1372,8 +1372,8 @@
         </span>
       </button>
       <HowWeKnowButton
-        text="Chapin University conducted a national survey of in 2017 and found that 69% of homeless youth report mental health challenges that can lead to significant and long term health issues."
-        reportLink="https://www.chapinhall.org/research/one-in-10-young-adults-experience-homelessness-during-one-year/"
+        text="A 2024 meta-analysis of the literature found that 77% of unhoused homeless individuals have had been diagnosed with a mental health disorder in their lifetime."
+        reportLink="https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2817602/"
         color="purple"
       />
     {/if}
@@ -2517,6 +2517,28 @@
           <a
             target="_blank"
             href="https://after8toeducate.com/mental-health-students-experiencing-homelessness/"
+            class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4"
+          >
+            <div class="btn-text">Go to Source</div>
+            <svg class="w-16" viewBox="0 0 150 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                id="Vector"
+                d="M3.05339 11.2409C38.1895 7.973 73.546 7.74546 108.722 10.5023C116.387 11.1044 124.041 11.8571 131.671 12.7373C131.13 12.4335 130.58 12.1442 130.035 11.8439C125.375 9.31656 120.715 6.78918 116.056 4.2618C114.907 3.64365 113.317 2.18852 114.418 0.820324C115.464 -0.484194 118.091 0.090017 119.293 0.744115C124.825 3.73931 130.357 6.73451 135.882 9.74452C140.394 12.1871 147.405 14.5337 149.421 19.7056C149.78 20.6233 149.582 21.3361 148.718 21.8718C142.302 25.772 135.318 28.5632 127.993 30.2237C126.304 30.5998 124.06 29.9674 122.949 28.5989C121.941 27.3684 122.308 25.9412 123.93 25.5691C130.241 24.1378 136.174 21.7916 141.763 18.5906C141.592 18.4013 141.42 18.2341 141.233 18.0662C140.521 18.3513 139.606 18.3718 138.964 18.299C104.576 13.9307 69.8531 12.4908 35.2271 14.0388C25.2928 14.4845 15.3646 15.1773 5.4654 16.0971C2.22322 16.4101 -1.83735 11.7036 3.05339 11.2409Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+        </div>
+        <div class="w-full border-b-[3px] border-help-light min-h-24 py-5 pb-20 md:pb-5 relative">
+          <div class="w-5/6 lg:w-3/5 h-full flex flex-col justify-between">
+            <p class="text-left">
+              Prevalence of Mental Health Disorders Among Individuals Experiencing Homelessness
+            </p>
+            <p class="text-orange text-left">JAMA Psychiatry</p>
+          </div>
+          <a
+            target="_blank"
+            href="https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2817602"
             class="bump absolute bottom-7 right-auto left-0 md:left-auto md:right-5 text-light-orange hover:text-orange flex flex-row gap-3 hover:gap-4"
           >
             <div class="btn-text">Go to Source</div>
