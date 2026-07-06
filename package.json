@@ -13,15 +13,14 @@
     "format": "prettier --write . --plugin prettier-plugin-svelte ."
   },
   "type": "module",
-  "packageManager": "pnpm@11.7.0",
+  "packageManager": "pnpm@11.8.0",
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
-    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.60.0",
-    "@reddoorla/maintenance": "^0.40.0",
+    "@reddoorla/maintenance": "^0.65.0",
     "@sveltejs/adapter-netlify": "^6.0.4",
     "@sveltejs/kit": "^2.61.1",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
