@@ -11,9 +11,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . --plugin prettier-plugin-svelte . && eslint .",
     "format": "prettier --write . --plugin prettier-plugin-svelte .",
-    "test:smoke": "playwright install chromium && playwright test",
-    "test:unit": "vitest run",
-    "test": "vitest run"
+    "test:smoke": "playwright install chromium && playwright test"
   },
   "type": "module",
   "packageManager": "pnpm@11.8.0",
