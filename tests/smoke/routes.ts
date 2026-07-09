@@ -8,8 +8,9 @@
 // wired to a real Prismic repo (getByUID("page","home") resolves). On the bare
 // placeholder starter, `/` returns 404 (the Prismic lookup throws → error(404)),
 // so the `/` case only goes green after Prismic is wired — by design, since the
-// gate is about real site health. The hydration marker `footer` is the shared
-// layout footer, present on every page including the error page.
+// gate is about real site health. This site is a bespoke single-page build with
+// no shared <footer>, so the hydration marker is `main` (the layout's main
+// content region), present once `/` paints.
 
 export type SmokeRoute = {
   /** Route path to visit, e.g. "/" or "/about". */
@@ -22,4 +23,4 @@ export type SmokeRoute = {
   expectStatus?: number;
 };
 
-export const smokeRoutes: SmokeRoute[] = [{ path: "/", name: "home", hydrationMarker: "footer" }];
+export const smokeRoutes: SmokeRoute[] = [{ path: "/", name: "home", hydrationMarker: "main" }];
