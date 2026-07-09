@@ -22,4 +22,5 @@ export type SmokeRoute = {
   expectStatus?: number;
 };
 
-export const smokeRoutes: SmokeRoute[] = [{ path: "/", name: "home", hydrationMarker: "footer" }];
+// This site renders no <footer>: home is a full-screen <main> panel carousel, so `main` is the always-visible hydration marker.
+export const smokeRoutes: SmokeRoute[] = [{ path: "/", name: "home", hydrationMarker: "main" }];
