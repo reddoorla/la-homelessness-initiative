@@ -23,4 +23,9 @@ export type SmokeRoute = {
   expectStatus?: number;
 };
 
-export const smokeRoutes: SmokeRoute[] = [{ path: "/", name: "home", hydrationMarker: "main" }];
+export const smokeRoutes: SmokeRoute[] = [
+  { path: "/", name: "home", hydrationMarker: "main" },
+  // Live function-health probe (src/routes/health/+server.ts) — JSON, so no
+  // hydration marker; a 200 proves the endpoint's imports and env reads run.
+  { path: "/health", name: "health probe" },
+];
