@@ -5,3 +5,9 @@ allowBuilds:
   protobufjs: true
   sharp: true
 minimumReleaseAge: 0
+# Transitive-dependency security pins (dev-only chains; fleet convention).
+overrides:
+  # cookie <0.7.0: out-of-bounds chars in name/path/domain (GHSA-pxg6-pf52-xh8x).
+  # @sveltejs/kit pins cookie ^0.6.0 even at latest, so an in-range update can't
+  # reach the patch — range-scoped capped override.
+  "cookie@<0.7.0": "^0.7.2"
