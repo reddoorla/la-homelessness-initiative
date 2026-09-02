@@ -15,7 +15,7 @@
     "test": "pnpm test:smoke"
   },
   "type": "module",
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@11.11.0",
   "engines": {
     "node": ">=20"
   },
