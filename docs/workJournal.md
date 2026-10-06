@@ -53,3 +53,7 @@ security-advisory clearance in #25 among them. Half a dozen abandoned
 `renovate/*` branches remain on the remote with no PRs attached.
 
 **What changed today.** `CLAUDE.md` and this file, nothing else.
+
+## 2026-10-06 — Search Console verification tag on the live domain
+
+The operator asked to add Search Console to "lahomelessness" and gave the HTML-tag verification token. Two repos match the name. The tag goes here because this repo is the one with a custom domain: its Netlify site owns `www.lahomelessnessawareness.org`, and la-homelessness-youth is marked `no custom domain`, so a Search Console property can only verify on this one. The `<meta name="google-site-verification">` sits in `src/app.html`, beside the other static head tags, rather than in the page's `<svelte:head>`. That way it ships on every route, including the error page, and does not depend on hydration. A smoke test asserts the tag and its exact token on `/`. It fails with the tag removed and passes with it in place. Google's own Verify button is the real check, and it can only pass after this deploys.
