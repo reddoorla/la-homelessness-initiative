@@ -63,3 +63,11 @@ test("404 page renders the custom error component", async ({ page }) => {
   await expect(page.getByText("404", { exact: false }).first()).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("/ carries the Search Console verification tag", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await expect(page.locator('head meta[name="google-site-verification"]')).toHaveAttribute(
+    "content",
+    "SxgTLP4VyWHWcz3BeKJ2CyLdcr_NO3WPqkwGTKWWTWg",
+  );
+});
