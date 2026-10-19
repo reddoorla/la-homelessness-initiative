@@ -14,6 +14,13 @@ Commands: `pnpm dev`, `pnpm build`, `pnpm check` (svelte-check), `pnpm lint`,
 is the starter's script. CI is the org's reusable workflow
 (`reddoorla/.github/.github/workflows/ci.yml`).
 
+SvelteKit 3: the kit config is `sveltekit.config.js` (the maintenance
+package's `createKitConfig`), passed to `sveltekit(...)` in `vite.config.ts`;
+kit 3 refuses a `svelte.config.js`. Kit 3 exposes only the env vars declared in
+`src/env.ts`, read through `$app/env/private|public`; an undeclared read is
+silently `undefined`. `tests/kit-config.spec.ts` (part of `pnpm test`, no
+browser) holds both.
+
 Two things that have bitten before:
 
 - **The smoke suite's hydration marker is `main`, not `footer`.** This site has
