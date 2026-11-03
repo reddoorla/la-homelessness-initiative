@@ -3,11 +3,16 @@ import { PRIVACY_POLICY_DRAFT } from "$lib/privacy/policy";
 import type { PageServerLoad } from "./$types";
 
 /**
- * The policy's owner and contact. Empty renders the page's own placeholders
- * ("[client legal name]"), which is how the starter ships too; the values are
- * the client's to give, not ours to guess.
+ * The policy's owner and contact. The client gave no values, so on the
+ * operator's word (2026-11-03, reddoor-maintenance#921: "if there's no value
+ * default to reddoor") the policy names Reddoor. Empty strings would render
+ * the page's own placeholders ("[client legal name]").
  */
-const PRIVACY = { legalName: "", contactEmail: "", effectiveDate: "" };
+const PRIVACY = {
+  legalName: "Reddoor Creative",
+  contactEmail: "info@reddoorla.com",
+  effectiveDate: "2026-11-03",
+};
 
 export const load: PageServerLoad = () => ({
   title: "Privacy Policy",
