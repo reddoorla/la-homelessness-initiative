@@ -28,4 +28,6 @@ export const smokeRoutes: SmokeRoute[] = [
   // Live function-health probe (src/routes/health/+server.ts) — JSON, so no
   // hydration marker; a 200 proves the endpoint's imports and env reads run.
   { path: "/health", name: "health probe" },
+  // GA4's terms require a posted policy that discloses it (src/hooks.client.ts).
+  { path: "/privacy", name: "privacy policy", hydrationMarker: "article" },
 ];
