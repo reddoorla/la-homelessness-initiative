@@ -2609,8 +2609,10 @@
           <button class="bump hover:opacity-90" onclick={resetToFrameOne}>
             <img class="align-self-start mt-20 h-5" src={logo} alt="hearts and minds" />
           </button>
-          <a href="/privacy" class="block mt-5 mb-10 text-sm underline hover:opacity-80"
-            >Privacy Policy</a
+          <a
+            href="/privacy"
+            data-sveltekit-reload
+            class="block mt-5 mb-10 text-sm underline hover:opacity-80">Privacy Policy</a
           >
         </div>
       </ContentWidth>

@@ -3,7 +3,7 @@
  *
  * The starter derives this at build time from the source tree
  * (reddoor-starter `scripts/privacy-services.ts`). That derivation misreads this
- * site: `+page.svelte` links to six partner organisations' YouTube channels, and
+ * site: `+page.svelte` links to eight partner organisations' YouTube channels, and
  * with no CSP to consult the starter counts any `www.youtube.com` string as an
  * embed, so the policy would claim the site shows YouTube video. It shows none.
  * A bespoke single page changes its services rarely and by hand, so they are

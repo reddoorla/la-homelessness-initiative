@@ -39,7 +39,11 @@
   {/if}
 {/snippet}
 
-<article class="max-w-2xl mx-auto px-8 py-16 space-y-8">
+<!-- app.css styles every bare a and p for the home page (uppercase links, centred
+     paragraphs under lg); the policy resets both so it reads as a document. -->
+<article
+  class="max-w-2xl mx-auto px-8 py-16 space-y-8 text-left [&_p]:text-left [&_p]:text-base [&_a]:normal-case [&_a]:tracking-normal [&_a]:text-base [&_a]:font-[inherit]"
+>
   {#if p.draft}
     <p
       data-testid="privacy-draft"
@@ -63,9 +67,9 @@
     <h2 class="text-xl font-semibold">What we collect</h2>
     {#if s.forms}
       <p>
-        When you send us a form, we collect what you enter, such as your name, email address, phone
-        number and message, and the address of the page you sent it from, including any campaign
-        tags in that link. The IP address the form was sent from goes to Reddoor with your message{#if s.turnstile}
+        When you send us a form, we collect what you enter: your name, email address, subject and
+        message, and the address of the page you sent it from, including any campaign tags in that
+        link. The IP address the form was sent from goes to Reddoor with your message{#if s.turnstile}
           and is used to confirm the form came from a real browser{/if}. It is not saved with your
         message, except in a backup copy kept if our system cannot file the message normally.
       </p>
