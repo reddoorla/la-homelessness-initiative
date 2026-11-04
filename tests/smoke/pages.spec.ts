@@ -51,6 +51,20 @@ for (const route of smokeRoutes) {
   });
 }
 
+// The fleet render check fails a site whose served HTML for any route lacks a
+// non-empty <meta name="description"> (reddoor-maintenance src/audits/browser.ts,
+// parsed from the raw HTML, i.e. what crawlers see). Every HTML route, the ones
+// with a hydration marker, must carry one in its SSR output (P1-97, #81).
+for (const route of smokeRoutes.filter((r) => r.hydrationMarker)) {
+  test(`${route.path} (${route.name}) serves a non-empty meta description`, async ({ request }) => {
+    const html = await (await request.get(route.path)).text();
+    const tag = html.match(/<meta\b[^>]*\bname=["']description["'][^>]*>/i)?.[0];
+    expect(tag, `meta description tag on ${route.path}`).toBeTruthy();
+    const content = tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1] ?? "";
+    expect(content.trim(), `meta description content on ${route.path}`).not.toBe("");
+  });
+}
+
 test("404 page renders the custom error component", async ({ page }) => {
   // The browser logs a top-level "Failed to load resource: 404" for the page
   // itself — expected on a 404 route, not a bug. Allow it here.

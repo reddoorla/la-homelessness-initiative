@@ -29,5 +29,8 @@ export const smokeRoutes: SmokeRoute[] = [
   // hydration marker; a 200 proves the endpoint's imports and env reads run.
   { path: "/health", name: "health probe" },
   // GA4's terms require a posted policy that discloses it (src/hooks.client.ts).
-  { path: "/privacy", name: "privacy policy", hydrationMarker: "article" },
+  // Its marker is `main article`: the policy must sit inside `main`, because the
+  // fleet render check marks a site Broken when a route has no visible
+  // `main, [role=main]` (reddoor-maintenance src/audits/browser.ts; P1-97, #81).
+  { path: "/privacy", name: "privacy policy", hydrationMarker: "main article" },
 ];
