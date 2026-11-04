@@ -58,9 +58,9 @@ for (const route of smokeRoutes) {
 for (const route of smokeRoutes.filter((r) => r.hydrationMarker)) {
   test(`${route.path} (${route.name}) serves a non-empty meta description`, async ({ request }) => {
     const html = await (await request.get(route.path)).text();
-    const tag = html.match(/<meta\b[^>]*\bname=["']description["'][^>]*>/i)?.[0];
+    const tag = html.match(/<meta\b[^>]*\sname=["']description["'][^>]*>/i)?.[0];
     expect(tag, `meta description tag on ${route.path}`).toBeTruthy();
-    const content = tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1] ?? "";
+    const content = tag?.match(/\scontent=(["'])(.*?)\1/i)?.[2] ?? "";
     expect(content.trim(), `meta description content on ${route.path}`).not.toBe("");
   });
 }

@@ -50,11 +50,12 @@ async function renderPrivacy(draft: boolean) {
 for (const draft of [true, false]) {
   test(`/privacy renders a main landmark and a meta description with draft=${draft}`, async () => {
     const { head, body } = await renderPrivacy(draft);
-    const tag = head.match(/<meta\b[^>]*\bname=["']description["'][^>]*>/i)?.[0];
+    const tag = head.match(/<meta\b[^>]*\sname=["']description["'][^>]*>/i)?.[0];
     expect(tag, "meta description tag").toBeTruthy();
-    const content = tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1] ?? "";
+    const content = tag?.match(/\scontent=(["'])(.*?)\1/i)?.[2] ?? "";
     expect(content.trim(), "meta description content").not.toBe("");
-    expect(body, "main landmark wrapping the policy").toMatch(/<main\b[^>]*>[\s\S]*<article\b/);
+    const main = body.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] ?? "";
+    expect(main, "main landmark wrapping the whole policy").toMatch(/<article\b[\s\S]*<\/article>/);
     // The draft flag still gates what it is meant to gate.
     expect(head.includes('name="robots"'), "noindex only while draft").toBe(draft);
   });
